@@ -21,7 +21,7 @@ public class Main extends PApplet {
 
     public void settings() {
 //        fullScreen(2);
-        size(900, 900);
+        size(900, 900, P2D);
 
     }
 
