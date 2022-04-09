@@ -29,17 +29,23 @@ public class Main extends PApplet {
 
     public void movement(Character player) {
         if (keyPressed) {
-            if (isFree(player.getPositionX() - 1,player.getPositionY() - imageHeight) && keyCode == LEFT) {
+            if (isFree(player.getPositionX() - 1,player.getPositionY() )
+                    && isFree(player.getPositionX() - 1, player.getPositionY() + imageHeight)
+            && keyCode == LEFT) {
                 player.left();
             }
-            if (isFree(player.getPositionX() + imageWidth + 1,player.getPositionY()) && keyCode == RIGHT) {
-                player.right();
-            }
-            if (isFree(player.getPositionX() - imageWidth ,player.getPositionY() - 1) && keyCode == UP) {
+            if (isFree(player.getPositionX(),player.getPositionY() - 1 )
+                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() - 1)
+                    && keyCode == UP) {
                 player.up();
-            }
-            if (isFree(player.getPositionX() ,player.getPositionY() + imageHeight + 1) && keyCode == DOWN) {
+            } if (isFree(player.getPositionX() ,player.getPositionY() + imageHeight + 1 )
+                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + 1)
+                    && keyCode == DOWN) {
                 player.down();
+            } if (isFree(player.getPositionX() + imageWidth + 1,player.getPositionY() )
+                    && isFree(player.getPositionX() + imageWidth + 1, player.getPositionY() + imageHeight)
+                    && keyCode == RIGHT) {
+                player.right();
             }
         }
     }
@@ -240,7 +246,32 @@ public class Main extends PApplet {
                 for (int y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
 
                     if (x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
-                        if (xPosition >= x + 1 && xPosition <= x + fieldWidth + 1 && yPosition >= y + 1  && yPosition <= y + fieldHeight + 1 ) {
+                        if (xPosition > x && xPosition < x + fieldWidth && yPosition > y  && yPosition < y + fieldHeight ) {
+                            ergebnis = false;
+                            break forSchleife;
+                        } else {
+                            ergebnis = true;
+                        }
+                    }
+                }
+            }
+        }
+        return ergebnis;
+    }
+
+    public boolean isFree(int xPosition, int yPosition, int imageWidth, int imageHeight) {
+        int xPositionImage = xPosition + imageWidth;
+        int yPositionnImage = yPosition + imageHeight;
+        boolean ergebnis = false;
+        if (xPosition < fieldWidth || xPosition > width - fieldWidth || yPosition < fieldHeight || yPosition > height - fieldHeight) {
+            ergebnis = false;
+        } else {
+            forSchleife:
+            for (int x = fieldWidth; x < width - fieldWidth; x += fieldWidth) {
+                for (int y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
+
+                    if (x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
+                        if (xPosition > x && xPosition < x + fieldWidth && yPosition > y  && yPosition < y + fieldHeight ) {
                             ergebnis = false;
                             break forSchleife;
                         } else {
