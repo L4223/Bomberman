@@ -25,7 +25,39 @@ public class Main extends PApplet {
 
     }
 
-//    public void keyPressed() {
+
+
+    public void movement(Character player) {
+        if (keyPressed) {
+            if (isFree(player.getPositionX() - 1,player.getPositionY() - imageHeight) && keyCode == LEFT) {
+                player.left();
+            }
+            if (isFree(player.getPositionX() + imageWidth + 1,player.getPositionY()) && keyCode == RIGHT) {
+                player.right();
+            }
+            if (isFree(player.getPositionX() - imageWidth ,player.getPositionY() - 1) && keyCode == UP) {
+                player.up();
+            }
+            if (isFree(player.getPositionX() ,player.getPositionY() + imageHeight + 1) && keyCode == DOWN) {
+                player.down();
+            }
+        }
+    }
+
+    public void keyPressed() {
+//        if (keyCode == LEFT) {
+//            player[0].left();
+//        }
+//        if (keyCode == RIGHT) {
+//            player[0].right();
+//        }
+//        if (keyCode == UP) {
+//            player[0].up();
+//        }
+//        if (keyCode == DOWN) {
+//            player[0].down();
+//        }
+
 //        if (start && key == ENTER) {
 //            start = false;
 //            playground = true;
@@ -41,7 +73,7 @@ public class Main extends PApplet {
 //            key = ESC;
 //        }
 
-//    }
+    }
 
     public void setup() {
         fieldWidth = width/ fieldSize;
@@ -83,18 +115,41 @@ public class Main extends PApplet {
             player[i].setSpeed(width/100);
             player[i].setBomb(1);
             player[i].setHeart(3);
-            player[i].setPositionX(player[i].getStartPositionX(i));
-            player[i].setPositionY(player[i].getStartPositionY(i));
+            if (i == 0) {
+                player[i].setPositionX(fieldWidth);
+                player[i].setPositionY(fieldHeight);
+            }
+            if (i == 1) {
+                player[i].setPositionX(width - fieldWidth);
+                player[i].setPositionY(height - fieldHeight);
+            }
+            if (i == 2) {
+                player[i].setPositionX(width - fieldWidth);
+                player[i].setPositionY(fieldHeight);
+            }
+            if (i == 3) {
+                player[i].setPositionX(fieldWidth);
+                player[i].setPositionY(height - fieldHeight);
+            }
         }
     }
     public void draw() {
+        println(player[0].getPositionX());
+        movement(player[0]);
         battlefield();
         rectMode(CORNERS);
-        stroke(0);
+        noStroke();
+
+
         for(int i = 0; i < 4; i++) {
             fill(player[i].getColor());
-            rect(player[i].getPositionX(), player[i].getPositionY(),player[i].getPositionX() + imageWidth, player[i].getPositionY() + imageHeight  );
+            if (i == 0) rect(player[i].getPositionX(), player[i].getPositionY(),player[i].getPositionX() + imageWidth, player[i].getPositionY() + imageHeight  );
+            if (i == 1) rect(player[i].getPositionX() - imageWidth, player[i].getPositionY() - imageHeight,player[i].getPositionX(), player[i].getPositionY()  );
+            if (i == 2) rect(player[i].getPositionX() - imageWidth, player[i].getPositionY(),player[i].getPositionX() , player[i].getPositionY() + imageHeight );
+            if (i == 3) rect(player[i].getPositionX(), player[i].getPositionY() - imageHeight,player[i].getPositionX() + imageWidth, player[i].getPositionY()  );
         }
+
+
 //        background(255);
 //        start();
 //        pause();
@@ -185,7 +240,7 @@ public class Main extends PApplet {
                 for (int y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
 
                     if (x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
-                        if (xPosition > x && xPosition < x + fieldWidth && yPosition > y && yPosition < y + fieldHeight) {
+                        if (xPosition >= x + 1 && xPosition <= x + fieldWidth + 1 && yPosition >= y + 1  && yPosition <= y + fieldHeight + 1 ) {
                             ergebnis = false;
                             break forSchleife;
                         } else {

@@ -20,6 +20,18 @@ public class Position {
         this.positionY = positionY;
     }
 
+    public void left() {
+        this.positionX = positionX - 10;
+    }
+    public void right() {
+        this.positionX = positionX + 10;
+    }
+    public void down() {
+        this.positionY = positionY + 10;
+    }
+    public void up() {
+        this.positionY = positionY - 10;
+    }
 
 
 

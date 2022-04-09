@@ -3,21 +3,13 @@ public class Character extends Position{
     private int heart;
     private int bomb;
     private int color;
-    private final int [] startPositionX = {100,800,800,100};
-    private final int [] startPositionY = {100,800,100,800};
     private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFF1645F5, 0xFFF0F14E};
 
     public int getColorSelection(int whichNumber) {
         return colorSelection [whichNumber];
     }
 
-    public int getStartPositionX(int whichNumber) {
-        return startPositionX [whichNumber];
-    }
 
-    public int getStartPositionY(int whichNumber) {
-        return startPositionY [whichNumber];
-    }
 
 
     public int getBomb() {
@@ -51,6 +43,8 @@ public class Character extends Position{
     public void setColor(int color) {
         this.color = color;
     }
+
+
 
 
 }
