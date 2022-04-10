@@ -1,3 +1,6 @@
+//Noch nicht genutzt und bisher nur von einem Tutorial abgeschrieben
+
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

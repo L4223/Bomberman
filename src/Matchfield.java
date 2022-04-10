@@ -1,3 +1,5 @@
+// nocht nicht benutzt
+
 public class Matchfield extends Position{
     private boolean visible;
     private boolean taken;

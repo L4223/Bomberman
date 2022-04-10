@@ -20,6 +20,7 @@ public class Position {
         this.positionY = positionY;
     }
 
+    //läuft in die gegebene Richtung
     public void left() {
         this.positionX = positionX - 10;
     }

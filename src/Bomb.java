@@ -1,3 +1,5 @@
+//noch nicht benutzt
+
 public class Bomb extends Position{
     private int explosionRadius;
     private String color;

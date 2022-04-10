@@ -1,3 +1,5 @@
+//Noch nicht genutzt
+
 public class Field extends Matchfield {
     private boolean destroyable;
     private boolean empty;

@@ -1,3 +1,5 @@
+//Noch nicht genutzt und bisher nur von einem Tutorial abgeschrieben
+
 import java.awt.image.BufferedImage;
 
 
