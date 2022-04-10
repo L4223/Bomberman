@@ -8,12 +8,9 @@ public class Main extends PApplet {
     }
 
     // Variablen für Bildschirm
-//    boolean start, pause, playground, gameover;
-    // Anzahl des Spielfeldes
-//    int fieldsX = 9;
-//    int fieldsY = 9;
+    boolean start, pause, playground, gameover;
     //die größe des Spielfelds
-    int fieldSize = 21;
+    int fieldSize = 9;
     //Die Maße eines Feldes
     int fieldWidth;
     int fieldHeight;
@@ -22,8 +19,7 @@ public class Main extends PApplet {
     //Die Maße des Bildes
     int imageWidth;
     int imageHeight;
-    //Array für gezeichnetes kleines Spielfeld
-//    int[][] matchfield = new int[fieldsX][fieldsY];
+
 
     //Größe der Anzeige und Einstellung des Renderers
     public void settings() {
@@ -64,37 +60,24 @@ public class Main extends PApplet {
     }
 
     public void keyPressed() {
-        //unnötig bei nur einmal gedrückt
-//        if (keyCode == LEFT) {
-//            player[0].left();
-//        }
-//        if (keyCode == RIGHT) {
-//            player[0].right();
-//        }
-//        if (keyCode == UP) {
-//            player[0].up();
-//        }
-//        if (keyCode == DOWN) {
-//            player[0].down();
-//        }
-          // Enter geht von Start ins Spiel
-//        if (start && key == ENTER) {
-//            start = false;
-//            playground = true;
-//        }
-          // ESC geht wird umgeschrieben und bricht nicht das Spiel ab
-//        if (key == ESC) {
-//            key = 0;
-//        }
-          // ESC geht vom Spielfeld in die Pause
-//        if (playground || pause && key == 0) {
-//            playground = !playground;
-//            pause = !pause;
-//        }
-          // Der Punkt bricht das Spiel ab
-//        if (key == '.') {
-//            key = ESC;
-//        }
+        //Enter geht von Start ins Spiel
+        if (start && key == ENTER) {
+            start = false;
+            playground = true;
+        }
+        //ESC geht wird umgeschrieben und bricht nicht das Spiel ab
+        if (key == ESC) {
+            key = 0;
+        }
+        //ESC geht vom Spielfeld in die Pause
+        if (playground || pause && key == 0) {
+            playground = !playground;
+            pause = !pause;
+        }
+        //Der Punkt bricht das Spiel ab
+        if (key == '.') {
+            key = ESC;
+        }
 
     }
 
@@ -114,26 +97,15 @@ public class Main extends PApplet {
 
 
           // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
-//        start = false;
-//        pause = false;
-//        playground = false;
-//        gameover = false;
+        start = false;
+        pause = false;
+        playground = false;
+        gameover = false;
 
-//        // zeichnet schwarzen Hintergrund
-//        background(0);
+
         // zeichnet Spielfeld
-        battlefield();
+        matchfield();
 
-//        println(free(250, 250));
-//        matchfield();
-//        println("Hallo" + test);
-        // zeichnet das kleine Probenetz
-//        for (int i = 0; i < matchfield.length; i++) {
-//            println();
-//            for (int j = 0; j < matchfield[i].length; j++) {
-//                print(matchfield[i][j] + " ");
-//            }
-//        }
     }
 
     // erstellt die Charactere eines neuen Spiel mit Anzahl der Spieler und weißt Ihnen die Anzahl der Bomben, der Leben, die Farbe, die Geschwindigkeit und Position zu.
@@ -168,7 +140,7 @@ public class Main extends PApplet {
         //lässt die Spieler bewegen
         movement(player[0]);
         //zeichnet Spielfeld neu
-        battlefield();
+        matchfield();
 
         rectMode(CORNERS);
         noStroke();
@@ -182,68 +154,54 @@ public class Main extends PApplet {
             if (i == 3) rect(player[i].getPositionX(), player[i].getPositionY() - imageHeight,player[i].getPositionX() + imageWidth, player[i].getPositionY()  );
         }
 
-          //zeichnet schwarzen Bildschirm und entsprechend aktivierten Bildschirm
-//        background(255);
-//        start();
-//        pause();
-//        playground();
-//        gameover();
+        //zeichnet entsprechend aktivierten Bildschirm
+        start();
+        pause();
+        playground();
+        gameover();
 
 
     }
     //zeigt schwarzen Bildschirm und ein "Start"
-//    public void start() {
-//        if (start) {
-//            background(0);
-//            textSize(height / 4);
-//            fill(255);
-//            text("Start", height / 2, width / 2);
-//        }
-//    }
+    public void start() {
+        if (start) {
+            background(0);
+            textSize(height / 4);
+            fill(255);
+            text("Start", height / 2, width / 2);
+        }
+    }
 //  //zeigt schwarzen Bildschirm und ein "Game"
-//    public void playground() {
-//        if (playground) {
-//            background(0);
-//            textSize(height / 4);
-//            fill(255);
-//            text("Game", height / 2, width / 2);
-//        }
-//    }
+    public void playground() {
+        if (playground) {
+            background(0);
+            textSize(height / 4);
+            fill(255);
+            text("Game", height / 2, width / 2);
+        }
+    }
     //zeigt schwarzen Bildschirm und ein "Pause"
-//    public void pause() {
-//        if (pause) {
-//            background(0);
-//            textSize(height / 4);
-//            fill(255);
-//            text("Pause", height / 2, width / 2);
-//        }
-//    }
+    public void pause() {
+        if (pause) {
+            background(0);
+            textSize(height / 4);
+            fill(255);
+            text("Pause", height / 2, width / 2);
+        }
+    }
     //zeigt schwarzen Bildschirm und ein "GAME OVER"
-//    public void gameover() {
-//        if (gameover) {
-//            background(0);
-//            textSize(height / 4);
-//            fill(255);
-//            text("GAME OVER", height / 2, width / 2);
-//        }
-//    }
-        //erstellt Probe-Spielfeld
-//    public void matchfield() {
-//        for (int i = 0; i < matchfield.length; i++) {
-//            for (int j = 0; j < matchfield[i].length; j++) {
-//                if (i == 0 || i == matchfield.length - 1 || j == 0 || j == matchfield[i].length - 1 || i % 2 == 0 && j % 2 == 0) {
-//                    matchfield[i][j] = 1;
-//                } else {
-//                    matchfield[i][j] = 0;
-//                }
-//            }
-//        }
-//    }
-//    int xTest = 250;
-//    int yTest = 250;
-//    boolean test;
+    public void gameover() {
+        if (gameover) {
+            background(0);
+            textSize(height / 4);
+            fill(255);
+            text("GAME OVER", height / 2, width / 2);
+        }
+    }
+
+
     //erstellt Spielfeld
-    public void battlefield() {
+    public void matchfield() {
         rectMode(CORNERS);
 
         for (int x = 0; x < width; x += fieldWidth) {
@@ -258,7 +216,6 @@ public class Main extends PApplet {
                     noStroke();
                     fill(0, 0, 255);
                     rect(x, y, x + fieldWidth, y + fieldHeight);
-//                    println("Free: Position X = " + x + ", " + y + "; Position Y = " + (x + fieldWidth) + ", " + (y + fieldHeight));
                 }
             }
         }
@@ -288,31 +245,7 @@ public class Main extends PApplet {
         }
         return ergebnis;
     }
-    //mal gucken ob das Sinn macht, es wird noch die Bildergröße angegeben
-//    public boolean isFree(int xPosition, int yPosition, int imageWidth, int imageHeight) {
-//        int xPositionImage = xPosition + imageWidth;
-//        int yPositionnImage = yPosition + imageHeight;
-//        boolean ergebnis = false;
-//        if (xPosition < fieldWidth || xPosition > width - fieldWidth || yPosition < fieldHeight || yPosition > height - fieldHeight) {
-//            ergebnis = false;
-//        } else {
-//            forSchleife:
-//            for (int x = fieldWidth; x < width - fieldWidth; x += fieldWidth) {
-//                for (int y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
-//
-//                    if (x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
-//                        if (xPosition > x && xPosition < x + fieldWidth && yPosition > y  && yPosition < y + fieldHeight ) {
-//                            ergebnis = false;
-//                            break forSchleife;
-//                        } else {
-//                            ergebnis = true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return ergebnis;
-//    }
+
 }
 
 
