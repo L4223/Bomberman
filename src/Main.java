@@ -10,7 +10,7 @@ public class Main extends PApplet {
     // Variablen für Bildschirm
     boolean start, pause, playground, gameover;
     //die größe des Spielfelds
-    int fieldSize = 9;
+    int fieldSize = 15;
     //Die Maße eines Feldes
     int fieldWidth;
     int fieldHeight;
@@ -128,14 +128,17 @@ public class Main extends PApplet {
 
     public void setup() {
 
+        pixelRestWidth = width%fieldSize;
+        pixelRestHeight = height%fieldSize;
+
+        width = width - pixelRestWidth;
+        height = height - pixelRestHeight;
+
 
         //bestimmt die Feldgröße anhand der Größe des Bildschirms
         fieldWidth = width/ fieldSize;
         fieldHeight = height/ fieldSize;
 
-        //bestimmt Pixelreste
-        pixelRestWidth = width % fieldSize;
-        pixelRestHeight = height % fieldSize;
         //bestimmt die Größe des Bildes
         imageWidth = 20;
         imageHeight = 20;
@@ -254,43 +257,22 @@ public class Main extends PApplet {
     //erstellt Spielfeld
     public void matchfield() {
         rectMode(CORNERS);
-        int helpX;
-        int helpY;
-        if(pixelRestHeight % 2 == 1) pixelRestHeight = pixelRestHeight;
-        if(pixelRestWidth % 2 == 1) pixelRestWidth = pixelRestWidth;
+
         for (int x = 0; x < width; x += fieldWidth) {
-            for (int y = 0 ; y < height; y += fieldHeight) {
-//                println("x: " + x + " x zeug ist gleich: "  + (width-fieldWidth-pixelRestWidth/2));
-//                println("y: " + y + " y zeug ist gleich: "  + (height-fieldHeight-pixelRestHeight/2));
-//
-//                //erstellt die weißen Felder in dem mittleren Teil
-//                if (x == 0 + pixelRestWidth||  y == 0 + pixelRestHeight || x == width - fieldWidth - pixelRestWidth/2 || y == height - fieldHeight - pixelRestHeight/2 ) {
-//                    noStroke();
-//                    fill(125);
-//                    rect(x, y, x + fieldWidth + pixelRestWidth, y + fieldHeight + pixelRestHeight);
-//                } else if (x == width - fieldWidth - pixelRestWidth/2) {
-//                    helpX = width -fieldWidth - pixelRestWidth/2;
-//                    noStroke();
-//                    fill(125);
-//                    rect(helpX, y, helpX + fieldWidth + pixelRestWidth, y + fieldHeight + pixelRestHeight);
-//                } else if (y == height - fieldHeight - pixelRestHeight/2) {
-//                    helpY = height - fieldHeight - pixelRestHeight/2;
-//                    noStroke();
-//                    fill(125);
-//                    rect(x, helpY, x + fieldWidth + pixelRestWidth, helpY + fieldHeight + pixelRestHeight);
-//                } else
-                    if (x % (fieldWidth * 2) == 0 || y % (fieldHeight * 2) == 0) {
-                        println(x);
-                        println(y);
-                        noStroke();
-                        fill(255);
-                        rect(x, y, x + fieldWidth, y + fieldHeight);
+            for (int y = 0; y < height; y += fieldHeight) {
+                //erstellt die weißen Felder in dem mittleren Teil
+                if (x == 0 || x == fieldWidth * fieldSize - fieldWidth   || y == 0 || y == fieldHeight * fieldSize - fieldHeight || x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
+                    noStroke();
+                    fill(255);
+                    rect(x, y, x + fieldWidth, y + fieldHeight);
+//                                        println("Free: Position X = " + x + ", " + y + "; Position Y = " + (x + fieldWidth) + ", " + (y + fieldHeight));
 
                     //zeichnet die restliche Fläche in Blau
                 } else {
                     noStroke();
                     fill(0, 0, 255);
                     rect(x, y, x + fieldWidth, y + fieldHeight);
+//                    println("Free: Position X = " + x + ", " + y + "; Position Y = " + (x + fieldWidth) + ", " + (y + fieldHeight));
                 }
             }
         }
