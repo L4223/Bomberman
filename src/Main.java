@@ -19,45 +19,90 @@ public class Main extends PApplet {
     //Die Maße des Bildes
     int imageWidth;
     int imageHeight;
+    //pixelReste
+    int pixelRestWidth;
+    int pixelRestHeight;
 
 
     //Größe der Anzeige und Einstellung des Renderers
     public void settings() {
-//        fullScreen(2);
-        size(900, 900, P2D);
+        fullScreen(2);
+//        size(900, 900, P2D);
 
     }
 
 
-    // Bewegung bei Tastatudruck nach rechts oder linke
+
     public void movement(Character player) {
         if (keyPressed) {
             //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach links
-            if (isFree(player.getPositionX() - 1,player.getPositionY() )
-                    && isFree(player.getPositionX() - 1, player.getPositionY() + imageHeight)
-            && keyCode == LEFT) {
-                player.left();
+
+            if (isFree(player.getPositionX() - player.getSpeed(),player.getPositionY() )
+                    && isFree(player.getPositionX() - player.getSpeed(), player.getPositionY() + imageHeight)
+                    && keyCode == LEFT) {
+                player.left(player.getSpeed());
+            } else {
+                if (keyCode == LEFT) {
+
+                    for (int i = player.getSpeed(); i > 0; i--) {
+                        if (isFree(player.getPositionX() - i,player.getPositionY() )
+                                && isFree(player.getPositionX() - i, player.getPositionY() + imageHeight)) {
+                            player.left(i);
+                        }
+                    }
+                }
             }
             //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach oben
-            if (isFree(player.getPositionX(),player.getPositionY() - 1 )
-                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() - 1)
+            if (isFree(player.getPositionX(),player.getPositionY() - player.getSpeed())
+                    && isFree(player.getPositionX() + imageWidth, player.getPositionY()  - player.getSpeed())
                     && keyCode == UP) {
-                player.up();
-            }
-            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach unten
-            if (isFree(player.getPositionX() ,player.getPositionY() + imageHeight + 1 )
-                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + 1)
-                    && keyCode == DOWN) {
-                player.down();
+                player.up(player.getSpeed());
+            } else {
+                if (keyCode == UP) {
+
+                    for (int i = player.getSpeed(); i > 0; i--) {
+                        if (isFree(player.getPositionX(),player.getPositionY() - i)
+                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() - i)) {
+                            player.up(i);
+                        }
+                    }
+                }
             }
             //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach rechts
-            if (isFree(player.getPositionX() + imageWidth + 1,player.getPositionY() )
-                    && isFree(player.getPositionX() + imageWidth + 1, player.getPositionY() + imageHeight)
+            if (isFree(player.getPositionX() + imageWidth + player.getSpeed(),player.getPositionY() )
+                    && isFree(player.getPositionX() + imageWidth + player.getSpeed(), player.getPositionY() + imageHeight)
                     && keyCode == RIGHT) {
-                player.right();
+                player.right(player.getSpeed());
+            } else {
+                if (keyCode == RIGHT) {
+
+                    for (int i = player.getSpeed(); i > 0; i--) {
+                        if (isFree(player.getPositionX() + imageWidth + i,player.getPositionY() )
+                                && isFree(player.getPositionX() + imageWidth + i, player.getPositionY() + imageHeight)) {
+                            player.right(i);
+                        }
+                    }
+                }
+            }
+            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach unten
+            if (isFree(player.getPositionX() ,player.getPositionY() + imageHeight + player.getSpeed() )
+                    && isFree(player.getPositionX() + imageWidth , player.getPositionY() + imageHeight + player.getSpeed())
+                    && keyCode == DOWN) {
+                player.down(player.getSpeed());
+            } else {
+                if (keyCode == DOWN) {
+
+                    for (int i = player.getSpeed(); i >0; i--) {
+                        if (isFree(player.getPositionX(),player.getPositionY() + imageHeight + i )
+                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + i)) {
+                            player.down((i ));
+                        }
+                    }
+                }
             }
         }
     }
+
 
     public void keyPressed() {
         //Enter geht von Start ins Spiel
@@ -82,14 +127,21 @@ public class Main extends PApplet {
     }
 
     public void setup() {
+
+
         //bestimmt die Feldgröße anhand der Größe des Bildschirms
         fieldWidth = width/ fieldSize;
         fieldHeight = height/ fieldSize;
+
+        //bestimmt Pixelreste
+        pixelRestWidth = width % fieldSize;
+        pixelRestHeight = height % fieldSize;
         //bestimmt die Größe des Bildes
         imageWidth = 20;
         imageHeight = 20;
         //erstellt neues Spiel mit Anzahl der Spieler
         newGame(4);
+
 
 
 
@@ -117,26 +169,25 @@ public class Main extends PApplet {
             player[i].setBomb(1);
             player[i].setHeart(3);
             if (i == 0) {
-                player[i].setPositionX(fieldWidth);
-                player[i].setPositionY(fieldHeight);
+                player[i].setPositionX((int)fieldWidth);
+                player[i].setPositionY((int)fieldHeight);
             }
             if (i == 1) {
-                player[i].setPositionX(width - fieldWidth);
-                player[i].setPositionY(height - fieldHeight);
+                player[i].setPositionX(width - (int)fieldWidth);
+                player[i].setPositionY(height - (int)fieldHeight);
             }
             if (i == 2) {
-                player[i].setPositionX(width - fieldWidth);
-                player[i].setPositionY(fieldHeight);
+                player[i].setPositionX(width - (int)fieldWidth);
+                player[i].setPositionY((int)fieldHeight);
             }
             if (i == 3) {
-                player[i].setPositionX(fieldWidth);
-                player[i].setPositionY(height - fieldHeight);
+                player[i].setPositionX((int)fieldWidth);
+                player[i].setPositionY(height - (int)fieldHeight);
             }
         }
     }
 
     public void draw() {
-        println(player[0].getPositionX());
         //lässt die Spieler bewegen
         movement(player[0]);
         //zeichnet Spielfeld neu
@@ -203,15 +254,39 @@ public class Main extends PApplet {
     //erstellt Spielfeld
     public void matchfield() {
         rectMode(CORNERS);
-
+        int helpX;
+        int helpY;
+        if(pixelRestHeight % 2 == 1) pixelRestHeight = pixelRestHeight;
+        if(pixelRestWidth % 2 == 1) pixelRestWidth = pixelRestWidth;
         for (int x = 0; x < width; x += fieldWidth) {
-            for (int y = 0; y < height; y += fieldHeight) {
-                //erstellt die weißen Felder in dem mittleren Teil
-                if (x == 0 || x > width - fieldWidth * 2 || y == 0 || y > height - fieldHeight * 2 || x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
-                    noStroke();
-                    fill(255);
-                    rect(x, y, x + fieldWidth, y + fieldHeight);
-                //zeichnet die restliche Fläche in Blau
+            for (int y = 0 ; y < height; y += fieldHeight) {
+//                println("x: " + x + " x zeug ist gleich: "  + (width-fieldWidth-pixelRestWidth/2));
+//                println("y: " + y + " y zeug ist gleich: "  + (height-fieldHeight-pixelRestHeight/2));
+//
+//                //erstellt die weißen Felder in dem mittleren Teil
+//                if (x == 0 + pixelRestWidth||  y == 0 + pixelRestHeight || x == width - fieldWidth - pixelRestWidth/2 || y == height - fieldHeight - pixelRestHeight/2 ) {
+//                    noStroke();
+//                    fill(125);
+//                    rect(x, y, x + fieldWidth + pixelRestWidth, y + fieldHeight + pixelRestHeight);
+//                } else if (x == width - fieldWidth - pixelRestWidth/2) {
+//                    helpX = width -fieldWidth - pixelRestWidth/2;
+//                    noStroke();
+//                    fill(125);
+//                    rect(helpX, y, helpX + fieldWidth + pixelRestWidth, y + fieldHeight + pixelRestHeight);
+//                } else if (y == height - fieldHeight - pixelRestHeight/2) {
+//                    helpY = height - fieldHeight - pixelRestHeight/2;
+//                    noStroke();
+//                    fill(125);
+//                    rect(x, helpY, x + fieldWidth + pixelRestWidth, helpY + fieldHeight + pixelRestHeight);
+//                } else
+                    if (x % (fieldWidth * 2) == 0 || y % (fieldHeight * 2) == 0) {
+                        println(x);
+                        println(y);
+                        noStroke();
+                        fill(255);
+                        rect(x, y, x + fieldWidth, y + fieldHeight);
+
+                    //zeichnet die restliche Fläche in Blau
                 } else {
                     noStroke();
                     fill(0, 0, 255);
@@ -220,6 +295,7 @@ public class Main extends PApplet {
             }
         }
     }
+
     //checkt ob eine Position frei ist
     public boolean isFree(int xPosition, int yPosition) {
         boolean ergebnis = false;
@@ -229,8 +305,8 @@ public class Main extends PApplet {
         } else {
             //check ob die Felder in der Mitte getroffen werden mit Hilfe einer for-Schleife, gleich wie beim zeichnen
             forSchleife:
-            for (int x = fieldWidth; x < width - fieldWidth; x += fieldWidth) {
-                for (int y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
+            for (double x = fieldWidth; x < width - fieldWidth; x += fieldWidth) {
+                for (double y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
 
                     if (x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
                         if (xPosition > x && xPosition < x + fieldWidth && yPosition > y  && yPosition < y + fieldHeight ) {
