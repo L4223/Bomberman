@@ -21,17 +21,17 @@ public class Position {
     }
 
     //läuft in die gegebene Richtung
-    public void left() {
-        this.positionX = positionX - 10;
+    public void left(int speed) {
+        this.positionX = positionX - speed;
     }
-    public void right() {
-        this.positionX = positionX + 10;
+    public void right(int speed) {
+        this.positionX = positionX + speed;
     }
-    public void down() {
-        this.positionY = positionY + 10;
+    public void down(int speed) {
+        this.positionY = positionY + speed;
     }
-    public void up() {
-        this.positionY = positionY - 10;
+    public void up(int speed) {
+        this.positionY = positionY - speed;
     }
 
 
