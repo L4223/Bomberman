@@ -5,23 +5,23 @@ public class Main extends PApplet {
     public static void main(String[] args) {
         PApplet.main("Main");
 
+
     }
 
     // Variablen für Bildschirm
     boolean start, pause, playground, gameover;
-    //die größe des Spielfelds
-    int fieldSize = 15;
     //Die Maße eines Feldes
-    int fieldWidth;
-    int fieldHeight;
+
     //Array der Spieler
-    Character [] player = new Character[4];
+    Character[] player = new Character[4];
+
+    Matchfield levelOne = new Matchfield();
+
+
     //Die Maße des Bildes
     int imageWidth;
     int imageHeight;
     //pixelReste
-    int pixelRestWidth;
-    int pixelRestHeight;
 
 
     //Größe der Anzeige und Einstellung des Renderers
@@ -32,75 +32,96 @@ public class Main extends PApplet {
     }
 
 
-
-    public void movement(Character player) {
+    public void movement() {
         if (keyPressed) {
             //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach links
 
-            if (isFree(player.getPositionX() - player.getSpeed(),player.getPositionY() )
-                    && isFree(player.getPositionX() - player.getSpeed(), player.getPositionY() + imageHeight)
-                    && keyCode == LEFT) {
-                player.left(player.getSpeed());
-            } else {
+            if (levelOne.isFree(player[0].getCornerLeftUpX(), player[0].getCornerLeftUpY()) && levelOne.isFree(player[0].getCornerLeftDownX(), player[0].getCornerLeftDownY()) && keyCode == LEFT) {
+                player[0].left(player[0].getSpeed());
+            }
+
+            else {
                 if (keyCode == LEFT) {
 
-                    for (int i = player.getSpeed(); i > 0; i--) {
-                        if (isFree(player.getPositionX() - i,player.getPositionY() )
-                                && isFree(player.getPositionX() - i, player.getPositionY() + imageHeight)) {
-                            player.left(i);
-                        }
-                    }
-                }
-            }
-            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach oben
-            if (isFree(player.getPositionX(),player.getPositionY() - player.getSpeed())
-                    && isFree(player.getPositionX() + imageWidth, player.getPositionY()  - player.getSpeed())
-                    && keyCode == UP) {
-                player.up(player.getSpeed());
-            } else {
-                if (keyCode == UP) {
+                    for (int i = player[0].getSpeed(); i > 0; i--) {
+                        println("test3");
+                        println(player[0].getCornerRightUpX());
+                        if (levelOne.isFree(player[0].getCornerLeftUpX() - i, player[0].getCornerLeftUpY()) && levelOne.isFree(player[0].getCornerLeftDownX() - i , player[0].getCornerLeftDownY()) && keyCode == LEFT) {
+                            player[0].left(i);
+                            println("test2");
 
-                    for (int i = player.getSpeed(); i > 0; i--) {
-                        if (isFree(player.getPositionX(),player.getPositionY() - i)
-                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() - i)) {
-                            player.up(i);
                         }
                     }
                 }
             }
-            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach rechts
-            if (isFree(player.getPositionX() + imageWidth + player.getSpeed(),player.getPositionY() )
-                    && isFree(player.getPositionX() + imageWidth + player.getSpeed(), player.getPositionY() + imageHeight)
-                    && keyCode == RIGHT) {
-                player.right(player.getSpeed());
-            } else {
-                if (keyCode == RIGHT) {
-
-                    for (int i = player.getSpeed(); i > 0; i--) {
-                        if (isFree(player.getPositionX() + imageWidth + i,player.getPositionY() )
-                                && isFree(player.getPositionX() + imageWidth + i, player.getPositionY() + imageHeight)) {
-                            player.right(i);
-                        }
-                    }
-                }
+                        if(levelOne.isFree(player[0].getCornerRightUpX() , player[0].getCornerRightUpY()) && levelOne.isFree(player[0].getCornerRightDownX() , player[0].getCornerRightDownY()) && keyCode == RIGHT) {
+                player[0].right(player[0].getSpeed());
+                println("test");
             }
-            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach unten
-            if (isFree(player.getPositionX() ,player.getPositionY() + imageHeight + player.getSpeed() )
-                    && isFree(player.getPositionX() + imageWidth , player.getPositionY() + imageHeight + player.getSpeed())
-                    && keyCode == DOWN) {
-                player.down(player.getSpeed());
-            } else {
-                if (keyCode == DOWN) {
-
-                    for (int i = player.getSpeed(); i >0; i--) {
-                        if (isFree(player.getPositionX(),player.getPositionY() + imageHeight + i )
-                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + i)) {
-                            player.down((i ));
-                        }
-                    }
-                }
-            }
+//            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach oben
+//            if (isFree(player.getPositionX(), player.getPositionY() - player.getSpeed())
+//                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() - player.getSpeed())
+//                    && keyCode == UP) {
+//                player.up(player.getSpeed());
+//            } else {
+//                if (keyCode == UP) {
+//
+//                    for (int i = player.getSpeed(); i > 0; i--) {
+//                        if (isFree(player.getPositionX(), player.getPositionY() - i)
+//                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() - i)) {
+//                            player.up(i);
+//                        }
+//                    }
+//                }
+//            }
+//            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach rechts
+//            if (isFree(player.getPositionX() + imageWidth + player.getSpeed(), player.getPositionY())
+//                    && isFree(player.getPositionX() + imageWidth + player.getSpeed(), player.getPositionY() + imageHeight)
+//                    && keyCode == RIGHT) {
+//                player.right(player.getSpeed());
+//            } else {
+//                if (keyCode == RIGHT) {
+//
+//                    for (int i = player.getSpeed(); i > 0; i--) {
+//                        if (isFree(player.getPositionX() + imageWidth + i, player.getPositionY())
+//                                && isFree(player.getPositionX() + imageWidth + i, player.getPositionY() + imageHeight)) {
+//                            player.right(i);
+//                        }
+//                    }
+//                }
+//            }
+//            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach unten
+//            if (isFree(player.getPositionX(), player.getPositionY() + imageHeight + player.getSpeed())
+//                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + player.getSpeed())
+//                    && keyCode == DOWN) {
+//                player.down(player.getSpeed());
+//            } else {
+//                if (keyCode == DOWN) {
+//
+//                    for (int i = player.getSpeed(); i > 0; i--) {
+//                        if (isFree(player.getPositionX(), player.getPositionY() + imageHeight + i)
+//                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + i)) {
+//                            player.down((i));
+//                        }
+//                    }
+//                }
+//            }
         }
+    }
+
+    public void updatePosition() {
+        player[0].setCornerLeftUpX();
+        player[0].setCornerLeftUpY();
+        player[0].setCornerLeftDownX();
+        player[0].setCornerLeftDownY();
+        player[0].setCornerRightUpX();
+        player[0].setCornerRightUpY();
+        player[0].setCornerRightDownX();
+        player[0].setCornerRightUpY();
+
+
+
+
     }
 
 
@@ -128,16 +149,6 @@ public class Main extends PApplet {
 
     public void setup() {
 
-        pixelRestWidth = width%fieldSize;
-        pixelRestHeight = height%fieldSize;
-
-        width = width - pixelRestWidth;
-        height = height - pixelRestHeight;
-
-
-        //bestimmt die Feldgröße anhand der Größe des Bildschirms
-        fieldWidth = width/ fieldSize;
-        fieldHeight = height/ fieldSize;
 
         //bestimmt die Größe des Bildes
         imageWidth = 20;
@@ -146,66 +157,94 @@ public class Main extends PApplet {
         newGame(4);
 
 
-
-
-
-
-
-          // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
+        // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
         start = false;
         pause = false;
         playground = false;
         gameover = false;
+        println(levelOne.getFieldHeight());
 
 
         // zeichnet Spielfeld
-        matchfield();
+
 
     }
 
     // erstellt die Charactere eines neuen Spiel mit Anzahl der Spieler und weißt Ihnen die Anzahl der Bomben, der Leben, die Farbe, die Geschwindigkeit und Position zu.
-    public void newGame (int numberOfPlayer) {
+    public void newGame(int numberOfPlayer) {
+
+
+        levelOne.setFieldSize(15);
+        levelOne.setWidth(width);
+        levelOne.setHeight(height);
+        levelOne.setFieldWidth();
+        levelOne.setFieldHeight();
+
+
         for (int i = 0; i < numberOfPlayer; i++) {
+
+
             player[i] = new Character();
+
+            player[i].setFieldSize(levelOne.getFieldSize());
+            player[i].setWidth(levelOne.getWidth());
+            player[i].setHeight(levelOne.getHeight());
+            player[i].setFieldWidth();
+            player[i].setFieldHeight();
+
+            player[i].setImageWidth(20);
+            player[i].setImageHeight(20);
+
             player[i].setColor(player[i].getColorSelection(i));
-            player[i].setSpeed(width/100);
+            player[i].setSpeed(width / 100);
             player[i].setBomb(1);
             player[i].setHeart(3);
             if (i == 0) {
-                player[i].setPositionX((int)fieldWidth);
-                player[i].setPositionY((int)fieldHeight);
+                player[i].setPositionX(levelOne.getFieldWidth());
+                player[i].setPositionY(levelOne.getFieldHeight());
             }
             if (i == 1) {
-                player[i].setPositionX(width - (int)fieldWidth);
-                player[i].setPositionY(height - (int)fieldHeight);
+                player[i].setPositionX(width - levelOne.getFieldWidth());
+                player[i].setPositionY(height -levelOne.getFieldHeight());
             }
             if (i == 2) {
-                player[i].setPositionX(width - (int)fieldWidth);
-                player[i].setPositionY((int)fieldHeight);
+                player[i].setPositionX(width - levelOne.getFieldWidth());
+                player[i].setPositionY(levelOne.getFieldHeight());
             }
             if (i == 3) {
-                player[i].setPositionX((int)fieldWidth);
-                player[i].setPositionY(height - (int)fieldHeight);
+                player[i].setPositionX(levelOne.getFieldWidth());
+                player[i].setPositionY(height - levelOne.getFieldHeight());
             }
+            player[i].setCornerLeftUpX();
+            player[i].setCornerLeftUpY();
+            player[i].setCornerLeftDownX();
+            player[i].setCornerLeftDownY();
+            player[i].setCornerRightUpX();
+            player[i].setCornerRightUpY();
+            player[i].setCornerRightDownX();
+            player[i].setCornerRightDownY();
+
+
         }
     }
 
     public void draw() {
         //lässt die Spieler bewegen
-        movement(player[0]);
+//        movement(player[0]);
         //zeichnet Spielfeld neu
-        matchfield();
+
 
         rectMode(CORNERS);
         noStroke();
+        matchfield();
+        movement();
+        updatePosition();
+
 
         //zeichnet Spieler in enstprechender Farbe
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             fill(player[i].getColor());
-            if (i == 0) rect(player[i].getPositionX(), player[i].getPositionY(),player[i].getPositionX() + imageWidth, player[i].getPositionY() + imageHeight  );
-            if (i == 1) rect(player[i].getPositionX() - imageWidth, player[i].getPositionY() - imageHeight,player[i].getPositionX(), player[i].getPositionY()  );
-            if (i == 2) rect(player[i].getPositionX() - imageWidth, player[i].getPositionY(),player[i].getPositionX() , player[i].getPositionY() + imageHeight );
-            if (i == 3) rect(player[i].getPositionX(), player[i].getPositionY() - imageHeight,player[i].getPositionX() + imageWidth, player[i].getPositionY()  );
+            rect(player[i].getCornerLeftUpX(), player[i].getCornerLeftUpY(), player[i].getCornerRightDownX(), player[i].getCornerRightDownY());
         }
 
         //zeichnet entsprechend aktivierten Bildschirm
@@ -216,6 +255,7 @@ public class Main extends PApplet {
 
 
     }
+
     //zeigt schwarzen Bildschirm und ein "Start"
     public void start() {
         if (start) {
@@ -225,7 +265,8 @@ public class Main extends PApplet {
             text("Start", height / 2, width / 2);
         }
     }
-//  //zeigt schwarzen Bildschirm und ein "Game"
+
+    //  //zeigt schwarzen Bildschirm und ein "Game"
     public void playground() {
         if (playground) {
             background(0);
@@ -234,6 +275,7 @@ public class Main extends PApplet {
             text("Game", height / 2, width / 2);
         }
     }
+
     //zeigt schwarzen Bildschirm und ein "Pause"
     public void pause() {
         if (pause) {
@@ -243,6 +285,7 @@ public class Main extends PApplet {
             text("Pause", height / 2, width / 2);
         }
     }
+
     //zeigt schwarzen Bildschirm und ein "GAME OVER"
     public void gameover() {
         if (gameover) {
@@ -252,58 +295,34 @@ public class Main extends PApplet {
             text("GAME OVER", height / 2, width / 2);
         }
     }
-
-
     //erstellt Spielfeld
     public void matchfield() {
-        rectMode(CORNERS);
 
-        for (int x = 0; x < width; x += fieldWidth) {
-            for (int y = 0; y < height; y += fieldHeight) {
+
+        for (int x = 0; x < levelOne.getWidth(); x += levelOne.getFieldWidth()) {
+            for (int y = 0; y < levelOne.getHeight(); y += levelOne.getFieldHeight()) {
                 //erstellt die weißen Felder in dem mittleren Teil
-                if (x == 0 || x == fieldWidth * fieldSize - fieldWidth   || y == 0 || y == fieldHeight * fieldSize - fieldHeight || x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
-                    noStroke();
+                if (x == 0 || x == levelOne.getWidth() - levelOne.getFieldWidth()   || y == 0 || y == levelOne.getHeight()  - levelOne.getFieldHeight() || x % (levelOne.getFieldWidth() * 2) == 0 && y % (levelOne.getFieldHeight() * 2) == 0) {
+
                     fill(255);
-                    rect(x, y, x + fieldWidth, y + fieldHeight);
+                    rect(x, y, x + levelOne.getFieldWidth(), y + levelOne.getFieldHeight());
 //                                        println("Free: Position X = " + x + ", " + y + "; Position Y = " + (x + fieldWidth) + ", " + (y + fieldHeight));
 
                     //zeichnet die restliche Fläche in Blau
                 } else {
-                    noStroke();
+
                     fill(0, 0, 255);
-                    rect(x, y, x + fieldWidth, y + fieldHeight);
+                    rect(x, y, x + levelOne.getFieldWidth(), y + levelOne.getFieldHeight());
 //                    println("Free: Position X = " + x + ", " + y + "; Position Y = " + (x + fieldWidth) + ", " + (y + fieldHeight));
                 }
             }
         }
     }
-
-    //checkt ob eine Position frei ist
-    public boolean isFree(int xPosition, int yPosition) {
-        boolean ergebnis = false;
-        //schneller check ob der Rand betroffen ist
-        if (xPosition < fieldWidth || xPosition > width - fieldWidth || yPosition < fieldHeight || yPosition > height - fieldHeight) {
-            ergebnis = false;
-        } else {
-            //check ob die Felder in der Mitte getroffen werden mit Hilfe einer for-Schleife, gleich wie beim zeichnen
-            forSchleife:
-            for (double x = fieldWidth; x < width - fieldWidth; x += fieldWidth) {
-                for (double y = fieldHeight; y < height - fieldHeight; y += fieldHeight) {
-
-                    if (x % (fieldWidth * 2) == 0 && y % (fieldHeight * 2) == 0) {
-                        if (xPosition > x && xPosition < x + fieldWidth && yPosition > y  && yPosition < y + fieldHeight ) {
-                            ergebnis = false;
-                            break forSchleife;
-                        } else {
-                            ergebnis = true;
-                        }
-                    }
-                }
-            }
-        }
-        return ergebnis;
-    }
-
 }
+
+
+
+
+
 
 

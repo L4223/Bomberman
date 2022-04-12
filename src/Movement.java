@@ -1,5 +1,3 @@
-//Noch nicht benutzt.
-
-public class Movement {
+public class Movement extends Character{
 
 }
