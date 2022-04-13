@@ -3,8 +3,10 @@
 public class Position  {
 
 
-    public int positionX;
-    public int positionY;
+
+
+    private int positionX;
+    private int positionY;
 
     private int width;
     private int height;
@@ -23,7 +25,7 @@ public class Position  {
     }
 
     public void setWidth(int width) {
-        int pixelRestWidth = width % this.fieldSize;
+        int pixelRestWidth = width % getFieldSize();
         this.width = width - pixelRestWidth;
     }
 
@@ -32,7 +34,7 @@ public class Position  {
     }
 
     public void setHeight(int height) {
-        int pixelRestHeight = height % this.fieldSize;
+        int pixelRestHeight = height % getFieldSize();
         this.height = height - pixelRestHeight;
     }
 
@@ -84,16 +86,21 @@ public class Position  {
     //checkt ob eine Position frei ist
     public boolean isFree(int positionX, int positionY) {
         //schneller check ob der Rand betroffen ist
-        if (positionX <= this.fieldWidth || positionX >= this.width - this.fieldWidth || positionY <= this.fieldHeight || positionY >= this.height - this.fieldHeight) {
+        if (positionX < getFieldWidth()
+                || positionX > getWidth() - getFieldWidth()
+                || positionY < getFieldHeight()
+                || positionY > getHeight() - getFieldHeight()) {
             this.free = false;
         } else {
             //check ob die Felder in der Mitte getroffen werden mit Hilfe einer for-Schleife, gleich wie beim zeichnen
             forSchleife:
-            for (int x = this.fieldWidth; x < this.width - this.fieldWidth; x += this.fieldWidth) {
-                for (int y = this.fieldHeight; y < this.height - this.fieldHeight; y += this.fieldHeight) {
+            for (int x = getFieldWidth(); x < getWidth() - getFieldWidth(); x += getFieldWidth()) {
+                for (int y = getFieldHeight(); y < getHeight() - getFieldHeight(); y += getFieldHeight()) {
 
-                    if (x % (this.fieldWidth * 2) == 0 && y % (this.fieldHeight * 2) == 0) {
-                        if (positionX > x && positionX < x + this.fieldWidth && positionY > y  && positionY < y + this.fieldHeight ) {
+                    if (x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0) {
+                        if (positionX > x && positionX < x + getFieldWidth()
+                                && positionY > y
+                                && positionY < y + getFieldHeight() ) {
                             this.free = false;
                             break forSchleife;
                         } else {

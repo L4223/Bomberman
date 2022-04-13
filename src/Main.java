@@ -4,6 +4,7 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("Main");
+        PApplet.main("Position");
 
 
     }
@@ -26,8 +27,8 @@ public class Main extends PApplet {
 
     //Größe der Anzeige und Einstellung des Renderers
     public void settings() {
-        fullScreen(2);
-//        size(900, 900, P2D);
+//        fullScreen(2);
+        size(900, 900, P2D);
 
     }
 
@@ -35,94 +36,81 @@ public class Main extends PApplet {
     public void movement() {
         if (keyPressed) {
             //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach links
-
-            if (levelOne.isFree(player[0].getCornerLeftUpX(), player[0].getCornerLeftUpY()) && levelOne.isFree(player[0].getCornerLeftDownX(), player[0].getCornerLeftDownY()) && keyCode == LEFT) {
-                player[0].left(player[0].getSpeed());
-            }
-
-            else {
-                if (keyCode == LEFT) {
-
+            if (keyCode == LEFT) {
+                if (levelOne.isFree(player[0].getCornerLeftUpX() - player[0].getSpeed(), player[0].getCornerLeftUpY())
+                        && levelOne.isFree(player[0].getCornerLeftDownX() - player[0].getSpeed(), player[0].getCornerLeftDownY())) {
+                    player[0].left(player[0].getSpeed());
+                    player[0].updatePosition();
+                } else {
                     for (int i = player[0].getSpeed(); i > 0; i--) {
-                        println("test3");
-                        println(player[0].getCornerRightUpX());
-                        if (levelOne.isFree(player[0].getCornerLeftUpX() - i, player[0].getCornerLeftUpY()) && levelOne.isFree(player[0].getCornerLeftDownX() - i , player[0].getCornerLeftDownY()) && keyCode == LEFT) {
+                        if (levelOne.isFree(player[0].getCornerLeftUpX() - i, player[0].getCornerLeftUpY())
+                                && levelOne.isFree(player[0].getCornerLeftDownX() - i, player[0].getCornerLeftDownY())) {
                             player[0].left(i);
-                            println("test2");
+
 
                         }
+
                     }
                 }
             }
-                        if(levelOne.isFree(player[0].getCornerRightUpX() , player[0].getCornerRightUpY()) && levelOne.isFree(player[0].getCornerRightDownX() , player[0].getCornerRightDownY()) && keyCode == RIGHT) {
-                player[0].right(player[0].getSpeed());
-                println("test");
+            if (keyCode == RIGHT) {
+                if (levelOne.isFree(player[0].getCornerRightUpX() + player[0].getSpeed(), player[0].getCornerRightUpY())
+                        && levelOne.isFree(player[0].getCornerRightDownX() + player[0].getSpeed(), player[0].getCornerRightDownY())) {
+                    player[0].right(player[0].getSpeed());
+                    player[0].updatePosition();
+                } else {
+                    for (int i = player[0].getSpeed(); i > 0; i--) {
+                        if (levelOne.isFree(player[0].getCornerRightUpX() + i, player[0].getCornerRightUpY())
+                                && levelOne.isFree(player[0].getCornerRightDownX() + i, player[0].getCornerRightDownY())) {
+                            player[0].right(i);
+
+
+                        }
+
+                    }
+                }
             }
-//            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach oben
-//            if (isFree(player.getPositionX(), player.getPositionY() - player.getSpeed())
-//                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() - player.getSpeed())
-//                    && keyCode == UP) {
-//                player.up(player.getSpeed());
-//            } else {
-//                if (keyCode == UP) {
-//
-//                    for (int i = player.getSpeed(); i > 0; i--) {
-//                        if (isFree(player.getPositionX(), player.getPositionY() - i)
-//                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() - i)) {
-//                            player.up(i);
-//                        }
-//                    }
-//                }
-//            }
-//            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach rechts
-//            if (isFree(player.getPositionX() + imageWidth + player.getSpeed(), player.getPositionY())
-//                    && isFree(player.getPositionX() + imageWidth + player.getSpeed(), player.getPositionY() + imageHeight)
-//                    && keyCode == RIGHT) {
-//                player.right(player.getSpeed());
-//            } else {
-//                if (keyCode == RIGHT) {
-//
-//                    for (int i = player.getSpeed(); i > 0; i--) {
-//                        if (isFree(player.getPositionX() + imageWidth + i, player.getPositionY())
-//                                && isFree(player.getPositionX() + imageWidth + i, player.getPositionY() + imageHeight)) {
-//                            player.right(i);
-//                        }
-//                    }
-//                }
-//            }
-//            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach unten
-//            if (isFree(player.getPositionX(), player.getPositionY() + imageHeight + player.getSpeed())
-//                    && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + player.getSpeed())
-//                    && keyCode == DOWN) {
-//                player.down(player.getSpeed());
-//            } else {
-//                if (keyCode == DOWN) {
-//
-//                    for (int i = player.getSpeed(); i > 0; i--) {
-//                        if (isFree(player.getPositionX(), player.getPositionY() + imageHeight + i)
-//                                && isFree(player.getPositionX() + imageWidth, player.getPositionY() + imageHeight + i)) {
-//                            player.down((i));
-//                        }
-//                    }
-//                }
-//            }
-        }
-    }
+            if (keyCode == UP) {
+                if (levelOne.isFree(player[0].getCornerLeftUpX(), player[0].getCornerLeftUpY() - player[0].getSpeed())
+                        && levelOne.isFree(player[0].getCornerRightUpX() , player[0].getCornerRightUpY() - player[0].getSpeed())) {
+                    player[0].up(player[0].getSpeed());
+                } else {
+                    for (int i = player[0].getSpeed(); i > 0; i--) {
+                        if (levelOne.isFree(player[0].getCornerLeftUpX() , player[0].getCornerLeftUpY() - i)
+                                && levelOne.isFree(player[0].getCornerRightUpX() , player[0].getCornerRightUpY() - i )) {
+                            player[0].up(i);
 
-    public void updatePosition() {
-        player[0].setCornerLeftUpX();
-        player[0].setCornerLeftUpY();
-        player[0].setCornerLeftDownX();
-        player[0].setCornerLeftDownY();
-        player[0].setCornerRightUpX();
-        player[0].setCornerRightUpY();
-        player[0].setCornerRightDownX();
-        player[0].setCornerRightUpY();
+
+                        }
+
+                    }
+                }
+            }
+            if (keyCode == DOWN) {
+                if (levelOne.isFree(player[0].getCornerLeftDownX()  , player[0].getCornerLeftDownY()  + player[0].getSpeed())
+                        && levelOne.isFree(player[0].getCornerRightDownX() , player[0].getCornerRightDownY() + player[0].getSpeed())) {
+                    player[0].down(player[0].getSpeed());
+                } else {
+                    for (int i = player[0].getSpeed(); i > 0; i--) {
+                        if (levelOne.isFree(player[0].getCornerLeftDownX() , player[0].getCornerLeftDownY()  + i)
+                                && levelOne.isFree(player[0].getCornerRightDownX(), player[0].getCornerRightDownY() + i)) {
+                            player[0].down(i);
+
+                        }
+
+                    }
+                }
+            }
+
+
+                }
+        player[0].updatePosition();
+
+            }
 
 
 
 
-    }
 
 
     public void keyPressed() {
@@ -238,7 +226,8 @@ public class Main extends PApplet {
         noStroke();
         matchfield();
         movement();
-        updatePosition();
+
+        println("Position X = " + player[0].getPositionX() + "PositionY = " + player[0].getPositionY());
 
 
         //zeichnet Spieler in enstprechender Farbe

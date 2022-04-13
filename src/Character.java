@@ -37,7 +37,7 @@ public class Character extends Position{
     }
 
     public void setCornerLeftUpX() {
-        this.cornerLeftUpX = this.positionX;
+        this.cornerLeftUpX = getPositionX();
     }
 
     public int getCornerLeftUpY() {
@@ -45,7 +45,7 @@ public class Character extends Position{
     }
 
     public void setCornerLeftUpY() {
-        this.cornerLeftUpY = this.positionY;
+        this.cornerLeftUpY = getPositionY();
     }
 
     public int getCornerRightUpX() {
@@ -53,7 +53,7 @@ public class Character extends Position{
     }
 
     public void setCornerRightUpX() {
-        this.cornerRightUpX = this.positionX + this.imageWidth;
+        this.cornerRightUpX = getPositionX() + getImageWidth();
     }
 
     public int getCornerRightUpY() {
@@ -61,7 +61,7 @@ public class Character extends Position{
     }
 
     public void setCornerRightUpY() {
-        this.cornerRightUpY = this.positionY;
+        this.cornerRightUpY = getPositionY();
     }
 
     public int getCornerLeftDownX() {
@@ -69,7 +69,7 @@ public class Character extends Position{
     }
 
     public void setCornerLeftDownX() {
-        this.cornerLeftDownX = this.positionX;
+        this.cornerLeftDownX = getPositionX();
     }
 
     public int getCornerLeftDownY() {
@@ -77,7 +77,7 @@ public class Character extends Position{
     }
 
     public void setCornerLeftDownY() {
-        this.cornerLeftDownY = this.positionY + this.imageHeight;
+        this.cornerLeftDownY = getPositionY() + getImageHeight();
     }
 
     public int getCornerRightDownX() {
@@ -85,7 +85,7 @@ public class Character extends Position{
     }
 
     public void setCornerRightDownX() {
-        this.cornerRightDownX = this.positionX + this.imageWidth;
+        this.cornerRightDownX = getPositionX() + getImageWidth();
     }
 
     public int getCornerRightDownY() {
@@ -93,7 +93,7 @@ public class Character extends Position{
     }
 
     public void setCornerRightDownY() {
-        this.cornerRightDownY = this.positionY + this.imageHeight;
+        this.cornerRightDownY = getPositionY() + getImageHeight();
     }
 
     public int[] getColorSelection() {
@@ -146,16 +146,31 @@ public class Character extends Position{
 
     //läuft in die gegebene Richtung
     public void left(int speed) {
-        this.positionX = this.positionX - speed;
+        setPositionX(getPositionX() - speed);
+        updatePosition();
     }
     public void right(int speed) {
-        this.positionX = this.positionX + speed;
+        setPositionX(getPositionX() + speed);
+        updatePosition();
     }
     public void down(int speed) {
-        this.positionY = this.positionY + speed;
+        setPositionY(getPositionY() + speed);
+        updatePosition();
     }
     public void up(int speed) {
-        this.positionY = this.positionY - speed;
+        setPositionY(getPositionY()- speed);
+        updatePosition();
+    }
+
+    public void updatePosition() {
+        setCornerLeftUpX();
+        setCornerLeftUpY();
+        setCornerLeftDownX();
+        setCornerLeftDownY();
+        setCornerRightUpX();
+        setCornerRightUpY();
+        setCornerRightDownX();
+        setCornerRightDownY();
     }
 
 }
