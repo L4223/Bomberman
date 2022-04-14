@@ -8,6 +8,12 @@ public class Position  {
     private int positionX;
     private int positionY;
 
+
+    public Position() {
+        this.positionX = 20;
+        this.positionY = 20;
+    }
+
     private int width;
     private int height;
 

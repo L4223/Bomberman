@@ -4,6 +4,13 @@ public class Character extends Position{
     private int bomb;
     private int color;
 
+    public Character() {
+        this.speed = 20;
+        this.heart = 3;
+        this.bomb = 1;
+        updatePosition();
+    }
+
     private int cornerLeftUpX;
     private int cornerLeftUpY;
     private int cornerRightUpX;
@@ -15,6 +22,8 @@ public class Character extends Position{
 
     private int imageWidth;
     private int imageHeight;
+
+
 
     public int getImageWidth() {
         return imageWidth;

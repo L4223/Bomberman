@@ -40,7 +40,6 @@ public class Main extends PApplet {
                 if (levelOne.isFree(player[0].getCornerLeftUpX() - player[0].getSpeed(), player[0].getCornerLeftUpY())
                         && levelOne.isFree(player[0].getCornerLeftDownX() - player[0].getSpeed(), player[0].getCornerLeftDownY())) {
                     player[0].left(player[0].getSpeed());
-                    player[0].updatePosition();
                 } else {
                     for (int i = player[0].getSpeed(); i > 0; i--) {
                         if (levelOne.isFree(player[0].getCornerLeftUpX() - i, player[0].getCornerLeftUpY())
@@ -57,7 +56,6 @@ public class Main extends PApplet {
                 if (levelOne.isFree(player[0].getCornerRightUpX() + player[0].getSpeed(), player[0].getCornerRightUpY())
                         && levelOne.isFree(player[0].getCornerRightDownX() + player[0].getSpeed(), player[0].getCornerRightDownY())) {
                     player[0].right(player[0].getSpeed());
-                    player[0].updatePosition();
                 } else {
                     for (int i = player[0].getSpeed(); i > 0; i--) {
                         if (levelOne.isFree(player[0].getCornerRightUpX() + i, player[0].getCornerRightUpY())
@@ -183,10 +181,7 @@ public class Main extends PApplet {
             player[i].setImageWidth(20);
             player[i].setImageHeight(20);
 
-            player[i].setColor(player[i].getColorSelection(i));
-            player[i].setSpeed(width / 100);
-            player[i].setBomb(1);
-            player[i].setHeart(3);
+
             if (i == 0) {
                 player[i].setPositionX(levelOne.getFieldWidth());
                 player[i].setPositionY(levelOne.getFieldHeight());
