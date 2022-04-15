@@ -3,11 +3,15 @@ public class Character extends Position{
     private int heart;
     private int bomb;
     private int color;
+    private int imageWidth;
+    private int imageHeight;
 
     public Character() {
         this.speed = 20;
         this.heart = 3;
         this.bomb = 1;
+        this.imageWidth = 20;
+        this.imageHeight = 20;
         updatePosition();
     }
 
@@ -20,26 +24,9 @@ public class Character extends Position{
     private int cornerRightDownX;
     private int cornerRightDownY;
 
-    private int imageWidth;
-    private int imageHeight;
 
 
 
-    public int getImageWidth() {
-        return imageWidth;
-    }
-
-    public void setImageWidth(int imageWidth) {
-        this.imageWidth = imageWidth;
-    }
-
-    public int getImageHeight() {
-        return imageHeight;
-    }
-
-    public void setImageHeight(int imageHeight) {
-        this.imageHeight = imageHeight;
-    }
 
     public int getCornerLeftUpX() {
         return cornerLeftUpX;
@@ -152,34 +139,23 @@ public class Character extends Position{
         this.color = color;
     }
 
-
-    //läuft in die gegebene Richtung
-    public void left(int speed) {
-        setPositionX(getPositionX() - speed);
-        updatePosition();
-    }
-    public void right(int speed) {
-        setPositionX(getPositionX() + speed);
-        updatePosition();
-    }
-    public void down(int speed) {
-        setPositionY(getPositionY() + speed);
-        updatePosition();
-    }
-    public void up(int speed) {
-        setPositionY(getPositionY()- speed);
-        updatePosition();
+    public int getImageWidth() {
+        return imageWidth;
     }
 
-    public void updatePosition() {
-        setCornerLeftUpX();
-        setCornerLeftUpY();
-        setCornerLeftDownX();
-        setCornerLeftDownY();
-        setCornerRightUpX();
-        setCornerRightUpY();
-        setCornerRightDownX();
-        setCornerRightDownY();
+    public void setImageWidth(int imageWidth) {
+        this.imageWidth = imageWidth;
     }
+
+    public int getImageHeight() {
+        return imageHeight;
+    }
+
+    public void setImageHeight(int imageHeight) {
+        this.imageHeight = imageHeight;
+    }
+
+
+
 
 }

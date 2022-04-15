@@ -1,12 +1,6 @@
 <component name="libraryTable">
   <library name="core">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/processing/core/library/jogl-all.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/processing/core/library/jogl-all-natives-windows-i586.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/processing/core/library/gluegen-rt.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/processing/core/library/gluegen-rt-natives-windows-i586.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/processing/core/library/core.jar!/" />
-      <root url="file://$PROJECT_DIR$" />
       <root url="jar://$PROJECT_DIR$/lib/core.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/gluegen-rt-natives-linux-aarch64.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/gluegen-rt-natives-linux-amd64.jar!/" />
@@ -26,8 +20,6 @@
       <root url="jar://$PROJECT_DIR$/lib/jogl-all.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/src" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

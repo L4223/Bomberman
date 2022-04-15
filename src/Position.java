@@ -1,100 +1,30 @@
-
-
-public class Position  {
-
-
-
-
+public class Position {
     private int positionX;
     private int positionY;
 
 
-    public Position() {
-        this.positionX = 20;
-        this.positionY = 20;
-    }
-
-    private int width;
-    private int height;
-
-
-    private int fieldWidth;
-    private int fieldHeight;
-
-    private int fieldSize;
-
-    private boolean free;
-
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        int pixelRestWidth = width % getFieldSize();
-        this.width = width - pixelRestWidth;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        int pixelRestHeight = height % getFieldSize();
-        this.height = height - pixelRestHeight;
-    }
-
-    public int getFieldWidth() {
-        return fieldWidth;
-    }
-
-    public void setFieldWidth() {
-        this.fieldWidth = this.width / this.fieldSize;
-    }
-
-    public int getFieldHeight() {
-        return fieldHeight;
-    }
-
-    public void setFieldHeight() {
-        this.fieldHeight = this.height / this.fieldSize;
-    }
-
-    public int getFieldSize() {
-        return fieldSize;
-    }
-
-    public void setFieldSize(int fieldSize) {
-        this.fieldSize = fieldSize;
-    }
-
-
-    public int getPositionX() {
+    public int getPositionX (){
         return positionX;
+    }
+
+    public int getPositionY () {
+        return positionY;
     }
 
     public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
 
-    public int getPositionY() {
-        return positionY;
-    }
-
     public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
-
-
-
-
 
     //checkt ob eine Position frei ist
     public boolean isFree(int positionX, int positionY) {
         //schneller check ob der Rand betroffen ist
         if (positionX < getFieldWidth()
-                || positionX > getWidth() - getFieldWidth()
-                || positionY < getFieldHeight()
+        positionX > getWidth() - getFieldWidth()
+        positionY < getFieldHeight()
                 || positionY > getHeight() - getFieldHeight()) {
             this.free = false;
         } else {
@@ -119,8 +49,5 @@ public class Position  {
         return this.free;
     }
 
+
 }
-
-
-
-
