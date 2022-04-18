@@ -1,6 +1,17 @@
 // nocht nicht benutzt
 
+import processing.core.PApplet;
+
 public class Matchfield extends Position{
+
+    public Matchfield (PApplet pApplet) {
+        this.fieldSize = 9;
+        setHeight(pApplet.height);
+        setWidth(pApplet.width);
+        setFieldHeight();
+        setFieldWidth();
+    }
+
     private boolean visible;
     private boolean taken;
 
@@ -73,5 +84,39 @@ public class Matchfield extends Position{
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public void setFree (boolean free) {
+        this.free = free;
+    }
+
+    //checkt ob eine Position frei ist
+    public boolean isFree(int positionX, int positionY) {
+        //schneller check ob der Rand betroffen ist
+        if (positionX < getFieldWidth()
+                || positionX > getWidth() - getFieldWidth()
+                || positionY < getFieldHeight()
+                || positionY > getHeight() - getFieldHeight()) {
+            setFree(false);
+        } else {
+            //check ob die Felder in der Mitte getroffen werden mit Hilfe einer for-Schleife, gleich wie beim zeichnen
+            forSchleife:
+            for (int x = getFieldWidth(); x < getWidth() - getFieldWidth(); x += getFieldWidth()) {
+                for (int y = getFieldHeight(); y < getHeight() - getFieldHeight(); y += getFieldHeight()) {
+
+                    if (x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0) {
+                        if (positionX > x && positionX < x + getFieldWidth()
+                                && positionY > y
+                                && positionY < y + getFieldHeight() ) {
+                            setFree(false);
+                            break forSchleife;
+                        } else {
+                            setFree(true);
+                        }
+                    }
+                }
+            }
+        }
+        return this.free;
     }
 }

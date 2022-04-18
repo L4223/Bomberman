@@ -2,6 +2,8 @@ import processing.core.PApplet;
 
 public class MatchfieldView {
 
+    private PApplet pApplet = this.pApplet;
+
     //zeichnet Spielfeld
     public void matchfield(Matchfield matchfield, PApplet pApplet) {
 

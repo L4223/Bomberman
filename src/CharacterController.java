@@ -2,12 +2,16 @@ import processing.core.PApplet;
 
 public class CharacterController {
 
+    private PApplet pApplet = this.pApplet;
+
     private Character bomberman;
     private CharacterView view;
+    private Matchfield matchfield;
 
-    public CharacterController (Character bomberman, CharacterView view) {
+    public CharacterController (Character bomberman, CharacterView view, Matchfield matchfield) {
         this.bomberman = bomberman;
         this.view = view;
+        this.matchfield = matchfield;
     }
 
 
@@ -29,6 +33,81 @@ public class CharacterController {
         updatePosition();
     }
 
+
+
+    public void movement() {
+        if (pApplet.keyPressed) {
+            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach links
+            if (pApplet.keyCode == pApplet.LEFT) {
+                if (matchfield.isFree(bomberman.getCornerLeftUpX() - bomberman.getSpeed(), bomberman.getCornerLeftUpY())
+                        && matchfield.isFree(bomberman.getCornerLeftDownX() - bomberman.getSpeed(), bomberman.getCornerLeftDownY())) {
+                    left(bomberman.getSpeed());
+                } else {
+                    for (int i = bomberman.getSpeed(); i > 0; i--) {
+                        if (matchfield.isFree(bomberman.getCornerLeftUpX() - i, bomberman.getCornerLeftUpY())
+                                && matchfield.isFree(bomberman.getCornerLeftDownX() - i, bomberman.getCornerLeftDownY())) {
+                            left(i);
+
+
+                        }
+
+                    }
+                }
+            }
+            if (pApplet.keyCode == pApplet.RIGHT) {
+                if (matchfield.isFree(bomberman.getCornerRightUpX() + bomberman.getSpeed(), bomberman.getCornerRightUpY())
+                        && matchfield.isFree(bomberman.getCornerRightDownX() + bomberman.getSpeed(), bomberman.getCornerRightDownY())) {
+                    right(bomberman.getSpeed());
+                } else {
+                    for (int i = bomberman.getSpeed(); i > 0; i--) {
+                        if (matchfield.isFree(bomberman.getCornerRightUpX() + i, bomberman.getCornerRightUpY())
+                                && matchfield.isFree(bomberman.getCornerRightDownX() + i, bomberman.getCornerRightDownY())) {
+                            right(i);
+
+
+                        }
+
+                    }
+                }
+            }
+            if (pApplet.keyCode == pApplet.UP) {
+                if (matchfield.isFree(bomberman.getCornerLeftUpX(), bomberman.getCornerLeftUpY() - bomberman.getSpeed())
+                        && matchfield.isFree(bomberman.getCornerRightUpX() , bomberman.getCornerRightUpY() - bomberman.getSpeed())) {
+                    up(bomberman.getSpeed());
+                } else {
+                    for (int i = bomberman.getSpeed(); i > 0; i--) {
+                        if (matchfield.isFree(bomberman.getCornerLeftUpX() , bomberman.getCornerLeftUpY() - i)
+                                && matchfield.isFree(bomberman.getCornerRightUpX() , bomberman.getCornerRightUpY() - i )) {
+                            up(i);
+
+
+                        }
+
+                    }
+                }
+            }
+            if (pApplet.keyCode == pApplet.DOWN) {
+                if (matchfield.isFree(bomberman.getCornerLeftDownX()  , bomberman.getCornerLeftDownY()  + bomberman.getSpeed())
+                        && matchfield.isFree(bomberman.getCornerRightDownX() , bomberman.getCornerRightDownY() + bomberman.getSpeed())) {
+                    down(bomberman.getSpeed());
+                } else {
+                    for (int i = bomberman.getSpeed(); i > 0; i--) {
+                        if (matchfield.isFree(bomberman.getCornerLeftDownX() , bomberman.getCornerLeftDownY()  + i)
+                                && matchfield.isFree(bomberman.getCornerRightDownX(), bomberman.getCornerRightDownY() + i)) {
+                            down(i);
+
+                        }
+
+                    }
+                }
+            }
+
+
+        }
+        updatePosition();
+
+    }
+
     public void updatePosition() {
         bomberman.setCornerLeftUpX();
         bomberman.setCornerLeftUpY();
@@ -40,77 +119,8 @@ public class CharacterController {
         bomberman.setCornerRightDownY();
     }
 
-    public void movement(PApplet pApplet) {
-        if (pApplet.keyPressed) {
-            //checkt ob die nächste Position frei ist und ob die Taste gedrück wurde und bewegt sich nach links
-            if (pApplet.keyCode == pApplet.LEFT) {
-                if (levelOne.isFree(player[0].getCornerLeftUpX() - player[0].getSpeed(), player[0].getCornerLeftUpY())
-                        && levelOne.isFree(player[0].getCornerLeftDownX() - player[0].getSpeed(), player[0].getCornerLeftDownY())) {
-                    player[0].left(player[0].getSpeed());
-                } else {
-                    for (int i = player[0].getSpeed(); i > 0; i--) {
-                        if (levelOne.isFree(player[0].getCornerLeftUpX() - i, player[0].getCornerLeftUpY())
-                                && levelOne.isFree(player[0].getCornerLeftDownX() - i, player[0].getCornerLeftDownY())) {
-                            player[0].left(i);
-
-
-                        }
-
-                    }
-                }
-            }
-            if (keyCode == RIGHT) {
-                if (levelOne.isFree(player[0].getCornerRightUpX() + player[0].getSpeed(), player[0].getCornerRightUpY())
-                        && levelOne.isFree(player[0].getCornerRightDownX() + player[0].getSpeed(), player[0].getCornerRightDownY())) {
-                    player[0].right(player[0].getSpeed());
-                } else {
-                    for (int i = player[0].getSpeed(); i > 0; i--) {
-                        if (levelOne.isFree(player[0].getCornerRightUpX() + i, player[0].getCornerRightUpY())
-                                && levelOne.isFree(player[0].getCornerRightDownX() + i, player[0].getCornerRightDownY())) {
-                            player[0].right(i);
-
-
-                        }
-
-                    }
-                }
-            }
-            if (keyCode == UP) {
-                if (levelOne.isFree(player[0].getCornerLeftUpX(), player[0].getCornerLeftUpY() - player[0].getSpeed())
-                        && levelOne.isFree(player[0].getCornerRightUpX() , player[0].getCornerRightUpY() - player[0].getSpeed())) {
-                    player[0].up(player[0].getSpeed());
-                } else {
-                    for (int i = player[0].getSpeed(); i > 0; i--) {
-                        if (levelOne.isFree(player[0].getCornerLeftUpX() , player[0].getCornerLeftUpY() - i)
-                                && levelOne.isFree(player[0].getCornerRightUpX() , player[0].getCornerRightUpY() - i )) {
-                            player[0].up(i);
-
-
-                        }
-
-                    }
-                }
-            }
-            if (keyCode == DOWN) {
-                if (levelOne.isFree(player[0].getCornerLeftDownX()  , player[0].getCornerLeftDownY()  + player[0].getSpeed())
-                        && levelOne.isFree(player[0].getCornerRightDownX() , player[0].getCornerRightDownY() + player[0].getSpeed())) {
-                    player[0].down(player[0].getSpeed());
-                } else {
-                    for (int i = player[0].getSpeed(); i > 0; i--) {
-                        if (levelOne.isFree(player[0].getCornerLeftDownX() , player[0].getCornerLeftDownY()  + i)
-                                && levelOne.isFree(player[0].getCornerRightDownX(), player[0].getCornerRightDownY() + i)) {
-                            player[0].down(i);
-
-                        }
-
-                    }
-                }
-            }
-
-
-        }
-        player[0].updatePosition();
-
+    public void updateView () {
+        view.draw(bomberman);
     }
 
 

@@ -2,11 +2,23 @@ import processing.core.PApplet;
 
 public class Main extends PApplet {
 
-    private MatchfieldView matchfieldView;
-    private CharacterView characterView;
 
     public static void main(String[] args) {
         PApplet.main("Main");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     //Größe der Anzeige und Einstellung des Renderers
@@ -17,9 +29,22 @@ public class Main extends PApplet {
     }
 
 
+    Matchfield levelOne = new Matchfield(this);
+
+    MatchfieldView matchfieldView = new MatchfieldView();
+
+    MatchfieldController matchfieldController = new MatchfieldController(levelOne, matchfieldView, this);
+    Character bombermanOne  = new Character(0);
+
+    CharacterView characterView = new CharacterView();
+
+    CharacterController characterController = new CharacterController(bombermanOne, characterView, levelOne);
+
+
+
     public void setup() {
-        matchfieldView = new MatchfieldView();
-        characterView = new CharacterView();
+//        matchfieldView = new MatchfieldView();
+//        characterView = new CharacterView();
 
 
 /*        //bestimmt die Größe des Bildes
@@ -43,29 +68,31 @@ public class Main extends PApplet {
     }
 
     public void draw() {
-/*        //lässt die Spieler bewegen
-//        movement(player[0]);
-        //zeichnet Spielfeld neu
-
-
-        rectMode(CORNERS);
-        noStroke();
-        matchfield();
-        movement();
-
-        println("Position X = " + player[0].getPositionX() + "PositionY = " + player[0].getPositionY());
-
-
-        //zeichnet Spieler in enstprechender Farbe
-
-
-        //zeichnet entsprechend aktivierten Bildschirm
-        start();
-        pause();
-        playground();
-        gameover();*/
-
-
+      matchfieldController.setMatchfield();
+//        characterView.draw(this, player);
+///*        //lässt die Spieler bewegen
+////        movement(player[0]);
+//        //zeichnet Spielfeld neu
+//
+//
+//        rectMode(CORNERS);
+//        noStroke();
+//        matchfield();
+//        movement();
+//
+//        println("Position X = " + player[0].getPositionX() + "PositionY = " + player[0].getPositionY());
+//
+//
+//        //zeichnet Spieler in enstprechender Farbe
+//
+//
+//        //zeichnet entsprechend aktivierten Bildschirm
+//        start();
+//        pause();
+//        playground();
+//        gameover();*/
+//
+//
     }
 
 

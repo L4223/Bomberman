@@ -6,14 +6,19 @@ public class Character extends Position{
     private int imageWidth;
     private int imageHeight;
 
-    public Character() {
+    public Character(int spielernummer) {
         this.speed = 20;
         this.heart = 3;
         this.bomb = 1;
         this.imageWidth = 20;
         this.imageHeight = 20;
-        updatePosition();
+        this.color = colorSelection[spielernummer];
+        setPositionX(200);
+        setPositionY(100);
     }
+
+    //Farbe des Spielers, {rot, grün, blau, gelb}
+    private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFF1645F5, 0xFFF0F14E};
 
     private int cornerLeftUpX;
     private int cornerLeftUpY;
@@ -97,8 +102,7 @@ public class Character extends Position{
     }
 
 
-    //Farbe des Spielers, {rot, grün, blau, gelb}
-    private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFF1645F5, 0xFFF0F14E};
+
 
     public int getColorSelection(int whichNumber) {
         return colorSelection [whichNumber];
