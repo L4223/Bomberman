@@ -1,24 +1,52 @@
+import processing.core.PApplet;
+
 public class Character extends Position{
+    private int playernumber;
     private int speed;
     private int heart;
     private int bomb;
     private int color;
     private int imageWidth;
     private int imageHeight;
+    private Matchfield matchfield;
 
-    public Character(int spielernummer) {
+
+    public Matchfield getMatchfield() {
+        return matchfield;
+    }
+
+    public int getPlayernumber () {
+        return playernumber;
+    }
+
+    public Character(int playernumber, Matchfield matchfield, PApplet pApplet) {
+        this.playernumber = playernumber;
+        this.matchfield = matchfield;
         this.speed = 20;
         this.heart = 3;
         this.bomb = 1;
         this.imageWidth = 20;
         this.imageHeight = 20;
-        this.color = colorSelection[spielernummer];
-        setPositionX(200);
-        setPositionY(100);
+        this.color = colorSelection[playernumber];
+        if (playernumber == 0) {
+            setPositionXY(matchfield.getFieldWidth(), matchfield.getFieldHeight());
+        }
+        if (playernumber == 1) {
+            setPositionXY(pApplet.width - matchfield.getFieldWidth() - this.imageWidth, pApplet.height - matchfield.getFieldHeight() - this.imageHeight);
+        }
+        if (playernumber == 2) {
+            setPositionXY(pApplet.width - matchfield.getFieldWidth() - this.imageWidth, matchfield.getFieldHeight());
+        }
+        if (playernumber == 3) {
+            setPositionXY(matchfield.getFieldWidth(), pApplet.height - matchfield.getFieldHeight() -this.imageHeight);
+        }
+
     }
 
     //Farbe des Spielers, {rot, grün, blau, gelb}
     private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFF1645F5, 0xFFF0F14E};
+
+
 
     private int cornerLeftUpX;
     private int cornerLeftUpY;
@@ -31,7 +59,10 @@ public class Character extends Position{
 
 
 
-
+    public void setPositionXY(int positionX, int positionY) {
+        setPositionX(positionX);
+        setPositionY(positionY);
+    }
 
     public int getCornerLeftUpX() {
         return cornerLeftUpX;

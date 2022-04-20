@@ -1,4 +1,3 @@
-// nocht nicht benutzt
 
 import processing.core.PApplet;
 

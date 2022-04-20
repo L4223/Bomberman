@@ -4,7 +4,6 @@ public class MatchfieldController {
 
     private Matchfield matchfield;
     private MatchfieldView view;
-
     private PApplet pApplet;
 
     public MatchfieldController(Matchfield matchfield, MatchfieldView view, PApplet pApplet) {
@@ -45,7 +44,6 @@ public class MatchfieldController {
 
     public void setMatchfield () {
         view.matchfield(matchfield, pApplet);
-        pApplet.println(matchfield.getFieldHeight() + " " + matchfield.getHeight() + " " + matchfield.getFieldWidth() + " " + matchfield.getWidth());
     }
 
 }

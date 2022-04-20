@@ -28,21 +28,41 @@ public class Main extends PApplet {
 
     }
 
+    Matchfield matchfield;
 
-    Matchfield levelOne = new Matchfield(this);
+    Matchfield levelOne;
+    MatchfieldController matchfieldController;
+    MatchfieldView matchfieldView;
 
-    MatchfieldView matchfieldView = new MatchfieldView();
-
-    MatchfieldController matchfieldController = new MatchfieldController(levelOne, matchfieldView, this);
-    Character bombermanOne  = new Character(0);
-
-    CharacterView characterView = new CharacterView();
-
-    CharacterController characterController = new CharacterController(bombermanOne, characterView, levelOne);
+    Character bomberman[];
+    CharacterController characterController[];
+    CharacterView characterView;
+    int numberOfPlayers;
 
 
 
     public void setup() {
+        //hier muss ein fehlercatcher rein über 4 und unter 0 geht nicht
+        numberOfPlayers = 4;
+        bomberman = new Character[numberOfPlayers];
+        characterController = new CharacterController[numberOfPlayers];
+
+        levelOne = new Matchfield(this);
+        matchfield = levelOne;
+        matchfieldView = new MatchfieldView();
+        matchfieldController = new MatchfieldController(levelOne, matchfieldView, this);
+        characterView = new CharacterView();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            bomberman[i] = new Character(i, matchfield, this);
+            characterController[i] = new CharacterController(bomberman[i], characterView, this);
+        }
+
+
+
+
+
+
+
 //        matchfieldView = new MatchfieldView();
 //        characterView = new CharacterView();
 
@@ -69,6 +89,12 @@ public class Main extends PApplet {
 
     public void draw() {
       matchfieldController.setMatchfield();
+      characterController[0].movement();
+      characterController[1].movement();
+
+      for (int i = 0; i < numberOfPlayers; i++) {
+          characterController[i].updateView();
+      }
 //        characterView.draw(this, player);
 ///*        //lässt die Spieler bewegen
 ////        movement(player[0]);
