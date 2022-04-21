@@ -12,7 +12,19 @@ public class MatchfieldController {
         this.pApplet = pApplet;
     }
 
-//    //checkt ob eine Position frei ist
+    public Matchfield getMatchfield() {
+        return matchfield;
+    }
+
+    public MatchfieldView getView() {
+        return view;
+    }
+
+    public PApplet getpApplet() {
+        return pApplet;
+    }
+
+    //    //checkt ob eine Position frei ist
 //    public boolean isFree(int positionX, int positionY) {
 //        //schneller check ob der Rand betroffen ist
 //        if (positionX < matchfield.getFieldWidth()
@@ -43,7 +55,7 @@ public class MatchfieldController {
 //    }
 
     public void setMatchfield () {
-        view.matchfield(matchfield, pApplet);
+        view.matchfield(getMatchfield(), getpApplet());
     }
 
 }
