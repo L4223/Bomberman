@@ -22,7 +22,7 @@ public class Character extends Position{
     public Character(int playernumber, Matchfield matchfield, PApplet pApplet) {
         this.playernumber = playernumber;
         this.matchfield = matchfield;
-        this.speed = 20;
+        this.speed = 5;
         this.heart = 3;
         this.bomb = 1;
         this.imageWidth = 20;

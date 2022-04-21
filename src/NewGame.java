@@ -23,6 +23,7 @@ public class NewGame {
     }
 
 
+
     public int getNumberOfPlayers() {
         return numberOfPlayers;
     }

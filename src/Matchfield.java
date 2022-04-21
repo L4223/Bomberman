@@ -4,7 +4,7 @@ import processing.core.PApplet;
 public class Matchfield extends Position{
 
     public Matchfield (PApplet pApplet) {
-        this.fieldSize = 9;
+        this.fieldSize = 15;
         setHeight(pApplet.height);
         setWidth(pApplet.width);
         setFieldHeight();

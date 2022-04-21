@@ -5,20 +5,6 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("Main");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     //Größe der Anzeige und Einstellung des Renderers
@@ -30,10 +16,7 @@ public class Main extends PApplet {
 
 
     int numberOfPlayers;
-
-
     NewGame newGame;
-
 
     boolean start,pause, playground, gameover;
 
@@ -45,7 +28,7 @@ public class Main extends PApplet {
 
         //Spieleranzahl wird bestimmt
         numberOfPlayers = 4;
-        newGame = new NewGame(numberOfPlayers,this);
+        newGame = new NewGame(numberOfPlayers, this);
 
         newGame.newGame();
 
@@ -54,8 +37,6 @@ public class Main extends PApplet {
         pause = false;
         playground = false;
         gameover = false;
-
-
     }
 
 
@@ -76,6 +57,8 @@ public class Main extends PApplet {
       newGame.getMatchfieldController().setMatchfield();
       newGame.getCharacterController(0).movement();
       newGame.getCharacterController(1).movement();
+      newGame.getCharacterController(2).automovement(1);
+      newGame.getCharacterController(3).automovement(0);
 
       for (int i = 0; i < numberOfPlayers; i++) {
           newGame.getCharacterController(i).updateView();
