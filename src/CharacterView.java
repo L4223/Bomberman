@@ -2,8 +2,6 @@ import processing.core.PApplet;
 
 public class CharacterView {
 
-    private PApplet pApplet;
-
     public void draw (Character bomberman, PApplet pApplet) {
         pApplet.rectMode(pApplet.CORNERS);
         pApplet.noStroke();
