@@ -30,13 +30,10 @@ public class Main extends PApplet {
 
 
     int numberOfPlayers;
-    Character bomberman[];
-    CharacterController characterController[];
-    Matchfield matchfield;
-    Matchfield levelOne;
-    MatchfieldView matchfieldView;
-    MatchfieldController matchfieldController;
-    CharacterView characterView;
+
+
+    NewGame newGame;
+
 
     boolean start,pause, playground, gameover;
 
@@ -48,8 +45,9 @@ public class Main extends PApplet {
 
         //Spieleranzahl wird bestimmt
         numberOfPlayers = 4;
+        newGame = new NewGame(numberOfPlayers,this);
 
-        newGame();
+        newGame.newGame();
 
         // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
         start = false;
@@ -60,32 +58,7 @@ public class Main extends PApplet {
 
     }
 
-    public void newGame () {
-        if (numberOfPlayers >= 0) {
-            try {
-                bomberman = new Character[numberOfPlayers];
-                characterController = new CharacterController[numberOfPlayers];
 
-                levelOne = new Matchfield(this);
-                matchfield = levelOne;
-                matchfieldView = new MatchfieldView();
-                matchfieldController = new MatchfieldController(levelOne, matchfieldView, this);
-                characterView = new CharacterView();
-
-
-                for (int i = 0; i < numberOfPlayers; i++) {
-                    bomberman[i] = new Character(i, matchfield, this);
-                    characterController[i] = new CharacterController(bomberman[i], characterView, this);
-                }
-            } catch (Exception exception) {
-                println("Fehler! Zwischen 1 - 4 Spieler zugelassen");
-                numberOfPlayers = 0;
-            }
-        } else {
-            println("Fehler! Spieleranzahl muss positiv sein");
-            numberOfPlayers = 0;
-        }
-    }
 
 
 
@@ -100,12 +73,12 @@ public class Main extends PApplet {
 
 
     public void draw() {
-      matchfieldController.setMatchfield();
-      characterController[0].movement();
-      characterController[1].movement();
+      newGame.getMatchfieldController().setMatchfield();
+      newGame.getCharacterController(0).movement();
+      newGame.getCharacterController(1).movement();
 
       for (int i = 0; i < numberOfPlayers; i++) {
-          characterController[i].updateView();
+          newGame.getCharacterController(i).updateView();
       }
     }
 
