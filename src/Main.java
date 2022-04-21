@@ -28,64 +28,76 @@ public class Main extends PApplet {
 
     }
 
-    Matchfield matchfield;
 
-    Matchfield levelOne;
-    MatchfieldController matchfieldController;
-    MatchfieldView matchfieldView;
-
+    int numberOfPlayers;
     Character bomberman[];
     CharacterController characterController[];
+    Matchfield matchfield;
+    Matchfield levelOne;
+    MatchfieldView matchfieldView;
+    MatchfieldController matchfieldController;
     CharacterView characterView;
-    int numberOfPlayers;
+
+    boolean start,pause, playground, gameover;
+
+
 
 
 
     public void setup() {
-        //hier muss ein fehlercatcher rein über 4 und unter 0 geht nicht
+
+        //Spieleranzahl wird bestimmt
         numberOfPlayers = 4;
-        bomberman = new Character[numberOfPlayers];
-        characterController = new CharacterController[numberOfPlayers];
 
-        levelOne = new Matchfield(this);
-        matchfield = levelOne;
-        matchfieldView = new MatchfieldView();
-        matchfieldController = new MatchfieldController(levelOne, matchfieldView, this);
-        characterView = new CharacterView();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            bomberman[i] = new Character(i, matchfield, this);
-            characterController[i] = new CharacterController(bomberman[i], characterView, this);
-        }
-
-
-
-
-
-
-
-//        matchfieldView = new MatchfieldView();
-//        characterView = new CharacterView();
-
-
-/*        //bestimmt die Größe des Bildes
-        imageWidth = 20;
-        imageHeight = 20;
-        //erstellt neues Spiel mit Anzahl der Spieler
-        newGame(4);
-
+        newGame();
 
         // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
         start = false;
         pause = false;
         playground = false;
         gameover = false;
-        println(levelOne.getFieldHeight());
-
-
-        // zeichnet Spielfeld*/
 
 
     }
+
+    public void newGame () {
+        if (numberOfPlayers >= 0) {
+            try {
+                bomberman = new Character[numberOfPlayers];
+                characterController = new CharacterController[numberOfPlayers];
+
+                levelOne = new Matchfield(this);
+                matchfield = levelOne;
+                matchfieldView = new MatchfieldView();
+                matchfieldController = new MatchfieldController(levelOne, matchfieldView, this);
+                characterView = new CharacterView();
+
+
+                for (int i = 0; i < numberOfPlayers; i++) {
+                    bomberman[i] = new Character(i, matchfield, this);
+                    characterController[i] = new CharacterController(bomberman[i], characterView, this);
+                }
+            } catch (Exception exception) {
+                println("Fehler! Zwischen 1 - 4 Spieler zugelassen");
+                numberOfPlayers = 0;
+            }
+        } else {
+            println("Fehler! Spieleranzahl muss positiv sein");
+            numberOfPlayers = 0;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void draw() {
       matchfieldController.setMatchfield();
@@ -95,49 +107,17 @@ public class Main extends PApplet {
       for (int i = 0; i < numberOfPlayers; i++) {
           characterController[i].updateView();
       }
-//        characterView.draw(this, player);
-///*        //lässt die Spieler bewegen
-////        movement(player[0]);
-//        //zeichnet Spielfeld neu
-//
-//
-//        rectMode(CORNERS);
-//        noStroke();
-//        matchfield();
-//        movement();
-//
-//        println("Position X = " + player[0].getPositionX() + "PositionY = " + player[0].getPositionY());
-//
-//
-//        //zeichnet Spieler in enstprechender Farbe
-//
-//
-//        //zeichnet entsprechend aktivierten Bildschirm
-//        start();
-//        pause();
-//        playground();
-//        gameover();*/
-//
-//
     }
 
 
 
-/*
-    // Variablen für Bildschirm
-    boolean start, pause, playground, gameover;
-    //Die Maße eines Feldes
-
-    //Array der Spieler
-    Character[] player = new Character[4];
-
-    Matchfield levelOne = new Matchfield();
 
 
-    //Die Maße des Bildes
-    int imageWidth;
-    int imageHeight;
-    //pixelReste
+
+
+
+
+
 
 
 
@@ -174,60 +154,6 @@ public class Main extends PApplet {
 
 
 
-    // erstellt die Charactere eines neuen Spiel mit Anzahl der Spieler und weißt Ihnen die Anzahl der Bomben, der Leben, die Farbe, die Geschwindigkeit und Position zu.
-    public void newGame(int numberOfPlayer) {
-
-
-        levelOne.setFieldSize(15);
-        levelOne.setWidth(width);
-        levelOne.setHeight(height);
-        levelOne.setFieldWidth();
-        levelOne.setFieldHeight();
-
-
-        for (int i = 0; i < numberOfPlayer; i++) {
-
-
-            player[i] = new Character();
-
-            player[i].setFieldSize(levelOne.getFieldSize());
-            player[i].setWidth(levelOne.getWidth());
-            player[i].setHeight(levelOne.getHeight());
-            player[i].setFieldWidth();
-            player[i].setFieldHeight();
-
-            player[i].setImageWidth(20);
-            player[i].setImageHeight(20);
-
-
-            if (i == 0) {
-                player[i].setPositionX(levelOne.getFieldWidth());
-                player[i].setPositionY(levelOne.getFieldHeight());
-            }
-            if (i == 1) {
-                player[i].setPositionX(width - levelOne.getFieldWidth());
-                player[i].setPositionY(height -levelOne.getFieldHeight());
-            }
-            if (i == 2) {
-                player[i].setPositionX(width - levelOne.getFieldWidth());
-                player[i].setPositionY(levelOne.getFieldHeight());
-            }
-            if (i == 3) {
-                player[i].setPositionX(levelOne.getFieldWidth());
-                player[i].setPositionY(height - levelOne.getFieldHeight());
-            }
-            player[i].setCornerLeftUpX();
-            player[i].setCornerLeftUpY();
-            player[i].setCornerLeftDownX();
-            player[i].setCornerLeftDownY();
-            player[i].setCornerRightUpX();
-            player[i].setCornerRightUpY();
-            player[i].setCornerRightDownX();
-            player[i].setCornerRightDownY();
-
-
-        }
-    }
 
 
 
@@ -241,7 +167,7 @@ public class Main extends PApplet {
         }
     }
 
-    //  //zeigt schwarzen Bildschirm und ein "Game"
+    //zeigt schwarzen Bildschirm und ein "Game"
     public void playground() {
         if (playground) {
             background(0);
@@ -269,7 +195,7 @@ public class Main extends PApplet {
             fill(255);
             text("GAME OVER", height / 2, width / 2);
         }
-    }*/
+    }
 
 }
 
