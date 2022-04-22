@@ -5,36 +5,20 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("Main");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     //Größe der Anzeige und Einstellung des Renderers
     public void settings() {
 //        fullScreen(2);
         size(900, 900, P2D);
-
     }
 
-
+    //Anzahl der Spieler
     int numberOfPlayers;
+    //Klasse Neues Spiel wird erstellt
+    NewGame game;
 
-
-    NewGame newGame;
-
-
+    //booleans der verschiedenen Bildschirme
     boolean start,pause, playground, gameover;
 
 
@@ -44,18 +28,17 @@ public class Main extends PApplet {
     public void setup() {
 
         //Spieleranzahl wird bestimmt
-        numberOfPlayers = 4;
-        newGame = new NewGame(numberOfPlayers,this);
+        numberOfPlayers = 1;
+        //Neues Spiel wird erstellt
+        game = new NewGame(numberOfPlayers, this);
 
-        newGame.newGame();
+
 
         // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
         start = false;
         pause = false;
         playground = false;
         gameover = false;
-
-
     }
 
 
@@ -67,18 +50,42 @@ public class Main extends PApplet {
 
 
 
-
-
+    //Hilfsfunktion falls man die Position des Characters wissen möchte
+    public void printPosition (Character bomberman) {
+        println("LinksObenX: " +
+                  bomberman.getCornerLeftUpX() +
+                "\nLinksObenY: " +
+                        bomberman.getCornerLeftUpY() +
+                        "\nLinksUntenX: " +
+                        bomberman.getCornerLeftDownX() +
+                        "\nLinksUntenY: " +
+                        bomberman.getCornerLeftDownY() +
+                        "\nRechtsObenX: " +
+                        bomberman.getCornerRightUpX() +
+                        "\nRechtsObenY: " +
+                        bomberman.getCornerRightUpY() +
+                        "\nRechtsUntenX: " +
+                        bomberman.getCornerRightDownX() +
+                        "\nRechtsUntenY: " +
+                        bomberman.getCornerRightDownY());
+    }
 
 
 
     public void draw() {
-      newGame.getMatchfieldController().setMatchfield();
-      newGame.getCharacterController(0).movement();
-      newGame.getCharacterController(1).movement();
 
-      for (int i = 0; i < numberOfPlayers; i++) {
-          newGame.getCharacterController(i).updateView();
+      //zeichnet das Spielfeld
+      game.getMatchfieldController().setMatchfield();
+
+      //updatet die Bewegung der Spieler und zeichnet sie
+      for (int i = 0; i <game.getNumberOfPlayers(); i++) {
+          game.getBombermanController(i).movement();
+          game.getBombermanController(i).updateView();
+      }
+      //updatet die Bewegung der Bots und zeichnet sie
+      for (int i = 0; i < game.getNumberOfOpponents(); i++) {
+          game.getAutoCharacterController(i).movement();
+          game.getAutoCharacterController(i).updateView();
       }
     }
 

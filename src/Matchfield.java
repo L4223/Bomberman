@@ -4,7 +4,7 @@ import processing.core.PApplet;
 public class Matchfield extends Position{
 
     public Matchfield (PApplet pApplet) {
-        this.fieldSize = 9;
+        this.fieldSize = 15;
         setHeight(pApplet.height);
         setWidth(pApplet.width);
         setFieldHeight();
@@ -104,7 +104,8 @@ public class Matchfield extends Position{
                 for (int y = getFieldHeight(); y < getHeight() - getFieldHeight(); y += getFieldHeight()) {
 
                     if (x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0) {
-                        if (positionX > x && positionX < x + getFieldWidth()
+                        if (positionX > x
+                                && positionX < x + getFieldWidth()
                                 && positionY > y
                                 && positionY < y + getFieldHeight() ) {
                             setFree(false);

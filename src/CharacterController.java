@@ -1,131 +1,84 @@
 import processing.core.PApplet;
 
-public class CharacterController {
+public abstract class CharacterController {
 
     private PApplet pApplet;
-    private Character bomberman;
+    private Character character;
     private CharacterView view;
 
-    public CharacterController (Character bomberman, CharacterView view, PApplet pApplet) {
-        this.bomberman = bomberman;
-        this.view = view;
+    public CharacterController (Character character, CharacterView view, PApplet pApplet) {
+        setCharacter(character);
+        setView(view);
+        setpApplet(pApplet);
+    }
+
+
+    private void setpApplet(PApplet pApplet) {
         this.pApplet = pApplet;
     }
 
+    public PApplet getpApplet() {
+        return pApplet;
+    }
+
+    private void setCharacter(Character bomberman) {
+        this.character = bomberman;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    private void setView(CharacterView view) {
+        this.view = view;
+    }
+
+    public CharacterView getView() {
+        return view;
+    }
 
     //läuft in die gegebene Richtung
     public void left(int speed) {
-        bomberman.setPositionX(bomberman.getPositionX() - speed);
+        getCharacter().setPositionX(getCharacter().getPositionX() - speed);
         updatePosition();
     }
     public void right(int speed) {
-        bomberman.setPositionX(bomberman.getPositionX() + speed);
+        getCharacter().setPositionX(getCharacter().getPositionX() + speed);
         updatePosition();
     }
     public void down(int speed) {
-        bomberman.setPositionY(bomberman.getPositionY() + speed);
+        getCharacter().setPositionY(getCharacter().getPositionY() + speed);
         updatePosition();
     }
     public void up(int speed) {
-        bomberman.setPositionY(bomberman.getPositionY()- speed);
+        getCharacter().setPositionY(getCharacter().getPositionY()- speed);
         updatePosition();
     }
 
 
 
-    public void movement() {
-        if (pApplet.keyPressed) {
-            //checkt ob die nächste Position frei ist und ob die Taste gedrückt wurde und bewegt sich nach links
-            if (pApplet.keyCode == pApplet.LEFT && bomberman.getPlayernumber() == 0
-                    || pApplet.key == 'a' && bomberman.getPlayernumber() == 1) {
-                if (bomberman.getMatchfield().isFree(bomberman.getCornerLeftUpX() - bomberman.getSpeed(), bomberman.getCornerLeftUpY())
-                        && bomberman.getMatchfield().isFree(bomberman.getCornerLeftDownX() - bomberman.getSpeed(), bomberman.getCornerLeftDownY())) {
-                    left(bomberman.getSpeed());
-                } else {
-                    for (int i = bomberman.getSpeed(); i > 0; i--) {
-                        if (bomberman.getMatchfield().isFree(bomberman.getCornerLeftUpX() - i, bomberman.getCornerLeftUpY())
-                                && bomberman.getMatchfield().isFree(bomberman.getCornerLeftDownX() - i, bomberman.getCornerLeftDownY())) {
-                            left(i);
 
 
-                        }
 
-                    }
-                }
-            }
-            if (pApplet.keyCode == pApplet.RIGHT && bomberman.getPlayernumber() == 0
-                    || pApplet.key == 'd' && bomberman.getPlayernumber() == 1) {
-                if (bomberman.getMatchfield().isFree(bomberman.getCornerRightUpX() + bomberman.getSpeed(), bomberman.getCornerRightUpY())
-                        && bomberman.getMatchfield().isFree(bomberman.getCornerRightDownX() + bomberman.getSpeed(), bomberman.getCornerRightDownY())) {
-                    right(bomberman.getSpeed());
-
-                } else {
-                    for (int i = bomberman.getSpeed(); i > 0; i--) {
-                        if (bomberman.getMatchfield().isFree(bomberman.getCornerRightUpX() + i, bomberman.getCornerRightUpY())
-                                && bomberman.getMatchfield().isFree(bomberman.getCornerRightDownX() + i, bomberman.getCornerRightDownY())) {
-                            right(i);
-
-
-                        }
-
-                    }
-                }
-            }
-            if (pApplet.keyCode == pApplet.UP && bomberman.getPlayernumber() == 0
-                    || pApplet.key == 'w' && bomberman.getPlayernumber() == 1) {
-                if (bomberman.getMatchfield().isFree(bomberman.getCornerLeftUpX(), bomberman.getCornerLeftUpY() - bomberman.getSpeed())
-                        && bomberman.getMatchfield().isFree(bomberman.getCornerRightUpX() , bomberman.getCornerRightUpY() - bomberman.getSpeed())) {
-                    up(bomberman.getSpeed());
-                } else {
-                    for (int i = bomberman.getSpeed(); i > 0; i--) {
-                        if (bomberman.getMatchfield().isFree(bomberman.getCornerLeftUpX() , bomberman.getCornerLeftUpY() - i)
-                                && bomberman.getMatchfield().isFree(bomberman.getCornerRightUpX() , bomberman.getCornerRightUpY() - i )) {
-                            up(i);
-
-
-                        }
-
-                    }
-                }
-            }
-            if (pApplet.keyCode == pApplet.DOWN && bomberman.getPlayernumber() == 0
-                    || pApplet.key == 's' && bomberman.getPlayernumber() == 1) {
-                if (bomberman.getMatchfield().isFree(bomberman.getCornerLeftDownX()  , bomberman.getCornerLeftDownY()  + bomberman.getSpeed())
-                        && bomberman.getMatchfield().isFree(bomberman.getCornerRightDownX() , bomberman.getCornerRightDownY() + bomberman.getSpeed())) {
-                    down(bomberman.getSpeed());
-                } else {
-                    for (int i = bomberman.getSpeed(); i > 0; i--) {
-                        if (bomberman.getMatchfield().isFree(bomberman.getCornerLeftDownX() , bomberman.getCornerLeftDownY()  + i)
-                                && bomberman.getMatchfield().isFree(bomberman.getCornerRightDownX(), bomberman.getCornerRightDownY() + i)) {
-                            down(i);
-
-                        }
-
-                    }
-                }
-            }
-
-
-        }
-        updatePosition();
-
-    }
-
+    //Die Positionen der verschiedenen Ecken werden aktualisiert
     public void updatePosition() {
-        bomberman.setCornerLeftUpX();
-        bomberman.setCornerLeftUpY();
-        bomberman.setCornerLeftDownX();
-        bomberman.setCornerLeftDownY();
-        bomberman.setCornerRightUpX();
-        bomberman.setCornerRightUpY();
-        bomberman.setCornerRightDownX();
-        bomberman.setCornerRightDownY();
-    }
 
+        getCharacter().setCornerLeftUpX();
+        getCharacter().setCornerLeftUpY();
+        getCharacter().setCornerLeftDownX();
+        getCharacter().setCornerLeftDownY();
+        getCharacter().setCornerRightUpX();
+        getCharacter().setCornerRightUpY();
+        getCharacter().setCornerRightDownX();
+        getCharacter().setCornerRightDownY();
+    }
+    //Die Ansicht wird mit den neuest Daten geupdatet
     public void updateView () {
         updatePosition();
-        view.draw(bomberman, pApplet);
+        getView().draw(getCharacter(), getpApplet());
     }
 
+    //abstrakte Funktion die in den Unterklassen verwendet wird
+    public abstract void movement ();
 
 }
