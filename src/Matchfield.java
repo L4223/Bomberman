@@ -104,7 +104,8 @@ public class Matchfield extends Position{
                 for (int y = getFieldHeight(); y < getHeight() - getFieldHeight(); y += getFieldHeight()) {
 
                     if (x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0) {
-                        if (positionX > x && positionX < x + getFieldWidth()
+                        if (positionX > x
+                                && positionX < x + getFieldWidth()
                                 && positionY > y
                                 && positionY < y + getFieldHeight() ) {
                             setFree(false);

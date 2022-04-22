@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import hilfsKlassen.Direction;
 
 public class Character extends Position{
     private int playernumber;
@@ -9,6 +10,7 @@ public class Character extends Position{
     private int imageWidth;
     private int imageHeight;
     private Matchfield matchfield;
+    private String direction;
 
 
     public Matchfield getMatchfield() {
@@ -25,8 +27,8 @@ public class Character extends Position{
         this.speed = 5;
         this.heart = 3;
         this.bomb = 1;
-        this.imageWidth = 20;
-        this.imageHeight = 20;
+        this.imageWidth = pApplet.width / matchfield.getFieldSize() - ((pApplet.width /100) * 1);
+        this.imageHeight = pApplet.height / matchfield.getFieldSize() - ((pApplet.height /100) * 1);
         this.color = colorSelection[playernumber];
         if (playernumber == 0) {
             setPositionXY(matchfield.getFieldWidth(), matchfield.getFieldHeight());
@@ -44,9 +46,15 @@ public class Character extends Position{
     }
 
     //Farbe des Spielers, {rot, grün, blau, gelb}
-    private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFF1645F5, 0xFFF0F14E};
+    private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFFFF5F85, 0xFFF0F14E};
 
+    public String getDirection() {
+        return direction;
+    }
 
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 
     private int cornerLeftUpX;
     private int cornerLeftUpY;

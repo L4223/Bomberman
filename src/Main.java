@@ -1,3 +1,4 @@
+import hilfsKlassen.Direction;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -17,6 +18,8 @@ public class Main extends PApplet {
 
     int numberOfPlayers;
     NewGame newGame;
+    Direction direction;
+    int randomDirection;
 
     boolean start,pause, playground, gameover;
 
@@ -31,6 +34,8 @@ public class Main extends PApplet {
         newGame = new NewGame(numberOfPlayers, this);
 
         newGame.newGame();
+        randomDirection = (int) random(4);
+
 
         // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
         start = false;
@@ -49,18 +54,40 @@ public class Main extends PApplet {
 
 
 
-
+    public void printPosition (Character bomberman) {
+        println("LinksObenX: " +
+                  bomberman.getCornerLeftUpX() +
+                "\nLinksObenY: " +
+                        bomberman.getCornerLeftUpY() +
+                        "\nLinksUntenX: " +
+                        bomberman.getCornerLeftDownX() +
+                        "\nLinksUntenY: " +
+                        bomberman.getCornerLeftDownY() +
+                        "\nRechtsObenX: " +
+                        bomberman.getCornerRightUpX() +
+                        "\nRechtsObenY: " +
+                        bomberman.getCornerRightUpY() +
+                        "\nRechtsUntenX: " +
+                        bomberman.getCornerRightDownX() +
+                        "\nRechtsUntenY: " +
+                        bomberman.getCornerRightDownY());
+    }
 
 
 
     public void draw() {
       newGame.getMatchfieldController().setMatchfield();
-      newGame.getCharacterController(0).movement();
-      newGame.getCharacterController(1).movement();
-      newGame.getCharacterController(2).automovement(1);
-      newGame.getCharacterController(3).automovement(0);
+      newGame.getCharacterController(0).automovement(newGame.getBomberman()[0].getDirection());
+      newGame.getCharacterController(0).automovement(newGame.getBomberman()[1].getDirection());
+      newGame.getCharacterController(0).automovement(newGame.getBomberman()[2].getDirection());
+      newGame.getCharacterController(0).automovement(newGame.getBomberman()[3].getDirection());
+      printPosition(newGame.getBomberman()[0]);
+//      newGame.getCharacterController(1).automovement(0);
+//      newGame.getCharacterController(2).automovement(0);
+//      newGame.getCharacterController(3).automovement(0);
 
-      for (int i = 0; i < numberOfPlayers; i++) {
+
+      for (int i = 0; i <numberOfPlayers; i++) {
           newGame.getCharacterController(i).updateView();
       }
     }
