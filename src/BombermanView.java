@@ -1,2 +1,2 @@
-public class BombermanView {
+public class BombermanView extends CharacterView{
 }

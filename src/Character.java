@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import hilfsKlassen.Direction;
 
 public class Character extends Position{
     private int playernumber;
@@ -10,7 +9,6 @@ public class Character extends Position{
     private int imageWidth;
     private int imageHeight;
     private Matchfield matchfield;
-    private String direction;
 
 
     public Matchfield getMatchfield() {
@@ -21,6 +19,13 @@ public class Character extends Position{
         return playernumber;
     }
 
+    /* erstellt einen Charakter mit
+    Geschwindigkeit: 5
+    Herzen: 3
+    Bomben: 1
+
+
+    * */
     public Character(int playernumber, Matchfield matchfield, PApplet pApplet) {
         this.playernumber = playernumber;
         this.matchfield = matchfield;
@@ -29,32 +34,15 @@ public class Character extends Position{
         this.bomb = 1;
         this.imageWidth = pApplet.width / matchfield.getFieldSize() - ((pApplet.width /100) * 1);
         this.imageHeight = pApplet.height / matchfield.getFieldSize() - ((pApplet.height /100) * 1);
-        this.color = colorSelection[playernumber];
-        if (playernumber == 0) {
-            setPositionXY(matchfield.getFieldWidth(), matchfield.getFieldHeight());
-        }
-        if (playernumber == 1) {
-            setPositionXY(pApplet.width - matchfield.getFieldWidth() - this.imageWidth, pApplet.height - matchfield.getFieldHeight() - this.imageHeight);
-        }
-        if (playernumber == 2) {
-            setPositionXY(pApplet.width - matchfield.getFieldWidth() - this.imageWidth, matchfield.getFieldHeight());
-        }
-        if (playernumber == 3) {
-            setPositionXY(matchfield.getFieldWidth(), pApplet.height - matchfield.getFieldHeight() -this.imageHeight);
-        }
+
+
+
 
     }
 
-    //Farbe des Spielers, {rot, grün, blau, gelb}
-    private final int [] colorSelection = {0xFFED3833, 0xFF6DED8A, 0xFFFF5F85, 0xFFF0F14E};
 
-    public String getDirection() {
-        return direction;
-    }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
+
 
     private int cornerLeftUpX;
     private int cornerLeftUpY;
@@ -136,16 +124,7 @@ public class Character extends Position{
         this.cornerRightDownY = getPositionY() + getImageHeight();
     }
 
-    public int[] getColorSelection() {
-        return colorSelection;
-    }
 
-
-
-
-    public int getColorSelection(int whichNumber) {
-        return colorSelection [whichNumber];
-    }
 
 
 

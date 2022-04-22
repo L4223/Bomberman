@@ -1,2 +1,2 @@
-public class AutoCharacterView {
+public class AutoCharacterView extends CharacterView{
 }

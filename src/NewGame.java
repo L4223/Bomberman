@@ -3,89 +3,153 @@ import processing.core.PApplet;
 public class NewGame {
 
     private int numberOfPlayers;
-    private Character bomberman[];
-    private CharacterController characterController[];
-    private CharacterView characterView;
+    private int numberOfOpponents;
+    private AutoCharacter autoCharacters[];
+    private AutoCharacterController autoCharacterControllers[];
+    private AutoCharacterView autoCharacterView;
+    private Bomberman bombermans[];
+    private BombermanController bombermanControllers[];
+    private BombermanView bombermanView;
     private Matchfield matchfield;
     private MatchfieldController matchfieldController;
     private MatchfieldView matchfieldView;
     private PApplet pApplet;
 
     public NewGame (int numberOfPlayers, PApplet pApplet) {
-        this.numberOfPlayers = numberOfPlayers;
-        this.pApplet = pApplet;
+        setNumberOfPlayers(numberOfPlayers);
+        setNumberOfOpponents(4 - numberOfPlayers);
+        setpApplet(pApplet);
+
         setBomberman();
+        setAutoCharacters();
         setMatchfield();
-        setCharacterView();
-        setCharacterController();
+
+        setBombermanView();
+        setBombermanControllers();
+
+        setAutoCharacterView();
+        setAutoCharacterControllers();
+
         setMatchfieldView();
         setMatchfieldController();
+
+        newGame();
     }
 
-
-
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
-    }
-
-    private void setBomberman () {
-        bomberman = new Character[getNumberOfPlayers()];
-    }
-
-    private void setMatchfield () {
-        matchfield = new Matchfield(getpApplet());
-    }
-
-    private void setCharacterController () {
-       characterController = new CharacterController[getNumberOfPlayers()];
-    }
-    private void setCharacterView () {
-        characterView = new CharacterView();
-    }
-    private void setMatchfieldController () {
-        matchfieldController =  new MatchfieldController(getMatchfield(), getMatchfieldView(), getpApplet());
-    }
-    private void setMatchfieldView () {
-        matchfieldView = new MatchfieldView();
-    }
-
-
-    public Matchfield getMatchfield() {
-        return matchfield;
-    }
-
-    public MatchfieldView getMatchfieldView() {
-        return matchfieldView;
+    private void setpApplet(PApplet pApplet) {
+        this.pApplet = pApplet;
     }
 
     public PApplet getpApplet() {
         return pApplet;
     }
 
-    public Character[] getBomberman() {
-        return bomberman;
+    private void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
     }
 
-    public CharacterController getCharacterController(int playernumber) {
-        return characterController[playernumber];
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
     }
 
-    public CharacterView getCharacterView() {
-        return characterView;
+    public int getNumberOfOpponents() {
+        return numberOfOpponents;
+    }
+
+    private void setNumberOfOpponents(int numberOfOpponents) {
+        this.numberOfOpponents = numberOfOpponents;
+    }
+
+    // Die Setter von Matchfield-MVC
+    private void setMatchfield () {
+        matchfield = new Matchfield(getpApplet());
+    }
+
+    private void setMatchfieldController () {
+        matchfieldController =  new MatchfieldController(getMatchfield(), getMatchfieldView(), getpApplet());
+    }
+
+    private void setMatchfieldView () {
+        matchfieldView = new MatchfieldView();
+    }
+
+    //Die Getter von Matchfield-MVC
+    public Matchfield getMatchfield() {
+        return matchfield;
     }
 
     public MatchfieldController getMatchfieldController() {
         return matchfieldController;
     }
 
+    public MatchfieldView getMatchfieldView() {
+        return matchfieldView;
+    }
+
+    //Die Setter von Bomberman-MVC
+    private void setBomberman () {
+        bombermans = new Bomberman[getNumberOfPlayers()];
+    }
+
+    private void setBombermanControllers () {
+       bombermanControllers = new BombermanController[getNumberOfPlayers()];
+    }
+
+    private void setBombermanView () {
+        bombermanView = new BombermanView();
+    }
+
+    //Die Getter von Bomberman-MVC
+    public Bomberman getBomberman(int playernumber) {
+        return bombermans[playernumber];
+    }
+
+    public BombermanController getBombermanController(int playernumber) {
+        return bombermanControllers[playernumber];
+    }
+
+    public BombermanView getBombermanView() {
+        return bombermanView;
+    }
+
+    //Die Setter von AutoCharacter-MVC
+    private void setAutoCharacters() {
+        this.autoCharacters = new AutoCharacter[numberOfOpponents];
+    }
+
+    private void setAutoCharacterControllers() {
+        this.autoCharacterControllers = new AutoCharacterController[numberOfOpponents];
+    }
+
+    private void setAutoCharacterView() {
+        this.autoCharacterView = new AutoCharacterView();
+    }
+
+    //Die Getter von AutoCharacter-MVC
+    public AutoCharacter getAutoCharacter(int playernumber) {
+        return autoCharacters[playernumber];
+    }
+
+    public AutoCharacterController getAutoCharacterController(int playernumber) {
+        return autoCharacterControllers[playernumber];
+    }
+
+    public AutoCharacterView getAutoCharacterView() {
+        return autoCharacterView;
+    }
+
+
+    //erstellt ein neues Spiel mit Standardwerten
     public void newGame () {
-        if (numberOfPlayers >= 0) {
+        if (getNumberOfPlayers() >= 0) {
             try {
-
-
-                for (int i = 0; i < numberOfPlayers; i++) {
-                    bomberman[i] = new Character(i, matchfield, pApplet);
-                    characterController[i] = new CharacterController(bomberman[i], characterView, pApplet);
+                for (int i = 0; i < getNumberOfPlayers(); i++) {
+                    bombermans[i] = new Bomberman(i, getMatchfield(), getpApplet());
+                    bombermanControllers[i] = new BombermanController(getBomberman(i), getBombermanView(), getpApplet());
+                }
+                for (int i = 0; i < getNumberOfOpponents(); i++) {
+                    autoCharacters[i] = new AutoCharacter(i,getMatchfield(),getpApplet());
+                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getAutoCharacterView(), getpApplet());
                 }
             } catch (Exception exception) {
                 pApplet.println("Fehler! Zwischen 1 - 4 Spieler zugelassen");

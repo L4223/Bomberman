@@ -1,4 +1,3 @@
-import hilfsKlassen.Direction;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -12,15 +11,14 @@ public class Main extends PApplet {
     public void settings() {
 //        fullScreen(2);
         size(900, 900, P2D);
-
     }
 
-
+    //Anzahl der Spieler
     int numberOfPlayers;
-    NewGame newGame;
-    Direction direction;
-    int randomDirection;
+    //Klasse Neues Spiel wird erstellt
+    NewGame game;
 
+    //booleans der verschiedenen Bildschirme
     boolean start,pause, playground, gameover;
 
 
@@ -30,11 +28,10 @@ public class Main extends PApplet {
     public void setup() {
 
         //Spieleranzahl wird bestimmt
-        numberOfPlayers = 4;
-        newGame = new NewGame(numberOfPlayers, this);
+        numberOfPlayers = 1;
+        //Neues Spiel wird erstellt
+        game = new NewGame(numberOfPlayers, this);
 
-        newGame.newGame();
-        randomDirection = (int) random(4);
 
 
         // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
@@ -53,7 +50,7 @@ public class Main extends PApplet {
 
 
 
-
+    //Hilfsfunktion falls man die Position des Characters wissen möchte
     public void printPosition (Character bomberman) {
         println("LinksObenX: " +
                   bomberman.getCornerLeftUpX() +
@@ -76,19 +73,19 @@ public class Main extends PApplet {
 
 
     public void draw() {
-      newGame.getMatchfieldController().setMatchfield();
-      newGame.getCharacterController(0).automovement(newGame.getBomberman()[0].getDirection());
-      newGame.getCharacterController(0).automovement(newGame.getBomberman()[1].getDirection());
-      newGame.getCharacterController(0).automovement(newGame.getBomberman()[2].getDirection());
-      newGame.getCharacterController(0).automovement(newGame.getBomberman()[3].getDirection());
-      printPosition(newGame.getBomberman()[0]);
-//      newGame.getCharacterController(1).automovement(0);
-//      newGame.getCharacterController(2).automovement(0);
-//      newGame.getCharacterController(3).automovement(0);
 
+      //zeichnet das Spielfeld
+      game.getMatchfieldController().setMatchfield();
 
-      for (int i = 0; i <numberOfPlayers; i++) {
-          newGame.getCharacterController(i).updateView();
+      //updatet die Bewegung der Spieler und zeichnet sie
+      for (int i = 0; i <game.getNumberOfPlayers(); i++) {
+          game.getBombermanController(i).movement();
+          game.getBombermanController(i).updateView();
+      }
+      //updatet die Bewegung der Bots und zeichnet sie
+      for (int i = 0; i < game.getNumberOfOpponents(); i++) {
+          game.getAutoCharacterController(i).movement();
+          game.getAutoCharacterController(i).updateView();
       }
     }
 
