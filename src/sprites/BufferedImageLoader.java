@@ -1,4 +1,4 @@
-//Noch nicht genutzt und bisher nur von einem Tutorial abgeschrieben
+package sprites;//Noch nicht genutzt und bisher nur von einem Tutorial abgeschrieben
 
 
 import javax.imageio.ImageIO;

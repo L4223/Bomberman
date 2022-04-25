@@ -1,3 +1,5 @@
+package charactere;
+
 import hilfsKlassen.DirectionMovement;
 import processing.core.PApplet;
 
@@ -35,7 +37,7 @@ public class AutoCharacterController extends CharacterController {
     @Override
     public void movement () {
         //checkt ob die Richtung rechts ist
-        if (getAutoCharacter().getDirection() == getDirections().getRight()) {
+        if (getAutoCharacter().getDirection().equals(getDirections().getRight())) {
             //wenn sie rechts ist geht es solange in die Richtung bis rechts nichts mehr frei ist
             if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightUpX() + getCharacter().getSpeed(), getCharacter().getCornerRightUpY())
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX() + getCharacter().getSpeed(), getCharacter().getCornerRightDownY())) {
@@ -54,16 +56,16 @@ public class AutoCharacterController extends CharacterController {
             }
         }
         //checkt ob die Richtung unten ist
-        if (getAutoCharacter().getDirection() == getDirections().getDown()) {
+        if (getAutoCharacter().getDirection().equals(getDirections().getDown())) {
             //wenn sie unten ist geht es solange in die Richtung bis unten nichts mehr frei ist
             if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + getCharacter().getSpeed())
-                    && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + +getCharacter().getSpeed())) {
+                    && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + getCharacter().getSpeed())) {
                 down(getCharacter().getSpeed());
                 getAutoCharacter().setDirection(getDirections().getDown());
             } else {
                 for (int i = getCharacter().getSpeed(); i > 0; i--) {
                     if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + i)
-                            && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + +i)) {
+                            && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + i)) {
                         down(i);
                         getAutoCharacter().setDirection(getDirections().getDown());
                     }
@@ -73,7 +75,7 @@ public class AutoCharacterController extends CharacterController {
             }
         }
         //checkt ob die Richtung oben ist
-        if (getAutoCharacter().getDirection() == getDirections().getUp()) {
+        if (getAutoCharacter().getDirection().equals(getDirections().getUp())) {
             //wenn sie unten ist geht es solange in die Richtung bis unten nichts mehr frei ist
             if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightUpX(), getCharacter().getCornerRightUpY() - getCharacter().getSpeed())
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed())) {
@@ -92,7 +94,7 @@ public class AutoCharacterController extends CharacterController {
             }
         }
         //checkt ob die Richtung links ist
-        if (getAutoCharacter().getDirection() == getDirections().getLeft()) {
+        if (getAutoCharacter().getDirection().equals(getDirections().getLeft())) {
             //wenn sie links ist geht es solange in die Richtung bis links nichts mehr frei ist
             if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY())
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX() - getCharacter().getSpeed(), getCharacter().getCornerLeftDownY())) {

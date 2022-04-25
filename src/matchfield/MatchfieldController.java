@@ -1,10 +1,12 @@
+package matchfield;
+
 import processing.core.PApplet;
 
 public class MatchfieldController {
 
-    private Matchfield matchfield;
-    private MatchfieldView view;
-    private PApplet pApplet;
+    final private Matchfield matchfield;
+    final private MatchfieldView view;
+    final private PApplet pApplet;
 
     public MatchfieldController(Matchfield matchfield, MatchfieldView view, PApplet pApplet) {
         this.matchfield = matchfield;

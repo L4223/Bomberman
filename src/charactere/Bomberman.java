@@ -1,15 +1,18 @@
+package charactere;
+
+import matchfield.Matchfield;
 import processing.core.PApplet;
 
-public class Bomberman extends Character{
+public class Bomberman extends Character {
     public Bomberman(int playernumber, Matchfield matchfield, PApplet pApplet) {
         super(playernumber, matchfield, pApplet);
         //Farbe des Spieles
         setColor(colorSelection[playernumber]);
-        //Position links oben
+        //main.Position links oben
         if (playernumber == 0) {
             setPositionXY(matchfield.getFieldWidth(), matchfield.getFieldHeight());
         }
-        //Position rechts unten
+        //main.Position rechts unten
         if (playernumber == 1) {
             setPositionXY(pApplet.width - matchfield.getFieldWidth() - getImageWidth(), pApplet.height - matchfield.getFieldHeight() - getImageHeight());
         }

@@ -1,14 +1,18 @@
-import processing.core.PApplet;
+package charactere;
 
-public class Character extends Position{
-    private int playernumber;
+import processing.core.PApplet;
+import matchfield.Matchfield;
+import main.Position;
+
+public class Character extends Position {
+    final private int playernumber;
     private int speed;
     private int heart;
     private int bomb;
     private int color;
     private int imageWidth;
     private int imageHeight;
-    private Matchfield matchfield;
+    final private Matchfield matchfield;
 
 
     public Matchfield getMatchfield() {
@@ -32,8 +36,8 @@ public class Character extends Position{
         this.speed = 5;
         this.heart = 3;
         this.bomb = 1;
-        this.imageWidth = pApplet.width / matchfield.getFieldSize() - ((pApplet.width /100) * 1);
-        this.imageHeight = pApplet.height / matchfield.getFieldSize() - ((pApplet.height /100) * 1);
+        this.imageWidth = pApplet.width / matchfield.getFieldSize() - (pApplet.width /100);
+        this.imageHeight = pApplet.height / matchfield.getFieldSize() - (pApplet.height /100);
 
 
 

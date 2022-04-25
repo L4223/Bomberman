@@ -1,6 +1,8 @@
-//noch nicht benutzt
+package acessoires;//noch nicht benutzt
 
-public class Bomb extends Position{
+import main.Position;
+
+public class Bomb extends Position {
     private int explosionRadius;
     private String color;
     private boolean exploded;

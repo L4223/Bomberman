@@ -1,7 +1,9 @@
+package matchfield;
 
 import processing.core.PApplet;
+import main.Position;
 
-public class Matchfield extends Position{
+public class Matchfield extends Position {
 
     public Matchfield (PApplet pApplet) {
         this.fieldSize = 15;
@@ -89,7 +91,7 @@ public class Matchfield extends Position{
         this.free = free;
     }
 
-    //checkt ob eine Position frei ist
+    //checkt ob eine main.Position frei ist
     public boolean isFree(int positionX, int positionY) {
         //schneller check ob der Rand betroffen ist
         if (positionX < getFieldWidth()

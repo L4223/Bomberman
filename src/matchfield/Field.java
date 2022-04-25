@@ -1,6 +1,6 @@
 //Noch nicht genutzt
 
-//public class Field extends Matchfield {
+//public class Field extends Matchfield.Matchfield {
 //    private boolean destroyable;
 //    private boolean empty;
 //    private String theme;

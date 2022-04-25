@@ -1,3 +1,6 @@
+package charactere;
+
+import matchfield.Matchfield;
 import hilfsKlassen.DirectionMovement;
 import processing.core.PApplet;
 
@@ -8,15 +11,15 @@ public class AutoCharacter extends Character {
         super(playernumber, matchfield, pApplet);
         setColor(colorSelection[playernumber]);
         directionMovement = new DirectionMovement("left");
-        //Position rechts oben
+        //main.Position rechts oben
         if (playernumber == 0) {
             setPositionXY(pApplet.width - matchfield.getFieldWidth() - getImageWidth(), matchfield.getFieldHeight());
         }
-        //Position links unten
+        //main.Position links unten
         if (playernumber == 1) {
             setPositionXY(matchfield.getFieldWidth(), pApplet.height - matchfield.getFieldHeight() -getImageHeight());
         }
-        //Position rechts unten
+        //main.Position rechts unten
         if (playernumber == 2) {
             setPositionXY(pApplet.width - matchfield.getFieldWidth() - getImageWidth(), pApplet.height - matchfield.getFieldHeight() - getImageHeight());
         }

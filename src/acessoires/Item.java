@@ -1,6 +1,6 @@
 // Noch nicht genutzt
 
-//public class Item extends Matchfield {
+//public class Item extends Matchfield.Matchfield {
 //
 //    public int moreHeart (int heart) {
 //        return heart + 1;

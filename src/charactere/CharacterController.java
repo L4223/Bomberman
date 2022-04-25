@@ -1,3 +1,5 @@
+package charactere;
+
 import processing.core.PApplet;
 
 public abstract class CharacterController {

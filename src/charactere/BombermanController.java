@@ -1,6 +1,8 @@
+package charactere;
+
 import processing.core.PApplet;
 
-public class BombermanController extends CharacterController{
+public class BombermanController extends CharacterController {
     
 
     public BombermanController(Bomberman bomberman, BombermanView view, PApplet pApplet) {
@@ -11,7 +13,7 @@ public class BombermanController extends CharacterController{
     @Override
     public void movement() {
         if (getpApplet().keyPressed) {
-            //checkt ob die nächste Position links frei ist und ob die Taste gedrückt wurde und bewegt sich nach links
+            //checkt ob die nächste main.Position links frei ist und ob die Taste gedrückt wurde und bewegt sich nach links
             if (getpApplet().keyCode == getpApplet().LEFT && getCharacter().getPlayernumber() == 0
                     || getpApplet().key == 'a' && getCharacter().getPlayernumber() == 1) {
                 if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY())
@@ -36,7 +38,7 @@ public class BombermanController extends CharacterController{
                     }
                 }
             }
-            //checkt ob die nächste Position rechts frei ist und ob die Taste gedrückt wurde und bewegt sich nach rechts
+            //checkt ob die nächste main.Position rechts frei ist und ob die Taste gedrückt wurde und bewegt sich nach rechts
             if (getpApplet().keyCode == getpApplet().RIGHT && getCharacter().getPlayernumber() == 0
                     || getpApplet().key == 'd' && getCharacter().getPlayernumber() == 1) {
                 if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightUpX() + getCharacter().getSpeed(), getCharacter().getCornerRightUpY())
@@ -61,7 +63,7 @@ public class BombermanController extends CharacterController{
                     }
                 }
             }
-            //checkt ob die nächste Position oben frei ist und ob die Taste gedrückt wurde und bewegt sich nach oben
+            //checkt ob die nächste main.Position oben frei ist und ob die Taste gedrückt wurde und bewegt sich nach oben
             if (getpApplet().keyCode == getpApplet().UP && getCharacter().getPlayernumber() == 0
                     || getpApplet().key == 'w' && getCharacter().getPlayernumber() == 1) {
                 if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed())
@@ -86,7 +88,7 @@ public class BombermanController extends CharacterController{
                     }
                 }
             }
-            //checkt ob die nächste Position unten frei ist und ob die Taste gedrückt wurde und bewegt sich nach unten
+            //checkt ob die nächste main.Position unten frei ist und ob die Taste gedrückt wurde und bewegt sich nach unten
             if (getpApplet().keyCode == getpApplet().DOWN && getCharacter().getPlayernumber() == 0
                     || getpApplet().key == 's' && getCharacter().getPlayernumber() == 1) {
                 if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + getCharacter().getSpeed())

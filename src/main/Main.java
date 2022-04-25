@@ -1,10 +1,13 @@
+package main;
+
+import charactere.Character;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
 
 
     public static void main(String[] args) {
-        PApplet.main("Main");
+        PApplet.main("main.Main");
     }
 
     //Größe der Anzeige und Einstellung des Renderers
@@ -50,7 +53,7 @@ public class Main extends PApplet {
 
 
 
-    //Hilfsfunktion falls man die Position des Characters wissen möchte
+    //Hilfsfunktion falls man die main.Position des Characters wissen möchte
     public void printPosition (Character bomberman) {
         println("LinksObenX: " +
                   bomberman.getCornerLeftUpX() +

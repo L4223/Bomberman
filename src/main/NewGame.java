@@ -1,14 +1,18 @@
+package main;
+
+import matchfield.*;
+import charactere.*;
 import processing.core.PApplet;
 
 public class NewGame {
 
     private int numberOfPlayers;
     private int numberOfOpponents;
-    private AutoCharacter autoCharacters[];
-    private AutoCharacterController autoCharacterControllers[];
+    private AutoCharacter [] autoCharacters;
+    private AutoCharacterController [] autoCharacterControllers;
     private AutoCharacterView autoCharacterView;
-    private Bomberman bombermans[];
-    private BombermanController bombermanControllers[];
+    private Bomberman [] bombermans;
+    private BombermanController [] bombermanControllers;
     private BombermanView bombermanView;
     private Matchfield matchfield;
     private MatchfieldController matchfieldController;
@@ -60,7 +64,7 @@ public class NewGame {
         this.numberOfOpponents = numberOfOpponents;
     }
 
-    // Die Setter von Matchfield-MVC
+    // Die Setter von Matchfield.Matchfield-MVC
     private void setMatchfield () {
         matchfield = new Matchfield(getpApplet());
     }
@@ -73,7 +77,7 @@ public class NewGame {
         matchfieldView = new MatchfieldView();
     }
 
-    //Die Getter von Matchfield-MVC
+    //Die Getter von Matchfield.Matchfield-MVC
     public Matchfield getMatchfield() {
         return matchfield;
     }
@@ -86,7 +90,7 @@ public class NewGame {
         return matchfieldView;
     }
 
-    //Die Setter von Bomberman-MVC
+    //Die Setter von charactere.Bomberman-MVC
     private void setBomberman () {
         bombermans = new Bomberman[getNumberOfPlayers()];
     }
@@ -99,7 +103,7 @@ public class NewGame {
         bombermanView = new BombermanView();
     }
 
-    //Die Getter von Bomberman-MVC
+    //Die Getter von charactere.Bomberman-MVC
     public Bomberman getBomberman(int playernumber) {
         return bombermans[playernumber];
     }
@@ -112,7 +116,7 @@ public class NewGame {
         return bombermanView;
     }
 
-    //Die Setter von AutoCharacter-MVC
+    //Die Setter von charactere.AutoCharacter-MVC
     private void setAutoCharacters() {
         this.autoCharacters = new AutoCharacter[numberOfOpponents];
     }
@@ -125,7 +129,7 @@ public class NewGame {
         this.autoCharacterView = new AutoCharacterView();
     }
 
-    //Die Getter von AutoCharacter-MVC
+    //Die Getter von charactere.AutoCharacter-MVC
     public AutoCharacter getAutoCharacter(int playernumber) {
         return autoCharacters[playernumber];
     }

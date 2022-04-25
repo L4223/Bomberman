@@ -1,3 +1,5 @@
+package matchfield;
+
 import processing.core.PApplet;
 
 public class MatchfieldView {
