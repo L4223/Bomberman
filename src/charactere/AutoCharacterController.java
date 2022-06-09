@@ -34,6 +34,8 @@ public class AutoCharacterController extends CharacterController {
 
 
 
+
+
     @Override
     public void movement () {
         //checkt ob die Richtung rechts ist
@@ -43,6 +45,10 @@ public class AutoCharacterController extends CharacterController {
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX() + getCharacter().getSpeed(), getCharacter().getCornerRightDownY())) {
                 right(getCharacter().getSpeed());
                 getAutoCharacter().setDirection(getDirections().getRight());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightUpX() + getCharacter().getSpeed(), getCharacter().getCornerRightUpY())) {
+                up(getCharacter().getSpeed());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX() + getCharacter().getSpeed(), getCharacter().getCornerRightDownY())) {
+                down(getCharacter().getSpeed());
             } else {
                 for (int i = getCharacter().getSpeed(); i > 0; i--) {
                     if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX() + i, getCharacter().getCornerLeftDownY())
@@ -62,6 +68,10 @@ public class AutoCharacterController extends CharacterController {
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + getCharacter().getSpeed())) {
                 down(getCharacter().getSpeed());
                 getAutoCharacter().setDirection(getDirections().getDown());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + getCharacter().getSpeed())) {
+                left(getCharacter().getSpeed());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + getCharacter().getSpeed())) {
+                right(getCharacter().getSpeed());
             } else {
                 for (int i = getCharacter().getSpeed(); i > 0; i--) {
                     if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + i)
@@ -81,6 +91,10 @@ public class AutoCharacterController extends CharacterController {
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed())) {
                 up(getCharacter().getSpeed());
                 getAutoCharacter().setDirection(getDirections().getUp());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed())) {
+                left(getCharacter().getSpeed());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightUpX(), getCharacter().getCornerRightUpY() - getCharacter().getSpeed())) {
+                right(getCharacter().getSpeed());
             } else {
                 for (int i = getCharacter().getSpeed(); i > 0; i--) {
                     if (getCharacter().getMatchfield().isFree(getCharacter().getCornerRightUpX(), getCharacter().getCornerRightUpY() - i)
@@ -100,6 +114,10 @@ public class AutoCharacterController extends CharacterController {
                     && getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX() - getCharacter().getSpeed(), getCharacter().getCornerLeftDownY())) {
                 left(getCharacter().getSpeed());
                 getAutoCharacter().setDirection(getDirections().getLeft());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY())) {
+                up(getCharacter().getSpeed());
+            } else if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftDownX() - getCharacter().getSpeed(), getCharacter().getCornerLeftDownY())) {
+                down(getCharacter().getSpeed());
             } else {
                 for (int i = getCharacter().getSpeed(); i >= 0; i--) {
                     if (getCharacter().getMatchfield().isFree(getCharacter().getCornerLeftUpX() - i, getCharacter().getCornerLeftUpY())
@@ -113,5 +131,6 @@ public class AutoCharacterController extends CharacterController {
             }
         }
         updatePosition();
+        if(getpApplet().frameCount % 120 == 0) getAutoCharacter().setDirection(getDirections().getRandomDirection(getAutoCharacter().getDirection()));
     }
 }
