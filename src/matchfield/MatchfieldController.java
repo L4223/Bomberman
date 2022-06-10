@@ -29,6 +29,7 @@ public class MatchfieldController {
 
     public void setMatchfield () {
         view.matchfield(getMatchfield(), getpApplet());
+        view.field(getMatchfield(),getpApplet());
     }
 
 }

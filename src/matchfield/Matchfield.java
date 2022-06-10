@@ -11,7 +11,30 @@ public class Matchfield extends Position {
         setWidth(pApplet.width);
         setFieldHeight();
         setFieldWidth();
+        setField();
     }
+
+    public Field[] getField() {
+        return field;
+    }
+
+    public void setField() {
+        int i = 0;
+        for (int x = 0; x < getWidth(); x += getFieldWidth()) {
+            for (int y = 0; y < getHeight(); y += getFieldHeight()) {
+                if (!(x == 0
+                        || x == getWidth() - getFieldWidth()
+                        || y == 0
+                        || y == getHeight() - getFieldHeight()
+                        || x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0)) {
+                    field[i] = new Field(x, y, getFieldWidth(), getFieldHeight());
+                    i++;
+                }
+            }
+        }
+    }
+
+    private Field[] field = new Field[133];
 
     private boolean visible;
     private boolean taken;
