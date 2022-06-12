@@ -4,7 +4,11 @@ import processing.core.PApplet;
 
 public class MatchfieldView {
 
+
+
     //zeichnet Spielfeld
+
+
     public void matchfield(Matchfield matchfield, PApplet pApplet) {
         pApplet.noStroke();
         for (int x = 0; x < matchfield.getWidth(); x += matchfield.getFieldWidth()) {
@@ -18,7 +22,7 @@ public class MatchfieldView {
                     pApplet.fill(255);
                     pApplet.rect(x, y, x + matchfield.getFieldWidth(), y + matchfield.getFieldHeight());
 
-                //zeichnet die restliche Fläche in Blau
+                    //zeichnet die restliche Fläche in Blau
                 } else {
                     pApplet.fill(0, 0, 255);
                     pApplet.rect(x, y, x + matchfield.getFieldWidth(), y + matchfield.getFieldHeight());

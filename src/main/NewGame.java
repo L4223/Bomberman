@@ -17,6 +17,13 @@ public class NewGame {
     private Matchfield matchfield;
     private MatchfieldController matchfieldController;
     private MatchfieldView matchfieldView;
+
+
+
+
+    private FieldController fieldController;
+
+    private FieldView fieldView;
     private PApplet pApplet;
 
     public NewGame (int numberOfPlayers, PApplet pApplet) {
@@ -27,6 +34,7 @@ public class NewGame {
         setBomberman();
         setAutoCharacters();
         setMatchfield();
+        setField();
 
         setBombermanView();
         setBombermanControllers();
@@ -34,11 +42,21 @@ public class NewGame {
         setAutoCharacterView();
         setAutoCharacterControllers();
 
+        setFieldView();
+        setFieldController();
+
         setMatchfieldView();
         setMatchfieldController();
 
+
+
+
+
+
         newGame();
     }
+
+    private Field[] field;
 
     private void setpApplet(PApplet pApplet) {
         this.pApplet = pApplet;
@@ -88,6 +106,49 @@ public class NewGame {
 
     public MatchfieldView getMatchfieldView() {
         return matchfieldView;
+    }
+
+    public Field[] getField() {
+        return field;
+    }
+
+    public void setField() {
+        field = new Field[(int) Math.pow(matchfield.getFieldSize(),2)];
+        int i = 0;
+        for (int x = 0; x < getMatchfield().getWidth(); x += getMatchfield().getFieldWidth()) {
+            for (int y = 0; y < getMatchfield().getHeight(); y += getMatchfield().getFieldHeight()) {
+                field[i] = new Field(x, y, getMatchfield().getFieldWidth(), getMatchfield().getFieldHeight(), true, getpApplet());
+                if (x == 0
+                        || x == getMatchfield().getWidth() - getMatchfield().getFieldWidth()
+                        || y == 0
+                        || y == getMatchfield().getHeight() - getMatchfield().getFieldHeight()
+                        || x % (getMatchfield().getFieldWidth() * 2) == 0 && y % (getMatchfield().getFieldHeight() * 2) == 0) {
+                    field[i].setBorder(true);
+                } else {
+                    field[i].setBorder(false);
+                    for (int j = 0; j < matchfield.getStartObstacle().length; j++) {
+                        if(matchfield.getStartObstacle()[j] == i) field[i].setEmpty(false);
+                    }
+                }
+                i++;
+            }
+        }
+    }
+
+    public FieldController getFieldController() {
+        return fieldController;
+    }
+
+    public void setFieldController() {
+        this.fieldController = new FieldController(getMatchfield(), getFieldView(), getField(), getpApplet());
+    }
+
+    public FieldView getFieldView() {
+        return fieldView;
+    }
+
+    public void setFieldView() {
+        this.fieldView = new FieldView();
     }
 
     //Die Setter von charactere.Bomberman-MVC
@@ -149,11 +210,11 @@ public class NewGame {
             try {
                 for (int i = 0; i < getNumberOfPlayers(); i++) {
                     bombermans[i] = new Bomberman(i, getMatchfield(), getpApplet());
-                    bombermanControllers[i] = new BombermanController(getBomberman(i), getBombermanView(), getpApplet());
+                    bombermanControllers[i] = new BombermanController(getBomberman(i), getBombermanView(), getMatchfield(), getField(), getpApplet());
                 }
                 for (int i = 0; i < getNumberOfOpponents(); i++) {
                     autoCharacters[i] = new AutoCharacter(i,getMatchfield(),getpApplet());
-                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getAutoCharacterView(), getpApplet());
+                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getAutoCharacterView(), getMatchfield(), getField(), getpApplet());
                 }
             } catch (Exception exception) {
                 pApplet.println("Fehler! Zwischen 1 - 4 Spieler zugelassen");

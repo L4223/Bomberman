@@ -2,9 +2,10 @@ package charactere;
 
 import matchfield.Matchfield;
 import processing.core.PApplet;
+import matchfield.Field;
 
 public class Bomberman extends Character {
-    public Bomberman(int playernumber, Matchfield matchfield, PApplet pApplet) {
+    public Bomberman(int playernumber, Matchfield matchfield,  PApplet pApplet) {
         super(playernumber, matchfield, pApplet);
         //Farbe des Spieles
         setColor(colorSelection[playernumber]);

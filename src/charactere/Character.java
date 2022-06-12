@@ -1,7 +1,7 @@
 package charactere;
 
 import processing.core.PApplet;
-import matchfield.Matchfield;
+import matchfield.*;
 import main.Position;
 
 public class Character extends Position {
@@ -10,9 +10,11 @@ public class Character extends Position {
     private int heart;
     private int bomb;
     private int color;
-    private int imageWidth;
-    private int imageHeight;
+
     final private Matchfield matchfield;
+
+
+
 
 
     public Matchfield getMatchfield() {
@@ -31,13 +33,14 @@ public class Character extends Position {
 
     * */
     public Character(int playernumber, Matchfield matchfield, PApplet pApplet) {
+        super(0,0);
         this.playernumber = playernumber;
         this.matchfield = matchfield;
         this.speed = 5;
         this.heart = 3;
         this.bomb = 1;
-        this.imageWidth = pApplet.width / matchfield.getFieldSize() - (pApplet.width /100);
-        this.imageHeight = pApplet.height / matchfield.getFieldSize() - (pApplet.height /100);
+        setImageWidth(pApplet.width / matchfield.getFieldSize() - (pApplet.width /100));
+        setImageHeight( pApplet.height / matchfield.getFieldSize() - (pApplet.height /100));
 
 
 
@@ -48,85 +51,9 @@ public class Character extends Position {
 
 
 
-    private int cornerLeftUpX;
-    private int cornerLeftUpY;
-    private int cornerRightUpX;
-    private int cornerRightUpY;
-    private int cornerLeftDownX;
-    private int cornerLeftDownY;
-    private int cornerRightDownX;
-    private int cornerRightDownY;
 
 
 
-    public void setPositionXY(int positionX, int positionY) {
-        setPositionX(positionX);
-        setPositionY(positionY);
-    }
-
-    public int getCornerLeftUpX() {
-        return cornerLeftUpX;
-    }
-
-    public void setCornerLeftUpX() {
-        this.cornerLeftUpX = getPositionX();
-    }
-
-    public int getCornerLeftUpY() {
-        return cornerLeftUpY;
-    }
-
-    public void setCornerLeftUpY() {
-        this.cornerLeftUpY = getPositionY();
-    }
-
-    public int getCornerRightUpX() {
-        return cornerRightUpX;
-    }
-
-    public void setCornerRightUpX() {
-        this.cornerRightUpX = getPositionX() + getImageWidth();
-    }
-
-    public int getCornerRightUpY() {
-        return cornerRightUpY;
-    }
-
-    public void setCornerRightUpY() {
-        this.cornerRightUpY = getPositionY();
-    }
-
-    public int getCornerLeftDownX() {
-        return cornerLeftDownX;
-    }
-
-    public void setCornerLeftDownX() {
-        this.cornerLeftDownX = getPositionX();
-    }
-
-    public int getCornerLeftDownY() {
-        return cornerLeftDownY;
-    }
-
-    public void setCornerLeftDownY() {
-        this.cornerLeftDownY = getPositionY() + getImageHeight();
-    }
-
-    public int getCornerRightDownX() {
-        return cornerRightDownX;
-    }
-
-    public void setCornerRightDownX() {
-        this.cornerRightDownX = getPositionX() + getImageWidth();
-    }
-
-    public int getCornerRightDownY() {
-        return cornerRightDownY;
-    }
-
-    public void setCornerRightDownY() {
-        this.cornerRightDownY = getPositionY() + getImageHeight();
-    }
 
 
 
@@ -165,21 +92,7 @@ public class Character extends Position {
         this.color = color;
     }
 
-    public int getImageWidth() {
-        return imageWidth;
-    }
 
-    public void setImageWidth(int imageWidth) {
-        this.imageWidth = imageWidth;
-    }
-
-    public int getImageHeight() {
-        return imageHeight;
-    }
-
-    public void setImageHeight(int imageHeight) {
-        this.imageHeight = imageHeight;
-    }
 
 
 
