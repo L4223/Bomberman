@@ -1,65 +1,62 @@
 package matchfield;
 
-public class Field {
+import main.Position;
+import processing.core.PApplet;
+import hilfsKlassen.Colour;
 
+public class Field extends Matchfield{
 
-    int startPositionX;
-    int startPositionY;
-    int endPositionX;
-    int endPositionY;
-//    Color color;
-    public Field (int positionX, int positionY, int width, int height) {
-        setStartPositionX(positionX);
-        setStartPositionY(positionY);
-        setEndPositionX(positionX + width);
-        setEndPositionY(positionY + height);
+    public Field (int positionX, int positionY, int width, int height, boolean empty, PApplet pApplet) {
+        super(pApplet);
+        setPositionXY(positionX,positionY);
+        setImageWidth(width);
+        setImageHeight(height);
+        setCornerLeftUpX();
+        setCornerLeftUpY();
+        setCornerLeftDownX();
+        setCornerLeftDownY();
+        setCornerRightUpX();
+        setCornerRightUpY();
+        setCornerRightDownX();
+        setCornerRightDownY();
+        setEmpty(empty);
     }
+
+
+    private PApplet pApplet;
+
+    public PApplet getpApplet() {
+        return pApplet;
+    }
+
+    public void setpApplet(PApplet pApplet) {
+        this.pApplet = pApplet;
+    }
+
+
+
+
+
+    private Field[] field;
+
 
 
     private boolean destroyable;
     private boolean empty;
+
+    private boolean border;
     private String theme;
 
+    private Colour colour;
 
-    public int getStartPositionX() {
-        return startPositionX;
+
+    public Colour getColour() {
+        return colour;
     }
 
-    public void setStartPositionX(int startPositionX) {
-        this.startPositionX = startPositionX;
+    public void setColour(Colour colour) {
+        this.colour = colour;
     }
-
-    public int getStartPositionY() {
-        return startPositionY;
-    }
-
-    public void setStartPositionY(int startPositionY) {
-        this.startPositionY = startPositionY;
-    }
-
-    public int getEndPositionX() {
-        return endPositionX;
-    }
-
-    public void setEndPositionX(int endPositionX) {
-        this.endPositionX = endPositionX;
-    }
-
-    public int getEndPositionY() {
-        return endPositionY;
-    }
-
-    public void setEndPositionY(int endPositionY) {
-        this.endPositionY = endPositionY;
-    }
-
-//    public Color getColor() {
-//        return color;
-//    }
-//
-//    public void setColor(Color color) {
-//        this.color = color;
-//    }
 
 
 
@@ -71,6 +68,7 @@ public class Field {
     public boolean isEmpty() {
         return empty;
     }
+    public boolean isBorder() {return border;}
 
     public String getTheme() {
         return theme;
@@ -82,9 +80,74 @@ public class Field {
 
     public void setEmpty(boolean empty) {
         this.empty = empty;
+        if (!empty && !(getBorder())) setColour(colourNotEmpty);
+        if (empty) setColour(colourFree);
+    }
+
+    public boolean getBorder() {
+        return border;
+    }
+
+
+
+    public void setBorder(boolean border) {
+        this.border = border;
+        if (border) {
+            setEmpty(false);
+            setColour(colourBorder);
+        }
     }
 
     public void setTheme(String theme) {
         this.theme = theme;
     }
+
+    final private Colour colourFree = new Colour(0,0,255);
+    final private Colour colourBorder = new Colour(255,255,255);
+    final private Colour colourNotEmpty = new Colour(255,125,125);
+
+    private boolean clear;
+
+    public void setClear(boolean clear) {
+        this.clear = clear;
+    }
+
+    //checkt ob eine main.Position frei ist
+    public boolean isClear(int positionX, int positionY) {
+        //schneller check ob der Rand betroffen ist
+        if (positionX < getFieldWidth()
+                || positionX > getWidth() - getFieldWidth()
+                || positionY < getFieldHeight()
+                || positionY > getHeight() - getFieldHeight()) {
+            setFree(false);
+        } else {
+            //check ob die Felder in der Mitte getroffen werden mit Hilfe einer for-Schleife, gleich wie beim zeichnen
+            forSchleife:
+            for (int x = getFieldWidth(); x < getWidth() - getFieldWidth(); x += getFieldWidth()) {
+                for (int y = getFieldHeight(); y < getHeight() - getFieldHeight(); y += getFieldHeight()) {
+
+                    if (x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0) {
+                        if (positionX > x
+                                && positionX < x + getFieldWidth()
+                                && positionY > y
+                                && positionY < y + getFieldHeight() ) {
+                            setFree(false);
+                            break forSchleife;
+                        } else {
+                            setFree(true);
+                        }
+                    }
+                }
+            }
+        }
+        return this.clear;
+    }
+
+
+
+
+
+
+
+
 }

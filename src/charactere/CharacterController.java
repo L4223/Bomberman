@@ -1,5 +1,7 @@
 package charactere;
 
+import matchfield.Field;
+import matchfield.Matchfield;
 import processing.core.PApplet;
 
 public abstract class CharacterController {
@@ -8,10 +10,17 @@ public abstract class CharacterController {
     private Character character;
     private CharacterView view;
 
-    public CharacterController (Character character, CharacterView view, PApplet pApplet) {
+    private Matchfield matchfield;
+
+    private Field[] field;
+
+    public CharacterController (Character character, CharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
         setCharacter(character);
         setView(view);
+        setMatchfield(matchfield);
+        setField(field);
         setpApplet(pApplet);
+
     }
 
 
@@ -33,6 +42,22 @@ public abstract class CharacterController {
 
     private void setView(CharacterView view) {
         this.view = view;
+    }
+
+    public Matchfield getMatchfield() {
+        return matchfield;
+    }
+
+    public void setMatchfield(Matchfield matchfield) {
+        this.matchfield = matchfield;
+    }
+
+    public Field[] getField() {
+        return field;
+    }
+
+    public void setField(Field[] field) {
+        this.field = field;
     }
 
     public CharacterView getView() {

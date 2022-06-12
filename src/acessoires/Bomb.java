@@ -7,6 +7,10 @@ public class Bomb extends Position {
     private String color;
     private boolean exploded;
 
+    public Bomb(int positionX, int positionY) {
+        super(positionX, positionY);
+    }
+
     public void setColor(String color) {
         this.color = color;
     }

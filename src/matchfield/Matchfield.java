@@ -6,35 +6,19 @@ import main.Position;
 public class Matchfield extends Position {
 
     public Matchfield (PApplet pApplet) {
+        super(0,0);
         this.fieldSize = 15;
         setHeight(pApplet.height);
         setWidth(pApplet.width);
         setFieldHeight();
         setFieldWidth();
-        setField();
     }
 
-    public Field[] getField() {
-        return field;
-    }
+    final private int[] startObstacle = {21,22,23,24,25,33,35,37,41,47,49,50,51,52,53,54,55,57,61,63,65,67,69,71,73,77,79,80,81,82,83,84,85,86,88,95,97,99,103,106,107,108,109,110,111,112,113,114,116,118,121,123,125,127,129,136,137,139,140,141,142,144,145,146,147,148,151,153,155,157,159,163,167,168,169,171,172,173,174,175,176,177,185,187,189,191,199,200,201,202,203,204,205};
 
-    public void setField() {
-        int i = 0;
-        for (int x = 0; x < getWidth(); x += getFieldWidth()) {
-            for (int y = 0; y < getHeight(); y += getFieldHeight()) {
-                if (!(x == 0
-                        || x == getWidth() - getFieldWidth()
-                        || y == 0
-                        || y == getHeight() - getFieldHeight()
-                        || x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0)) {
-                    field[i] = new Field(x, y, getFieldWidth(), getFieldHeight());
-                    i++;
-                }
-            }
-        }
+    public int[] getStartObstacle() {
+        return startObstacle;
     }
-
-    private Field[] field = new Field[133];
 
     private boolean visible;
     private boolean taken;
@@ -47,7 +31,7 @@ public class Matchfield extends Position {
     private int fieldWidth;
     private int fieldHeight;
 
-    private int fieldSize;
+    final private int fieldSize;
 
     private boolean free;
 
@@ -90,9 +74,7 @@ public class Matchfield extends Position {
         return fieldSize;
     }
 
-    public void setFieldSize(int fieldSize) {
-        this.fieldSize = fieldSize;
-    }
+
 
     public boolean isTaken() {
         return taken;
@@ -110,7 +92,7 @@ public class Matchfield extends Position {
         this.visible = visible;
     }
 
-    public void setFree (boolean free) {
+    public void setFree(boolean free) {
         this.free = free;
     }
 
