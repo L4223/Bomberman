@@ -145,6 +145,13 @@ public class BombermanController extends CharacterController {
             }
         }
 
+        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
+
+        }
+
+        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 1) {
+
+        }
 
         updatePosition();
     }
