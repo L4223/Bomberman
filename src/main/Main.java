@@ -83,6 +83,7 @@ public class Main extends PApplet {
 
       //updatet die Bewegung der Spieler und zeichnet sie
       for (int i = 0; i <game.getNumberOfPlayers(); i++) {
+//          game.getBombermanController(i).movementOne();
           game.getBombermanController(i).movement();
           game.getBombermanController(i).updateView();
       }
