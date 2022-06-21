@@ -14,29 +14,7 @@ public class BombermanController extends CharacterController {
         super(bomberman, view, matchfield, field, pApplet);
     }
 
-    public boolean movementDown(int positionFirstY, int positionSecondY) {
-        boolean move = true;
-        forSchleife:
-        for (int i = 0; i < getField().length; i++) {
-//                    getpApplet().println(i);
-            if (!(getField()[i].isEmpty())) {
-                if (getField()[i].getCornerLeftUpX() <= getCharacter().getCornerLeftDownX() && getField()[i].getCornerRightUpX() >= getCharacter().getCornerRightDownX() && getField()[i].getCornerLeftUpY() == positionFirstY && getField()[i].getCornerRightUpY() == positionSecondY) {
-                    move = false;
-                    break forSchleife;
 
-                } else {
-//                            getpApplet().println("testb");
-//                            printPositionOne(getCharacter());
-//                            printPositionTwo(getField()[21]);
-                    move = true;
-                }
-            }
-        }
-
-
-//        getpApplet().println("testc");
-        return move;
-    }
 
 
     public void printPositionOne(Character bomberman) {
@@ -48,14 +26,24 @@ public class BombermanController extends CharacterController {
     }
 
 
-    @Override
-    public void movement() {
 
+
+
+
+
+
+
+
+    public void movement() {
         if (getpApplet().keyPressed) {
             //checkt ob die nächste main.Position links frei ist und ob die Taste gedrückt wurde und bewegt sich nach links
             if (getpApplet().keyCode == getpApplet().LEFT && getCharacter().getPlayernumber() == 0 || getpApplet().key == 'a' && getCharacter().getPlayernumber() == 1) {
                 if (getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY()) && getMatchfield().isFree(getCharacter().getCornerLeftDownX() - getCharacter().getSpeed(), getCharacter().getCornerLeftDownY())) {
-                    left(getCharacter().getSpeed());
+                    for (int j = getCharacter().getSpeed(); j > 0; j--) {
+                        if (movementLeft()) {
+                            left(1);
+                        }
+                    }
                     //checkt ob eine der linken Ecke frei ist und bewegt sich dementsprechend um die Figur ganz zu befreien
                 } else if (getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY())) {
                     up(getCharacter().getSpeed());
@@ -78,7 +66,11 @@ public class BombermanController extends CharacterController {
             if (getpApplet().keyCode == getpApplet().RIGHT && getCharacter().getPlayernumber() == 0 || getpApplet().key == 'd' && getCharacter().getPlayernumber() == 1) {
 
                 if (getMatchfield().isFree(getCharacter().getCornerRightUpX() + getCharacter().getSpeed(), getCharacter().getCornerRightUpY()) && getMatchfield().isFree(getCharacter().getCornerRightDownX() + getCharacter().getSpeed(), getCharacter().getCornerRightDownY())) {
-                    right(getCharacter().getSpeed());
+                    for (int j = getCharacter().getSpeed(); j > 0; j--) {
+                        if (movementRight()) {
+                            right(1);
+                        }
+                    }
                     //checkt ob eine der rechten Ecke frei ist und bewegt sich dementsprechend um die Figur ganz zu befreien
                 } else if (getMatchfield().isFree(getCharacter().getCornerRightUpX() + getCharacter().getSpeed(), getCharacter().getCornerRightUpY())) {
                     up(getCharacter().getSpeed());
@@ -96,12 +88,17 @@ public class BombermanController extends CharacterController {
                         }
                     }
                 }
+
             }
 
             //checkt ob die nächste main.Position oben frei ist und ob die Taste gedrückt wurde und bewegt sich nach oben
             if (getpApplet().keyCode == getpApplet().UP && getCharacter().getPlayernumber() == 0 || getpApplet().key == 'w' && getCharacter().getPlayernumber() == 1) {
                 if (getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed()) && getMatchfield().isFree(getCharacter().getCornerRightUpX(), getCharacter().getCornerRightUpY() - getCharacter().getSpeed())) {
-                    up(getCharacter().getSpeed());
+                    for (int j = getCharacter().getSpeed(); j > 0; j--) {
+                        if (movementUp()) {
+                            up(1);
+                        }
+                    }
                     //checkt ob eine der oberen Ecke frei ist und bewegt sich dementsprechend um die Figur ganz zu befreien
                 } else if (getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed())) {
                     left(getCharacter().getSpeed());
@@ -123,7 +120,11 @@ public class BombermanController extends CharacterController {
             //checkt ob die nächste main.Position unten frei ist und ob die Taste gedrückt wurde und bewegt sich nach unten
             if (getpApplet().keyCode == getpApplet().DOWN && getCharacter().getPlayernumber() == 0 || getpApplet().key == 's' && getCharacter().getPlayernumber() == 1) {
                 if (getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + getCharacter().getSpeed()) && getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + getCharacter().getSpeed())) {
-                    down(getCharacter().getSpeed());
+                    for (int j = getCharacter().getSpeed(); j > 0; j--) {
+                        if (movementDown()) {
+                            down(1);
+                        }
+                    }
                     //checkt ob eine der unteren Ecke frei ist und bewegt sich dementsprechend um die Figur ganz zu befreien
                 } else if (getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + getCharacter().getSpeed())) {
                     left(getCharacter().getSpeed());
@@ -142,6 +143,7 @@ public class BombermanController extends CharacterController {
                         }
                     }
                 }
+
             }
         }
 

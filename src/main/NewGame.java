@@ -127,7 +127,7 @@ public class NewGame {
                 } else {
                     field[i].setBorder(false);
                     for (int j = 0; j < matchfield.getStartObstacle().length; j++) {
-                        if(matchfield.getStartObstacle()[j] == i) field[i].setEmpty(false);
+                        if(matchfield.getStartObstacle()[j] - 1 == i) field[i].setEmpty(false);
                     }
                 }
                 i++;

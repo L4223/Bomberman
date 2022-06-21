@@ -108,4 +108,85 @@ public abstract class CharacterController {
     //abstrakte Funktion die in den Unterklassen verwendet wird
     public abstract void movement ();
 
+    public boolean movementDown() {
+        boolean move = true;
+        forSchleife:
+        for (int i = 0; i < getField().length; i++) {
+            if (!(getField()[i].isEmpty())) {
+                if (getField()[i].getCornerLeftUpX() <= getCharacter().getCornerLeftDownX()
+                        && getField()[i].getCornerRightUpX() >= getCharacter().getCornerRightDownX()
+                        && getField()[i].getCornerLeftUpY() == getCharacter().getCornerRightDownY()
+                        && getField()[i].getCornerRightUpY() == getCharacter().getCornerLeftDownY()) {
+                    move = false;
+                    break forSchleife;
+
+                } else {
+                    move = true;
+                }
+            }
+        }
+        return move;
+    }
+
+    public boolean movementUp() {
+        boolean move = true;
+        forSchleife:
+        for (int i = 0; i < getField().length; i++) {
+            if (!(getField()[i].isEmpty())) {
+                if (getField()[i].getCornerLeftDownX() <= getCharacter().getCornerLeftUpX()
+                        && getField()[i].getCornerRightDownX() >= getCharacter().getCornerRightUpX()
+                        && getField()[i].getCornerLeftDownY() == getCharacter().getCornerRightUpY()
+                        && getField()[i].getCornerRightDownY() == getCharacter().getCornerLeftUpY()) {
+                    move = false;
+                    break forSchleife;
+
+                } else {
+                    move = true;
+                }
+            }
+        }
+        return move;
+    }
+
+    public boolean movementRight() {
+        boolean move = true;
+        forSchleife:
+        for (int i = 0; i < getField().length; i++) {
+            if (!(getField()[i].isEmpty())) {
+                if (getField()[i].getCornerLeftUpY() <= getCharacter().getCornerRightUpY()
+                        && getField()[i].getCornerLeftDownY() >= getCharacter().getCornerRightDownY()
+                        && getField()[i].getCornerLeftUpX() == getCharacter().getCornerRightUpX()
+                        && getField()[i].getCornerLeftDownX() == getCharacter().getCornerRightDownX()) {
+                    move = false;
+                    break forSchleife;
+
+                } else {
+                    move = true;
+                }
+            }
+        }
+        return move;
+    }
+
+    public boolean movementLeft() {
+        boolean move = true;
+        forSchleife:
+        for (int i = 0; i < getField().length; i++) {
+            if (!(getField()[i].isEmpty())) {
+                if (
+                        getField()[i].getCornerRightUpY() <= getCharacter().getCornerLeftUpY()
+                                && getField()[i].getCornerRightDownY() >= getCharacter().getCornerLeftDownY()
+                                && getField()[i].getCornerRightUpX() == getCharacter().getCornerLeftUpX()
+                                && getField()[i].getCornerRightDownX() == getCharacter().getCornerLeftDownX()) {
+                    move = false;
+                    break forSchleife;
+
+                } else {
+                    move = true;
+                }
+            }
+        }
+        return move;
+    }
+
 }
