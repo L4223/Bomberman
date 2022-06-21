@@ -14,86 +14,7 @@ public class BombermanController extends CharacterController {
         super(bomberman, view, matchfield, field, pApplet);
     }
 
-//    public boolean movementDown() {
-//        boolean move = true;
-//        forSchleife:
-//        for (int i = 0; i < getField().length; i++) {
-//            if (!(getField()[i].isEmpty())) {
-//                if (getField()[i].getCornerLeftUpX() <= getCharacter().getCornerLeftDownX()
-//                        && getField()[i].getCornerRightUpX() >= getCharacter().getCornerRightDownX()
-//                        && getField()[i].getCornerLeftUpY() == getCharacter().getCornerRightDownY()
-//                        && getField()[i].getCornerRightUpY() == getCharacter().getCornerLeftDownY()) {
-//                    move = false;
-//                    break forSchleife;
-//
-//                } else {
-//                    move = true;
-//                }
-//            }
-//        }
-//        return move;
-//    }
-//
-//    public boolean movementUp() {
-//        boolean move = true;
-//        forSchleife:
-//        for (int i = 0; i < getField().length; i++) {
-//            if (!(getField()[i].isEmpty())) {
-//                if (getField()[i].getCornerLeftDownX() <= getCharacter().getCornerLeftUpX()
-//                        && getField()[i].getCornerRightDownX() >= getCharacter().getCornerRightUpX()
-//                        && getField()[i].getCornerLeftDownY() == getCharacter().getCornerRightUpY()
-//                        && getField()[i].getCornerRightDownY() == getCharacter().getCornerLeftUpY()) {
-//                    move = false;
-//                    break forSchleife;
-//
-//                } else {
-//                    move = true;
-//                }
-//            }
-//        }
-//        return move;
-//    }
-//
-//    public boolean movementRight() {
-//        boolean move = true;
-//        forSchleife:
-//        for (int i = 0; i < getField().length; i++) {
-//            if (!(getField()[i].isEmpty())) {
-//                if (getField()[i].getCornerLeftUpY() <= getCharacter().getCornerRightUpY()
-//                        && getField()[i].getCornerLeftDownY() >= getCharacter().getCornerRightDownY()
-//                        && getField()[i].getCornerLeftUpX() == getCharacter().getCornerRightUpX()
-//                        && getField()[i].getCornerLeftDownX() == getCharacter().getCornerRightDownX()) {
-//                    move = false;
-//                    break forSchleife;
-//
-//                } else {
-//                    move = true;
-//                }
-//            }
-//        }
-//        return move;
-//    }
-//
-//    public boolean movementLeft() {
-//        boolean move = true;
-//        forSchleife:
-//        for (int i = 0; i < getField().length; i++) {
-//            if (!(getField()[i].isEmpty())) {
-//                if (
-//                        getField()[i].getCornerRightUpY() <= getCharacter().getCornerLeftUpY()
-//                        && getField()[i].getCornerRightDownY() >= getCharacter().getCornerLeftDownY()
-//                        && getField()[i].getCornerRightUpX() == getCharacter().getCornerLeftUpX()
-//                        && getField()[i].getCornerRightDownX() == getCharacter().getCornerLeftDownX()) {
-//                    move = false;
-//                    break forSchleife;
-//
-//                } else {
-//                    move = true;
-//                }
-//            }
-//        }
-//        return move;
-//    }
+
 
 
     public void printPositionOne(Character bomberman) {
@@ -105,118 +26,13 @@ public class BombermanController extends CharacterController {
     }
 
 
-//    @Override
-//    public void movementOne() {
-//
-//        if (getpApplet().keyPressed) {
-////            forSchleife:
-////            for (int i = 0; i < getField().length; i++) {
-////                if (getField()[i].isEmpty()) {
-//
-//
-//                    //checkt ob die nächste main.Position unten frei ist und ob die Taste gedrückt wurde und bewegt sich nach unten
-//                    if (getpApplet().keyCode == getpApplet().DOWN
-//                            && getCharacter().getPlayernumber() == 0
-//                            || getpApplet().key == 's'
-//                            && getCharacter().getPlayernumber() == 1) {
-//                        for (int j = getCharacter().getSpeed(); j > 0; j--) {
-//                            if (movementDown()) {
-//                                down(1);
-//                            }
-//                        }
-//                    }
-//            if (getpApplet().keyCode == getpApplet().UP
-//                    && getCharacter().getPlayernumber() == 0
-//                    || getpApplet().key == 'w'
-//                    && getCharacter().getPlayernumber() == 1) {
-//                for (int j = getCharacter().getSpeed(); j > 0; j--) {
-//                    if (movementUp()) {
-//                        up(1);
-//                    }
-//                }
-//            }
-//            if (getpApplet().keyCode == getpApplet().RIGHT
-//                    && getCharacter().getPlayernumber() == 0
-//                    || getpApplet().key == 'd'
-//                    && getCharacter().getPlayernumber() == 1) {
-//                for (int j = getCharacter().getSpeed(); j > 0; j--) {
-//                    if (movementRight()) {
-//                        right(1);
-//                    }
-//                }
-//            }
-//            if (getpApplet().keyCode == getpApplet().LEFT
-//                    && getCharacter().getPlayernumber() == 0
-//                    || getpApplet().key == 'a'
-//                    && getCharacter().getPlayernumber() == 1) {
-//                for (int j = getCharacter().getSpeed(); j > 0; j--) {
-//                    if (movementLeft()) {
-//                        left(1);
-//                    }
-//                }
-//            }
-//                        }
-//                    if (getpApplet().keyCode == getpApplet().UP && getCharacter().getPlayernumber() == 0) {
-//                        if (getField()[i].getCornerRightDownX() >= getCharacter().getCornerRightUpX()
-//                                && getField()[i].getCornerRightDownY() < getCharacter().getCornerRightUpY() + getCharacter().getSpeed()
-//                                && getField()[i].getCornerLeftDownX() <= getCharacter().getCornerLeftUpX()
-//                                && getField()[i].getCornerLeftDownY() < getCharacter().getCornerLeftUpY() + getCharacter().getSpeed()) {
-//                            up(getCharacter().getSpeed());
-//                        }
-//                    }
-//                    if (getpApplet().keyCode == getpApplet().RIGHT && getCharacter().getPlayernumber() == 0) {
-//                        if (getField()[i].getCornerLeftUpY() >= getCharacter().getCornerRightUpY()
-//                                && getField()[i].getCornerRightUpX() > getCharacter().getCornerLeftUpX() + getCharacter().getSpeed()
-//                                && getField()[i].getCornerLeftDownY() >= getCharacter().getCornerRightDownY()
-//                                && getField()[i].getCornerLeftDownX() < getCharacter().getCornerRightDownX() + getCharacter().getSpeed()) {
-//                            right(getCharacter().getSpeed());
-//                        }
-//                    }
-//                    if (getpApplet().keyCode == getpApplet().LEFT && getCharacter().getPlayernumber() == 0) {
-//                        if (getField()[i].getCornerRightUpX() >= getCharacter().getCornerRightDownX()
-//                                && getField()[i].getCornerRightUpY() > getCharacter().getCornerRightDownY() + getCharacter().getSpeed()
-//                                && getField()[i].getCornerLeftUpX() <= getCharacter().getCornerLeftDownX()
-//                                && getField()[i].getCornerLeftUpY() > getCharacter().getCornerLeftDownY() + getCharacter().getSpeed()) {
-//                            left(getCharacter().getSpeed());
-//                        }
-//                    }
-
-
-                        //checkt ob eine der unteren Ecke frei ist und bewegt sich dementsprechend um die Figur ganz zu befreien
-//                    } else if (getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + getCharacter().getSpeed())) {
-//                        left(getCharacter().getSpeed());
-//                    } else if (getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + getCharacter().getSpeed())) {
-//                        right(getCharacter().getSpeed());
-//                    } else {
-//                        //dasselbe wie vorher nur für die einzelnen Pixel um an den Rand zu kommen, sonst Abstand wie Geschwindigkeit
-//                        for (int j = getCharacter().getSpeed(); j > 0; j--) {
-//
-//                            if (getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + j)
-//                                    && getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + j)) {
-//                                down(j);
-//                            } else if (getMatchfield().isFree(getCharacter().getCornerLeftDownX(), getCharacter().getCornerLeftDownY() + j)) {
-//                                left(j);
-//                            } else if (getMatchfield().isFree(getCharacter().getCornerRightDownX(), getCharacter().getCornerRightDownY() + j)) {
-//                                right(j);
-//                            }
-//                        }
-//                    }
 
 
 
 
 
 
-//        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
-//
-//        }
-//
-//        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 1) {
-//
-//        }
-//
-//        updatePosition();
-//    }
+
 
     public void movement() {
         if (getpApplet().keyPressed) {
