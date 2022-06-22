@@ -10,7 +10,7 @@ public class AutoCharacterController extends CharacterController {
     private AutoCharacter autoCharacter;
     private DirectionMovement directions = new DirectionMovement(getpApplet());
 
-    public AutoCharacterController(AutoCharacter autoCharacter, AutoCharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
+    public AutoCharacterController(AutoCharacter autoCharacter, CharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
         super(autoCharacter, view, matchfield, field, pApplet);
         setAutoCharacter(autoCharacter);
         //Erstellt eine Klasse DirectionMovement mit dem Inhalt von rechts, links, unten, oben
@@ -171,13 +171,7 @@ public class AutoCharacterController extends CharacterController {
 
         }
 
-        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
 
-        }
-
-        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 1) {
-
-        }
 
         updatePosition();
         if(getpApplet().frameCount % 120 == 0) getAutoCharacter().setDirection(getDirections().getRandomDirection(getAutoCharacter().getDirection()));

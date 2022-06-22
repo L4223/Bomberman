@@ -79,6 +79,7 @@ public class Main extends PApplet {
 
       //zeichnet das Spielfeld
 //        game.getMatchfieldController().setMatchfield();
+
         game.getFieldController().setField();
 
       //updatet die Bewegung der Spieler und zeichnet sie

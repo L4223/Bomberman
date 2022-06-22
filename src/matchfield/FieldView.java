@@ -1,15 +1,38 @@
 package matchfield;
 
 import processing.core.PApplet;
+import processing.core.PImage;
+
+
+
 
 public class FieldView extends MatchfieldView{
 
     public void field(Field[] field, PApplet pApplet) {
+        PImage brick;
+        brick = pApplet.loadImage("images/brick.png");
+
+        PImage broken_brick;
+        broken_brick = pApplet.loadImage("images/broken_brick.png");
+
+        PImage floor;
+        floor = pApplet.loadImage("images/floor.png");
+
         for (int i = 0; i < field.length; i++) {
-            pApplet.noStroke();
-            pApplet.fill(field[i].getColour().getRed(),field[i].getColour().getGreen(),field[i].getColour().getBlue() );
-            pApplet.rect(field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY(), field[i].getCornerRightDownX(), field[i].getCornerRightDownY());
-            pApplet.fill(0);
+
+
+
+            if (field[i].isBorder()) {
+                pApplet.image(brick, field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY());
+            }
+
+            if (!field[i].isEmpty() && !field[i].isBorder()) {
+                pApplet.image(broken_brick, field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY());
+            }
+
+            if (field[i].isEmpty()) {
+                pApplet.image(floor, field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY());
+            }
             pApplet.text(pApplet.str(i),field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY());
             }
         }

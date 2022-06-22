@@ -1,5 +1,8 @@
 package charactere;
 
+import acessoires.Bomb;
+import acessoires.BombController;
+import acessoires.BombView;
 import matchfield.Field;
 import matchfield.Matchfield;
 import processing.core.PApplet;
@@ -7,31 +10,9 @@ import processing.core.PApplet;
 public class BombermanController extends CharacterController {
 
 
-    boolean move;
-
-
-    public BombermanController(Bomberman bomberman, BombermanView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
+    public BombermanController(Bomberman bomberman, CharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
         super(bomberman, view, matchfield, field, pApplet);
     }
-
-
-
-
-    public void printPositionOne(Character bomberman) {
-        getpApplet().println("LinksObenX: " + bomberman.getCornerLeftUpX() + "\nLinksObenY: " + bomberman.getCornerLeftUpY() + "\nLinksUntenX: " + bomberman.getCornerLeftDownX() + "\nLinksUntenY: " + bomberman.getCornerLeftDownY() + "\nRechtsObenX: " + bomberman.getCornerRightUpX() + "\nRechtsObenY: " + bomberman.getCornerRightUpY() + "\nRechtsUntenX: " + bomberman.getCornerRightDownX() + "\nRechtsUntenY: " + bomberman.getCornerRightDownY());
-    }
-
-    public void printPositionTwo(Field bomberman) {
-        getpApplet().println("LinksObenX: " + bomberman.getCornerLeftUpX() + "\nLinksObenY: " + bomberman.getCornerLeftUpY() + "\nLinksUntenX: " + bomberman.getCornerLeftDownX() + "\nLinksUntenY: " + bomberman.getCornerLeftDownY() + "\nRechtsObenX: " + bomberman.getCornerRightUpX() + "\nRechtsObenY: " + bomberman.getCornerRightUpY() + "\nRechtsUntenX: " + bomberman.getCornerRightDownX() + "\nRechtsUntenY: " + bomberman.getCornerRightDownY());
-    }
-
-
-
-
-
-
-
-
 
 
     public void movement() {
@@ -148,11 +129,15 @@ public class BombermanController extends CharacterController {
         }
 
         if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
-
+            Bomb bomb = new Bomb(getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
+            BombView bombView = new BombView();
+            new BombController(bomb,bombView,getpApplet());
         }
 
         if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 1) {
-
+            Bomb bomb = new Bomb(getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
+            BombView bombView = new BombView();
+            new BombController(bomb,bombView,getpApplet());
         }
 
         updatePosition();

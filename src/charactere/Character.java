@@ -3,13 +3,14 @@ package charactere;
 import processing.core.PApplet;
 import matchfield.*;
 import main.Position;
+import processing.core.PImage;
 
 public class Character extends Position {
     final private int playernumber;
     private int speed;
     private int heart;
     private int bomb;
-    private int color;
+
 
     final private Matchfield matchfield;
 
@@ -39,6 +40,7 @@ public class Character extends Position {
         this.speed = 5;
         this.heart = 3;
         this.bomb = 1;
+        this.bombRadius = 2;
         setImageWidth(pApplet.width / matchfield.getFieldSize() - (pApplet.width /100));
         setImageHeight( pApplet.height / matchfield.getFieldSize() - (pApplet.height /100));
 
@@ -52,29 +54,33 @@ public class Character extends Position {
 
 
 
+    PImage image;
 
 
-
-
-
-
-
-
-    public int getBomb() {
-        return bomb;
+    public PImage getImage() {
+        return image;
     }
 
-    public int getHeart() {
-        return heart;
+    public void setImage(PImage image) {
+        this.image = image;
     }
+
+
+
+    public int getBombRadius ( ) {
+        return bombRadius;
+    }
+
+    private int bombRadius;
+
+
+
 
     public int getSpeed() {
         return speed;
     }
 
-    public int getColor() {
-        return color;
-    }
+
 
     public void setBomb(int bomb) {
         this.bomb = bomb;
@@ -88,9 +94,7 @@ public class Character extends Position {
         this.speed = speed;
     }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
+
 
 
 

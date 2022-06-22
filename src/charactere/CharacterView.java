@@ -4,10 +4,9 @@ import processing.core.PApplet;
 
 public class CharacterView {
 
-    public void draw (Character bomberman, PApplet pApplet) {
-        pApplet.rectMode(pApplet.CORNERS);
-        pApplet.noStroke();
-        pApplet.fill(bomberman.getColor());
-        pApplet.rect(bomberman.getCornerLeftUpX(), bomberman.getCornerLeftUpY(), bomberman.getCornerRightDownX(), bomberman.getCornerRightDownY());
+    public void draw (Character character, PApplet pApplet) {
+        pApplet.image(character.getImage(),character.getCornerLeftUpX() - 20, character.getCornerLeftUpY() - 20, 100,100);
     }
 }
+
+

@@ -2,6 +2,7 @@ package main;
 
 import matchfield.*;
 import charactere.*;
+
 import processing.core.PApplet;
 
 public class NewGame {
@@ -10,13 +11,16 @@ public class NewGame {
     private int numberOfOpponents;
     private AutoCharacter [] autoCharacters;
     private AutoCharacterController [] autoCharacterControllers;
-    private AutoCharacterView autoCharacterView;
+    private CharacterView characterView;
     private Bomberman [] bombermans;
     private BombermanController [] bombermanControllers;
-    private BombermanView bombermanView;
+
     private Matchfield matchfield;
     private MatchfieldController matchfieldController;
     private MatchfieldView matchfieldView;
+
+
+
 
 
 
@@ -36,10 +40,10 @@ public class NewGame {
         setMatchfield();
         setField();
 
-        setBombermanView();
+
         setBombermanControllers();
 
-        setAutoCharacterView();
+        setCharacterView();
         setAutoCharacterControllers();
 
         setFieldView();
@@ -47,6 +51,8 @@ public class NewGame {
 
         setMatchfieldView();
         setMatchfieldController();
+
+
 
 
 
@@ -160,9 +166,7 @@ public class NewGame {
        bombermanControllers = new BombermanController[getNumberOfPlayers()];
     }
 
-    private void setBombermanView () {
-        bombermanView = new BombermanView();
-    }
+
 
     //Die Getter von charactere.Bomberman-MVC
     public Bomberman getBomberman(int playernumber) {
@@ -173,9 +177,7 @@ public class NewGame {
         return bombermanControllers[playernumber];
     }
 
-    public BombermanView getBombermanView() {
-        return bombermanView;
-    }
+
 
     //Die Setter von charactere.AutoCharacter-MVC
     private void setAutoCharacters() {
@@ -186,8 +188,8 @@ public class NewGame {
         this.autoCharacterControllers = new AutoCharacterController[numberOfOpponents];
     }
 
-    private void setAutoCharacterView() {
-        this.autoCharacterView = new AutoCharacterView();
+    private void setCharacterView() {
+        this.characterView = new CharacterView();
     }
 
     //Die Getter von charactere.AutoCharacter-MVC
@@ -199,8 +201,8 @@ public class NewGame {
         return autoCharacterControllers[playernumber];
     }
 
-    public AutoCharacterView getAutoCharacterView() {
-        return autoCharacterView;
+    public CharacterView getCharacterView() {
+        return characterView;
     }
 
 
@@ -210,11 +212,11 @@ public class NewGame {
             try {
                 for (int i = 0; i < getNumberOfPlayers(); i++) {
                     bombermans[i] = new Bomberman(i, getMatchfield(), getpApplet());
-                    bombermanControllers[i] = new BombermanController(getBomberman(i), getBombermanView(), getMatchfield(), getField(), getpApplet());
+                    bombermanControllers[i] = new BombermanController(getBomberman(i), getCharacterView(), getMatchfield(), getField(), getpApplet());
                 }
                 for (int i = 0; i < getNumberOfOpponents(); i++) {
                     autoCharacters[i] = new AutoCharacter(i,getMatchfield(),getpApplet());
-                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getAutoCharacterView(), getMatchfield(), getField(), getpApplet());
+                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getCharacterView(), getMatchfield(), getField(), getpApplet());
                 }
             } catch (Exception exception) {
                 pApplet.println("Fehler! Zwischen 1 - 4 Spieler zugelassen");

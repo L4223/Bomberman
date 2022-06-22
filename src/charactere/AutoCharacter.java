@@ -9,24 +9,24 @@ public class AutoCharacter extends Character {
 
     public AutoCharacter(int playernumber, Matchfield matchfield, PApplet pApplet) {
         super(playernumber, matchfield, pApplet);
-        setColor(colorSelection[playernumber]);
         directionMovement = new DirectionMovement("left");
         //main.Position rechts oben
         if (playernumber == 0) {
             setPositionXY(pApplet.width - matchfield.getFieldWidth() - getImageWidth(), matchfield.getFieldHeight());
+            setImage(pApplet.loadImage("images/bombermanGegner.png"));
         }
         //main.Position links unten
         if (playernumber == 1) {
             setPositionXY(matchfield.getFieldWidth(), pApplet.height - matchfield.getFieldHeight() -getImageHeight());
+            setImage(pApplet.loadImage("images/bombermanGegner2.png"));
         }
         //main.Position rechts unten
         if (playernumber == 2) {
             setPositionXY(pApplet.width - matchfield.getFieldWidth() - getImageWidth(), pApplet.height - matchfield.getFieldHeight() - getImageHeight());
+            setImage(pApplet.loadImage("images/bombermanGegner3.png"));
         }
     }
 
-    //Farbe des Spielers, {pink, gelb, grün}
-    private final int [] colorSelection = {0xFFFF5F85, 0xFFF0F14E, 0xFF6DED8A};
 
     public DirectionMovement getDirectionMovement() {
         return directionMovement;
@@ -40,7 +40,4 @@ public class AutoCharacter extends Character {
         return directionMovement.getDirection();
     }
 
-    private void setDirectionMovement(DirectionMovement direction) {
-        this.directionMovement = direction;
-    }
 }

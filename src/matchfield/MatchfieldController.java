@@ -18,17 +18,12 @@ public class MatchfieldController {
         return matchfield;
     }
 
-    public MatchfieldView getView() {
-        return view;
-    }
+
 
     public PApplet getpApplet() {
         return pApplet;
     }
 
 
-    public void setMatchfield () {
-//        view.matchfield(getMatchfield(), getpApplet());
-    }
 
 }
