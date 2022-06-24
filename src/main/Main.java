@@ -80,6 +80,8 @@ public class Main extends PApplet {
       //zeichnet das Spielfeld
 //        game.getMatchfieldController().setMatchfield();
 
+
+
         game.getFieldController().setField();
 
       //updatet die Bewegung der Spieler und zeichnet sie
@@ -87,12 +89,22 @@ public class Main extends PApplet {
 //          game.getBombermanController(i).movementOne();
           game.getBombermanController(i).movement();
           game.getBombermanController(i).updateView();
+          if (game.getBomberman(i).isBombSet()) {
+              for (int j = 0; j < game.getBomberman(i).getBombCounter(); j++) {
+                  if (game.getBomberman(i).getBombs(j).getBomb().isPlaced()) {
+
+                      game.getBomberman(i).getBombs(j).getBombController().setView();
+                  }
+              }
+          }
       }
-      //updatet die Bewegung der Bots und zeichnet sie
+//      updatet die Bewegung der Bots und zeichnet sie
       for (int i = 0; i < game.getNumberOfOpponents(); i++) {
           game.getAutoCharacterController(i).movement();
           game.getAutoCharacterController(i).updateView();
       }
+
+
     }
 
 

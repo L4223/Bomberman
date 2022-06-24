@@ -1,6 +1,7 @@
 package matchfield;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 
 
@@ -19,6 +20,7 @@ public class FieldView extends MatchfieldView{
         floor = pApplet.loadImage("images/floor.png");
 
         for (int i = 0; i < field.length; i++) {
+            pApplet.imageMode(PConstants.CORNER);
 
 
 
@@ -33,7 +35,7 @@ public class FieldView extends MatchfieldView{
             if (field[i].isEmpty()) {
                 pApplet.image(floor, field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY());
             }
-            pApplet.text(pApplet.str(i),field[i].getCornerLeftUpX(), field[i].getCornerLeftUpY());
+            pApplet.text(pApplet.str(i),field[i].getCornerLeftDownX(), field[i].getCornerLeftDownY());
             }
         }
     }

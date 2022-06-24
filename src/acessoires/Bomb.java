@@ -13,37 +13,73 @@ public class Bomb extends Position {
 
     public void setBombRadius(int bombRadius) {
         this.bombRadius = bombRadius;
+
     }
 
-    public Bomb(int positionX, int positionY, int bombRadius, PApplet pApplet) {
+    public Bomb(int positionX, int positionY) {
         super(positionX, positionY);
-        setImage(pApplet.loadImage("images/Bomb.png"));
-        setpApplet(pApplet);
-        setBombRadius(bombRadius);
+        setImageHeight(60);
+        setImageWidth(60);
+        setPlaced(false);
 
     }
+
+//    PImage image;
+//
+//    public PImage getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(PImage image) {
+//        this.image = image;
+//    }
 
     PApplet pApplet;
-
-    public PApplet getpApplet() {
-        return pApplet;
-    }
 
     public void setpApplet(PApplet pApplet) {
         this.pApplet = pApplet;
     }
 
-    PImage image;
-
-    public PImage getImage() {
-        return image;
+    public PApplet getpApplet() {
+        return pApplet;
     }
 
-    public void setImage(PImage image) {
-        this.image = image;
+    boolean placed;
+
+    public boolean isPlaced() {
+        return placed;
     }
 
+    public void setPlaced(boolean placed) {
+        this.placed = placed;
+    }
 
+    public void setPlaced() {
+        placed = true;
+    }
 
+    private BombController bombController;
+
+    private BombView bombView;
+
+    public void setBombController() {
+        this.bombController = new BombController(getBomb(),getBombView(), getpApplet() );
+    }
+
+    public BombView getBombView() {
+        return bombView;
+    }
+
+    public Bomb getBomb() {
+        return this;
+    }
+
+    public void setBombView() {
+        this.bombView = new BombView(getpApplet());
+    }
+
+    public BombController getBombController() {
+        return bombController;
+    }
 
 }

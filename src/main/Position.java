@@ -8,8 +8,8 @@ public class Position {
     private int imageHeight;
 
     public Position (int positionX, int positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+        setPositionXY(positionX,positionY);
+        updatePosition();
     }
 
 
@@ -43,7 +43,37 @@ public class Position {
     private int cornerRightDownX;
     private int cornerRightDownY;
 
+    private int midX;
+    private int midY;
 
+    public int getMidX() {
+        return midX;
+    }
+
+    public void setMidX() {
+        this.midX = getPositionX() + getImageWidth()/2;
+    }
+
+    public int getMidY() {
+        return midY;
+    }
+
+    public void setMidY() {
+        this.midY = getPositionY() + getImageHeight()/2;
+    }
+
+    public void updatePosition() {
+        setCornerLeftUpX();
+        setCornerLeftUpY();
+        setCornerLeftDownX();
+        setCornerLeftDownY();
+        setCornerRightUpX();
+        setCornerRightUpY();
+        setCornerRightDownX();
+        setCornerRightDownY();
+        setMidX();
+        setMidY();
+    }
 
     public int getCornerLeftUpX() {
         return cornerLeftUpX;

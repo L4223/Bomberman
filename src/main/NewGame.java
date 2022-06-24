@@ -1,5 +1,8 @@
 package main;
 
+import acessoires.Bomb;
+import acessoires.BombController;
+import acessoires.BombView;
 import matchfield.*;
 import charactere.*;
 
@@ -41,9 +44,9 @@ public class NewGame {
         setField();
 
 
-        setBombermanControllers();
 
         setCharacterView();
+        setBombermanControllers();
         setAutoCharacterControllers();
 
         setFieldView();
@@ -51,6 +54,9 @@ public class NewGame {
 
         setMatchfieldView();
         setMatchfieldController();
+
+
+
 
 
 
@@ -133,7 +139,7 @@ public class NewGame {
                 } else {
                     field[i].setBorder(false);
                     for (int j = 0; j < matchfield.getStartObstacle().length; j++) {
-                        if(matchfield.getStartObstacle()[j] - 1 == i) field[i].setEmpty(false);
+                        if(matchfield.getStartObstacle()[j] == i) field[i].setEmpty(false);
                     }
                 }
                 i++;
@@ -181,11 +187,11 @@ public class NewGame {
 
     //Die Setter von charactere.AutoCharacter-MVC
     private void setAutoCharacters() {
-        this.autoCharacters = new AutoCharacter[numberOfOpponents];
+        this.autoCharacters = new AutoCharacter[getNumberOfOpponents()];
     }
 
     private void setAutoCharacterControllers() {
-        this.autoCharacterControllers = new AutoCharacterController[numberOfOpponents];
+        this.autoCharacterControllers = new AutoCharacterController[getNumberOfOpponents()];
     }
 
     private void setCharacterView() {
@@ -228,4 +234,88 @@ public class NewGame {
             newGame();
         }
     }
+
+    private Bomb bomb;
+
+    private BombController bombController;
+
+    private BombView bombView;
+
+    public Bomb getBomb() {
+        return bomb;
+    }
+
+    private boolean bombPlaced;
+
+    public boolean isBombPlaced() {
+        return bombPlaced;
+    }
+
+    public void setBombPlaced() {
+        this.bombPlaced = false;
+    }
+
+    public void setBombPlaced(boolean bombPlaced) {
+        this.bombPlaced = bombPlaced;
+    }
+
+//    public void setNumberOfbombs() {
+//        int positionX = 0;
+//        int positionY = 0;
+//        int bombRadius = 0;
+//        for (int i = 0; i < getNumberOfPlayers(); i++) {
+//            if (getBomberman(i).isBombSet()) {
+//                setBombPlaced(getBomberman(i).isBombSet());
+//                positionX = getField()[getMatchfield().getFieldNumber(getBomberman(i).getPositionX(), getBomberman(i).getPositionY())].getMidX();
+//                positionY = getField()[getMatchfield().getFieldNumber(getBomberman(i).getPositionX(), getBomberman(i).getPositionY())].getMidY();
+//                bombRadius = getBomberman(i).getBombRadius();
+//                getBomberman(i).setBombSet();
+//
+//
+//            }
+//
+//        }
+//        for (int i = 0; i < getNumberOfPlayers(); i++) {
+//            if (autoCharacters[i].isBombSet()) {
+//                setBombPlaced(autoCharacters[i].isBombSet());
+//                positionX = autoCharacters[i].getMidX();
+//                positionY = autoCharacters[i].getMidY();
+//                bombRadius = autoCharacters[i].getBombRadius();
+//            }
+//            if (isBombPlaced()) {
+//                setShowBomb(true);
+//                this.bomb = new Bomb(positionX, positionY, bombRadius, getpApplet());
+//                this.bombView = new BombView();
+//                this.bombController = new BombController(getBomb(), getBombView(), getpApplet());
+//                setBombPlaced(false);
+////                pApplet.println(isBombPlaced());
+//            }
+//        }
+//    }
+
+    boolean showBomb;
+
+    public boolean isShowBomb() {
+        return showBomb;
+    }
+
+    public void setShowBomb(boolean showBomb) {
+        this.showBomb = showBomb;
+    }
+
+    public BombController getBombController() {
+        return bombController;
+    }
+
+//    public void setBombController() {
+//        this.bombController = new BombController();
+//    }
+
+    public BombView getBombView() {
+        return bombView;
+    }
+
+//    public void setBombView() {
+//        this.bombView = new BombView();
+//    }
 }

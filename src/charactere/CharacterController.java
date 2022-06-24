@@ -89,15 +89,7 @@ public abstract class CharacterController {
 
     //Die Positionen der verschiedenen Ecken werden aktualisiert
     public void updatePosition() {
-
-        getCharacter().setCornerLeftUpX();
-        getCharacter().setCornerLeftUpY();
-        getCharacter().setCornerLeftDownX();
-        getCharacter().setCornerLeftDownY();
-        getCharacter().setCornerRightUpX();
-        getCharacter().setCornerRightUpY();
-        getCharacter().setCornerRightDownX();
-        getCharacter().setCornerRightDownY();
+        getCharacter().updatePosition();
     }
     //Die Ansicht wird mit den neuest Daten geupdatet
     public void updateView () {

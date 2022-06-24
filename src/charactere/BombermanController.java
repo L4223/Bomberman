@@ -16,7 +16,10 @@ public class BombermanController extends CharacterController {
 
 
     public void movement() {
+        BombController bombPlaced;
         if (getpApplet().keyPressed) {
+
+
             //checkt ob die nächste main.Position links frei ist und ob die Taste gedrückt wurde und bewegt sich nach links
             if (getpApplet().keyCode == getpApplet().LEFT && getCharacter().getPlayernumber() == 0 || getpApplet().key == 'a' && getCharacter().getPlayernumber() == 1) {
                 if (getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY()) && getMatchfield().isFree(getCharacter().getCornerLeftDownX() - getCharacter().getSpeed(), getCharacter().getCornerLeftDownY())) {
@@ -128,19 +131,34 @@ public class BombermanController extends CharacterController {
             }
         }
 
+
+
         if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
-            Bomb bomb = new Bomb(getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
-            BombView bombView = new BombView();
-            new BombController(bomb,bombView,getpApplet());
+            if(getCharacter().getBombCounter() < getCharacter().getNumberOfBombs()) {
+                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getpApplet() );
+//                getCharacter().setBomb(getCharacter().getBombCounter(), getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
+                getCharacter().addBombCounter();
+                getCharacter().setBombSet(true);
+                getpApplet().keyCode = 1;
+                getpApplet().println("SetBomb");
+                getpApplet().println(getCharacter().getBombCounter());
+
+            }
+
+//            getCharacter().setBombSet(true);
+//            bombPlaced = new BombController(getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
         }
 
+
+
         if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 1) {
-            Bomb bomb = new Bomb(getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
-            BombView bombView = new BombView();
-            new BombController(bomb,bombView,getpApplet());
+//            new BombController(bomb,bombView,getpApplet());
         }
 
         updatePosition();
+
+//        getpApplet().println(getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY()));
+//        getpApplet().println("PositionX: " + getCharacter().getPositionX() + " PositionY: " + getCharacter().getPositionY());
     }
 }
 
