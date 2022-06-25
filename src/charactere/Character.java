@@ -41,7 +41,7 @@ public class Character extends Position {
         this.matchfield = matchfield;
         this.speed = 5;
         this.heart = 3;
-        this.numberOfBombs = 1;
+        this.numberOfBombs = 5;
         this.bombCounter = 0;
         this.maxNumberOfBombs = 5;
         this.bombRadius = 2;
@@ -58,6 +58,10 @@ public class Character extends Position {
 
     }
 
+    public int getMaxNumberOfBombs() {
+        return maxNumberOfBombs;
+    }
+
     PApplet pApplet;
 
     public void setpApplet(PApplet pApplet) {
@@ -68,7 +72,7 @@ public class Character extends Position {
         return pApplet;
     }
 
-    private int maxNumberOfBombs;
+    private final int maxNumberOfBombs;
 
     private Bomb[] bombs;
 
@@ -83,19 +87,24 @@ public class Character extends Position {
         return bombs[bombNumber];
     }
 
-    public void setBomb(int numberOfBomb, int positionX, int positionY, int bombRadius, PApplet pApplet) {
+    public void setBomb(int numberOfBomb, int positionX, int positionY, int bombRadius, int fieldNumber, Field [] field, PApplet pApplet) {
         bombs[numberOfBomb].setPositionXY(positionX, positionY);
         bombs[numberOfBomb].updatePosition();
         bombs[numberOfBomb].setBombRadius(bombRadius);
+        bombs[numberOfBomb].setFieldNumber(fieldNumber);
+        bombs[numberOfBomb].setField(field);
         bombs[numberOfBomb].setPlaced();
         bombs[numberOfBomb].setpApplet(pApplet);
+        bombs[numberOfBomb].setCharacter(this);
         bombs[numberOfBomb].setBombView();
         bombs[numberOfBomb].setBombController();
-        pApplet.println(bombs[numberOfBomb].getCornerLeftUpX());
+
 
 
 
     }
+
+
 
     private int bombCounter;
 

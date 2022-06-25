@@ -37,6 +37,8 @@ public class Main extends PApplet {
 
 
 
+
+
         // Bestimmt welcher Fenster angezeigt wird mit Fenster = true
         start = false;
         pause = false;
@@ -90,10 +92,15 @@ public class Main extends PApplet {
           game.getBombermanController(i).movement();
           game.getBombermanController(i).updateView();
           if (game.getBomberman(i).isBombSet()) {
-              for (int j = 0; j < game.getBomberman(i).getBombCounter(); j++) {
+              for (int j = 0; j < game.getBomberman(i).getMaxNumberOfBombs(); j++) {
                   if (game.getBomberman(i).getBombs(j).getBomb().isPlaced()) {
 
                       game.getBomberman(i).getBombs(j).getBombController().setView();
+                  }
+                  if (game.getBomberman(i).getBombs(j).getBomb().isExploded()) {
+                      game.getBomberman(i).getBombs(j).getBombController().explosion();
+                      println("test");
+
                   }
               }
           }

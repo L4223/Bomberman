@@ -1,15 +1,38 @@
 package acessoires;//noch nicht benutzt
 
+import charactere.Character;
 import main.Position;
+import matchfield.Field;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Bomb extends Position {
 
+    Field [] field;
+
+    public Field [] getField() {
+        return field;
+    }
+
+    public void setField(Field [] field) {
+        this.field = field;
+    }
+
+    Character character;
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
 
     private int bombRadius;
 
-
+    public int getBombRadius() {
+        return bombRadius;
+    }
 
     public void setBombRadius(int bombRadius) {
         this.bombRadius = bombRadius;
@@ -22,10 +45,28 @@ public class Bomb extends Position {
         setImageHeight(60);
         setImageWidth(60);
         setPlaced(false);
-//        PImage image;
-//        image = pApplet.loadImage("images/Bomb.png");
         setImage(pApplet.loadImage("images/Bomb.png"));
 
+    }
+
+    private boolean exploded;
+
+    public void setExploded(boolean exploded) {
+        this.exploded = exploded;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    private int fieldNumber;
+
+    public int getFieldNumber() {
+        return fieldNumber;
+    }
+
+    public void setFieldNumber(int fieldNumber) {
+        this.fieldNumber = fieldNumber;
     }
 
     PImage image;
@@ -79,7 +120,7 @@ public class Bomb extends Position {
     }
 
     public void setBombView() {
-        this.bombView = new BombView(getpApplet());
+        this.bombView = new BombView();
     }
 
     public BombController getBombController() {

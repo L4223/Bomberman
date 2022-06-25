@@ -135,8 +135,7 @@ public class BombermanController extends CharacterController {
 
         if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
             if(getCharacter().getBombCounter() < getCharacter().getNumberOfBombs()) {
-                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getpApplet() );
-//                getCharacter().setBomb(getCharacter().getBombCounter(), getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
+                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY()),getField(),getpApplet() );
                 getCharacter().addBombCounter();
                 getCharacter().setBombSet(true);
                 getpApplet().keyCode = 1;
