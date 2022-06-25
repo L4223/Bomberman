@@ -11,7 +11,7 @@ public class FieldView extends MatchfieldView{
 
     public void field(Field[] field, PApplet pApplet) {
         PImage brick;
-        brick = pApplet.loadImage("images/brick.png");
+        brick = pApplet.loadImage("images/Brick.png");
 
         PImage broken_brick;
         broken_brick = pApplet.loadImage("images/broken_brick.png");

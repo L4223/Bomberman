@@ -36,6 +36,7 @@ public class Character extends Position {
     * */
     public Character(int playernumber, Matchfield matchfield, PApplet pApplet) {
         super(0,0);
+        setpApplet(pApplet);
         this.playernumber = playernumber;
         this.matchfield = matchfield;
         this.speed = 5;
@@ -57,6 +58,16 @@ public class Character extends Position {
 
     }
 
+    PApplet pApplet;
+
+    public void setpApplet(PApplet pApplet) {
+        this.pApplet = pApplet;
+    }
+
+    public PApplet getpApplet() {
+        return pApplet;
+    }
+
     private int maxNumberOfBombs;
 
     private Bomb[] bombs;
@@ -64,7 +75,7 @@ public class Character extends Position {
     public void setBombs() {
         this.bombs = new Bomb[maxNumberOfBombs];
         for (int i = 0; i < maxNumberOfBombs; i++) {
-            bombs[i] = new Bomb(0, 0);
+            bombs[i] = new Bomb(getpApplet());
         }
     }
 

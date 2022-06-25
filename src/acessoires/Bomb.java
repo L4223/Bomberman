@@ -16,23 +16,27 @@ public class Bomb extends Position {
 
     }
 
-    public Bomb(int positionX, int positionY) {
-        super(positionX, positionY);
+    public Bomb(PApplet pApplet) {
+        super(0,0);
+        setpApplet(pApplet);
         setImageHeight(60);
         setImageWidth(60);
         setPlaced(false);
+//        PImage image;
+//        image = pApplet.loadImage("images/Bomb.png");
+        setImage(pApplet.loadImage("images/Bomb.png"));
 
     }
 
-//    PImage image;
-//
-//    public PImage getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(PImage image) {
-//        this.image = image;
-//    }
+    PImage image;
+
+    public PImage getImage() {
+        return image;
+    }
+
+    public void setImage(PImage image) {
+        this.image = image;
+    }
 
     PApplet pApplet;
 
