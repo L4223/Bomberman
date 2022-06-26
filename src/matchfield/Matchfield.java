@@ -2,6 +2,7 @@ package matchfield;
 
 import processing.core.PApplet;
 import main.Position;
+import processing.core.PImage;
 
 public class Matchfield extends Position {
 
@@ -12,10 +13,27 @@ public class Matchfield extends Position {
         setWidth(pApplet.width);
         setFieldHeight();
         setFieldWidth();
+        setpApplet(pApplet);
     }
 
-    final private int[] startObstacle = {22,23,24,25,26,34,36,38,42,48,50,51,52,53,54,55,56,58,62,64,66,68,69,70,72,74,78,80,81,82,83,84,85,86,87,89,96,98,100,104,107,108,109,110,111,112,113,114,115,117,119,122,124,126,128,130,137,138,140,141,142,143,145,146,147,148,149,152,154,156,158,160,164,168,170,172,173,174,175,176,177,178,186,188,190,192,200,201,202,203,204,205,206};
+    private PApplet pApplet;
+
+    public void setpApplet(PApplet pApplet) {
+        this.pApplet = pApplet;
+    }
+
+    public PApplet getpApplet() {
+        return pApplet;
+    }
+
+    final private int[] startObstacle = {21,22,23,24,25,33,35,37,41,47,49,50,51,52,53,54,55,57,61,63,65,67,69,71,73,77,79,80,81,82,83,84,85,86,88,95,97,99,103,106,107,108,109,110,111,112,113,114,116,118,121,123,125,127,129,136,137,139,140,141,142,144,145,146,147,148,151,153,155,157,159,163,167,168,169,171,172,173,174,175,176,177,185,187,189,191,199,200,201,202,203,204,205};
 //    final private int[] startObstacle = {17,22};
+
+    final private int[] itemsFields = {22,23,18};
+
+    public int[] getItemsFields() {
+        return itemsFields;
+    }
 
     public int[] getStartObstacle() {
         return startObstacle;
@@ -35,6 +53,9 @@ public class Matchfield extends Position {
     final private int fieldSize;
 
     private boolean free;
+
+
+
 
 
     public int getWidth() {

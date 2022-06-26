@@ -10,6 +10,21 @@ public class Character extends Position {
     final private int playernumber;
     private int speed;
     private int heart;
+
+    public int getHeart() {
+        return heart;
+    }
+
+    public void addHeart() {
+        this.heart++;
+    }
+
+    public void subHeart() {
+        this.heart--;
+    }
+
+
+
     private int numberOfBombs;
 
 

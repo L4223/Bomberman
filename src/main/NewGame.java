@@ -1,8 +1,6 @@
 package main;
 
-import acessoires.Bomb;
-import acessoires.BombController;
-import acessoires.BombView;
+import acessoires.*;
 import matchfield.*;
 import charactere.*;
 
@@ -49,8 +47,16 @@ public class NewGame {
         setBombermanControllers();
         setAutoCharacterControllers();
 
+
+
         setFieldView();
         setFieldController();
+
+        setItemView();
+        setItemController();
+
+        setObstacleView();
+        setObstacleController();
 
         setMatchfieldView();
         setMatchfieldController();
@@ -124,23 +130,52 @@ public class NewGame {
         return field;
     }
 
+    private Item[] items;
+
+    public Item[] getItems() {
+        return items;
+    }
+
+    private Obstacle[] obstacles;
+
+    public Obstacle[] getObstacles() {
+        return obstacles;
+    }
+
     public void setField() {
         field = new Field[(int) Math.pow(matchfield.getFieldSize(),2)];
+        items = new Item[matchfield.getItemsFields().length];
+        obstacles = new Obstacle[matchfield.getStartObstacle().length];
         int i = 0;
         for (int x = 0; x < getMatchfield().getWidth(); x += getMatchfield().getFieldWidth()) {
             for (int y = 0; y < getMatchfield().getHeight(); y += getMatchfield().getFieldHeight()) {
-                field[i] = new Field(x, y, getMatchfield().getFieldWidth(), getMatchfield().getFieldHeight(), true, getpApplet());
+                field[i] = new Field(i, x, y, getMatchfield().getFieldWidth(), getMatchfield().getFieldHeight(), true, getpApplet());
+                for (int k = 0; k < matchfield.getItemsFields().length; k++) {
+                    if(matchfield.getItemsFields()[k] == i) {
+                        items[k] = new Item(field[i]);
+                        items[k].setImage(field[i].getItem());
+                        items[k].setEmpty(false);
+                    }
+                }
+                for (int j = 0; j < matchfield.getStartObstacle().length; j++) {
+                    if(matchfield.getStartObstacle()[j] == i) {
+                        field[i].setEmpty(false);
+                        field[i].setImage(field[i].getFloor());
+                        obstacles[j] = new Obstacle(field[i]);
+                        obstacles[j].setImage(field[i].getBrocken_brick());
+                    }
+                }
                 if (x == 0
                         || x == getMatchfield().getWidth() - getMatchfield().getFieldWidth()
                         || y == 0
                         || y == getMatchfield().getHeight() - getMatchfield().getFieldHeight()
                         || x % (getMatchfield().getFieldWidth() * 2) == 0 && y % (getMatchfield().getFieldHeight() * 2) == 0) {
                     field[i].setBorder(true);
+                    field[i].setImage(field[i].getBrick());
                 } else {
                     field[i].setBorder(false);
-                    for (int j = 0; j < matchfield.getStartObstacle().length; j++) {
-                        if(matchfield.getStartObstacle()[j] == i) field[i].setEmpty(false);
-                    }
+
+
                 }
                 i++;
             }
@@ -153,6 +188,52 @@ public class NewGame {
 
     public void setFieldController() {
         this.fieldController = new FieldController(getMatchfield(), getFieldView(), getField(), getpApplet());
+    }
+
+    private ObstacleView obstacleView;
+
+    public ObstacleView getObstacleView() {
+        return obstacleView;
+    }
+
+    public void setObstacleView() {
+        this.obstacleView = new ObstacleView();
+    }
+
+    private ObstacleController obstacleController;
+
+    public ObstacleController getObstacleController() {
+        return obstacleController;
+    }
+
+    public void setObstacleController() {
+        this.obstacleController = new ObstacleController(getMatchfield(), getObstacleView(), getObstacles(), getpApplet());
+    }
+
+    private ItemView itemView;
+
+    public ItemView getItemView() {
+        return itemView;
+    }
+
+    public void setItemView() {
+        this.itemView = new ItemView();
+    }
+
+    private ItemController itemController;
+
+    public void setItemController() {
+        this.itemController = new ItemController(getMatchfield(), getItemView(), getItems(), getpApplet());
+    }
+
+    public void setItems(Item[] items) {
+        this.items = items;
+    }
+
+
+
+    public ItemController getItemController() {
+        return itemController;
     }
 
     public FieldView getFieldView() {
@@ -235,87 +316,7 @@ public class NewGame {
         }
     }
 
-    private Bomb bomb;
 
-    private BombController bombController;
 
-    private BombView bombView;
 
-    public Bomb getBomb() {
-        return bomb;
-    }
-
-    private boolean bombPlaced;
-
-    public boolean isBombPlaced() {
-        return bombPlaced;
-    }
-
-    public void setBombPlaced() {
-        this.bombPlaced = false;
-    }
-
-    public void setBombPlaced(boolean bombPlaced) {
-        this.bombPlaced = bombPlaced;
-    }
-
-//    public void setNumberOfbombs() {
-//        int positionX = 0;
-//        int positionY = 0;
-//        int bombRadius = 0;
-//        for (int i = 0; i < getNumberOfPlayers(); i++) {
-//            if (getBomberman(i).isBombSet()) {
-//                setBombPlaced(getBomberman(i).isBombSet());
-//                positionX = getField()[getMatchfield().getFieldNumber(getBomberman(i).getPositionX(), getBomberman(i).getPositionY())].getMidX();
-//                positionY = getField()[getMatchfield().getFieldNumber(getBomberman(i).getPositionX(), getBomberman(i).getPositionY())].getMidY();
-//                bombRadius = getBomberman(i).getBombRadius();
-//                getBomberman(i).setBombSet();
-//
-//
-//            }
-//
-//        }
-//        for (int i = 0; i < getNumberOfPlayers(); i++) {
-//            if (autoCharacters[i].isBombSet()) {
-//                setBombPlaced(autoCharacters[i].isBombSet());
-//                positionX = autoCharacters[i].getMidX();
-//                positionY = autoCharacters[i].getMidY();
-//                bombRadius = autoCharacters[i].getBombRadius();
-//            }
-//            if (isBombPlaced()) {
-//                setShowBomb(true);
-//                this.bomb = new Bomb(positionX, positionY, bombRadius, getpApplet());
-//                this.bombView = new BombView();
-//                this.bombController = new BombController(getBomb(), getBombView(), getpApplet());
-//                setBombPlaced(false);
-////                pApplet.println(isBombPlaced());
-//            }
-//        }
-//    }
-
-    boolean showBomb;
-
-    public boolean isShowBomb() {
-        return showBomb;
-    }
-
-    public void setShowBomb(boolean showBomb) {
-        this.showBomb = showBomb;
-    }
-
-    public BombController getBombController() {
-        return bombController;
-    }
-
-//    public void setBombController() {
-//        this.bombController = new BombController();
-//    }
-
-    public BombView getBombView() {
-        return bombView;
-    }
-
-//    public void setBombView() {
-//        this.bombView = new BombView();
-//    }
 }

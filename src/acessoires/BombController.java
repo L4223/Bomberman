@@ -55,26 +55,31 @@ public class BombController {
         }
     }
 
-    public void explosion() {
+
+
+
+
+
+
+
+    public int[] explosion (int fieldNumberBombermanOne, int fieldNumberBombermanTwo, int fieldNumberAutoCharacterOne, int fieldNumberAutoCharacterTwo, int fieldNumberAutoCharacterThree) {
+        int maxNumberOfFieldsGetHit = getBomb().getBombRadius() * 4 + 1;
+        int fieldsHit[] = new int[maxNumberOfFieldsGetHit];
+        int playerHit[] = {0, 0, 0, 0, 0};
         int verticalUp = -1;
         int horizontalLeft = -15;
         int verticalDown = 1;
         int horizontalRight = 15;
         int radius = getBomb().getBombRadius();
         int fieldNumber = getBomb().getFieldNumber();
+        fieldsHit[0] = fieldNumber;
+        int k = 1;
         Field[] field = getBomb().getField();
-        if (field[fieldNumber + verticalDown].isBorder()
-                || field[fieldNumber + verticalUp].isBorder()) {
-            verticalDown = 0;
-            verticalUp = 0;
-        }
+        if (field[fieldNumber + verticalDown].isBorder()) verticalDown = 0;
+        if (field[fieldNumber + verticalUp].isBorder()) verticalUp = 0;
+        if (field[fieldNumber + horizontalRight].isBorder()) horizontalRight = 0;
+        if (field[fieldNumber + horizontalLeft].isBorder()) horizontalLeft = 0;
 
-
-        if (field[fieldNumber + horizontalRight].isBorder()
-                || field[fieldNumber + horizontalLeft].isBorder()) {
-            horizontalRight = 0;
-            horizontalLeft = 0;
-        }
 
                 for (int j = 0; j <= radius; j++) {
                     int caseDown = fieldNumber + j * verticalDown;
@@ -103,14 +108,48 @@ public class BombController {
 
 
                     }
+                            if (field[i].isEmpty()) {
+                                if (i == caseDown) {
+                                    fieldsHit[k] = i;
+
+                                }
+                                if (i == caseUp) {
+                                    fieldsHit[k+1] = i;
+                                }
+                                if (i == caseRight) {
+                                    fieldsHit[k+2] = i;
+                                }
+                                if (i == caseLeft) {
+                                    fieldsHit[k+3] = i;
+                                }
+
+                            }
 
                 }
 
 
             }
         }
+        for (int i = 0; i < fieldsHit.length; i++) {
+            if (fieldsHit[i] == fieldNumberBombermanOne) {
+                playerHit[0] = 1;
+            }
+            if (fieldsHit[i] == fieldNumberBombermanTwo) {
+                playerHit[1] = 1;
+            }
+            if (fieldsHit[i] == fieldNumberAutoCharacterOne) {
+                playerHit[2] = 1;
+            }
+            if (fieldsHit[i] == fieldNumberAutoCharacterTwo) {
+                playerHit[3] = 1;
+            }
+            if (fieldsHit[i] == fieldNumberAutoCharacterThree) {
+                playerHit[4] = 1;
+            }
+        }
             getBomb().getCharacter().subBombCounter();
             getBomb().setExploded(false);
+        return playerHit;
         }
     }
 

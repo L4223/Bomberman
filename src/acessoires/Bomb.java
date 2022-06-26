@@ -18,6 +18,16 @@ public class Bomb extends Position {
         this.field = field;
     }
 
+    Obstacle[] obstacles;
+
+    public Obstacle[] getObstacles() {
+        return obstacles;
+    }
+
+    public void setObstacles(Obstacle[] obstacles) {
+        this.obstacles = obstacles;
+    }
+
     Character character;
 
     public Character getCharacter() {

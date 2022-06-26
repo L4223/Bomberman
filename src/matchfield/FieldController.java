@@ -31,7 +31,7 @@ public class FieldController extends MatchfieldController{
     }
 
 
-    public void setField () {
-        view.field(getField(), getpApplet());
+    public void setView() {
+        view.draw(getField(), getpApplet());
     }
 }
