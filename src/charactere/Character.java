@@ -1,6 +1,7 @@
 package charactere;
 
 import acessoires.Bomb;
+import acessoires.Obstacle;
 import processing.core.PApplet;
 import matchfield.*;
 import main.Position;
@@ -10,6 +11,21 @@ public class Character extends Position {
     final private int playernumber;
     private int speed;
     private int heart;
+
+    public int getHeart() {
+        return heart;
+    }
+
+    public void addHeart() {
+        this.heart++;
+    }
+
+    public void subHeart() {
+        this.heart--;
+    }
+
+
+
     private int numberOfBombs;
 
 
@@ -36,11 +52,12 @@ public class Character extends Position {
     * */
     public Character(int playernumber, Matchfield matchfield, PApplet pApplet) {
         super(0,0);
+        setpApplet(pApplet);
         this.playernumber = playernumber;
         this.matchfield = matchfield;
         this.speed = 5;
         this.heart = 3;
-        this.numberOfBombs = 1;
+        this.numberOfBombs = 5;
         this.bombCounter = 0;
         this.maxNumberOfBombs = 5;
         this.bombRadius = 2;
@@ -57,14 +74,28 @@ public class Character extends Position {
 
     }
 
-    private int maxNumberOfBombs;
+    public int getMaxNumberOfBombs() {
+        return maxNumberOfBombs;
+    }
+
+    PApplet pApplet;
+
+    public void setpApplet(PApplet pApplet) {
+        this.pApplet = pApplet;
+    }
+
+    public PApplet getpApplet() {
+        return pApplet;
+    }
+
+    private final int maxNumberOfBombs;
 
     private Bomb[] bombs;
 
     public void setBombs() {
         this.bombs = new Bomb[maxNumberOfBombs];
         for (int i = 0; i < maxNumberOfBombs; i++) {
-            bombs[i] = new Bomb(0, 0);
+            bombs[i] = new Bomb(getpApplet());
         }
     }
 
@@ -72,19 +103,25 @@ public class Character extends Position {
         return bombs[bombNumber];
     }
 
-    public void setBomb(int numberOfBomb, int positionX, int positionY, int bombRadius, PApplet pApplet) {
+    public void setBomb(int numberOfBomb, int positionX, int positionY, int bombRadius, int fieldNumber, Field [] field, Obstacle [] obstacles, PApplet pApplet) {
         bombs[numberOfBomb].setPositionXY(positionX, positionY);
         bombs[numberOfBomb].updatePosition();
         bombs[numberOfBomb].setBombRadius(bombRadius);
+        bombs[numberOfBomb].setFieldNumber(fieldNumber);
+        bombs[numberOfBomb].setField(field);
+        bombs[numberOfBomb].setObstacles(obstacles);
         bombs[numberOfBomb].setPlaced();
         bombs[numberOfBomb].setpApplet(pApplet);
+        bombs[numberOfBomb].setCharacter(this);
         bombs[numberOfBomb].setBombView();
         bombs[numberOfBomb].setBombController();
-        pApplet.println(bombs[numberOfBomb].getCornerLeftUpX());
+
 
 
 
     }
+
+
 
     private int bombCounter;
 

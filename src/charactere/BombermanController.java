@@ -3,6 +3,7 @@ package charactere;
 import acessoires.Bomb;
 import acessoires.BombController;
 import acessoires.BombView;
+import acessoires.Obstacle;
 import matchfield.Field;
 import matchfield.Matchfield;
 import processing.core.PApplet;
@@ -10,9 +11,11 @@ import processing.core.PApplet;
 public class BombermanController extends CharacterController {
 
 
-    public BombermanController(Bomberman bomberman, CharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
-        super(bomberman, view, matchfield, field, pApplet);
+    public BombermanController(Bomberman bomberman, CharacterView view, Matchfield matchfield, Field[] field, Obstacle[] obstacles, PApplet pApplet) {
+        super(bomberman, view, matchfield, field, obstacles, pApplet);
     }
+
+
 
 
     public void movement() {
@@ -135,8 +138,7 @@ public class BombermanController extends CharacterController {
 
         if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
             if(getCharacter().getBombCounter() < getCharacter().getNumberOfBombs()) {
-                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getpApplet() );
-//                getCharacter().setBomb(getCharacter().getBombCounter(), getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
+                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY()),getField(),getObstacles(),getpApplet() );
                 getCharacter().addBombCounter();
                 getCharacter().setBombSet(true);
                 getpApplet().keyCode = 1;
