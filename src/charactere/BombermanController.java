@@ -10,19 +10,15 @@ import processing.core.PApplet;
 
 public class BombermanController extends CharacterController {
 
-
     public BombermanController(Bomberman bomberman, CharacterView view, Matchfield matchfield, Field[] field, Obstacle[] obstacles, PApplet pApplet) {
         super(bomberman, view, matchfield, field, obstacles, pApplet);
     }
 
 
-
-
+    //Auch die Erstellung der Bombe enthalten, soll aber noch in eine eigenee Funktion
+    @Override
     public void movement() {
-        BombController bombPlaced;
         if (getpApplet().keyPressed) {
-
-
             //checkt ob die nächste main.Position links frei ist und ob die Taste gedrückt wurde und bewegt sich nach links
             if (getpApplet().keyCode == getpApplet().LEFT && getCharacter().getPlayernumber() == 0 || getpApplet().key == 'a' && getCharacter().getPlayernumber() == 1) {
                 if (getMatchfield().isFree(getCharacter().getCornerLeftUpX() - getCharacter().getSpeed(), getCharacter().getCornerLeftUpY()) && getMatchfield().isFree(getCharacter().getCornerLeftDownX() - getCharacter().getSpeed(), getCharacter().getCornerLeftDownY())) {
@@ -75,9 +71,7 @@ public class BombermanController extends CharacterController {
                         }
                     }
                 }
-
             }
-
             //checkt ob die nächste main.Position oben frei ist und ob die Taste gedrückt wurde und bewegt sich nach oben
             if (getpApplet().keyCode == getpApplet().UP && getCharacter().getPlayernumber() == 0 || getpApplet().key == 'w' && getCharacter().getPlayernumber() == 1) {
                 if (getMatchfield().isFree(getCharacter().getCornerLeftUpX(), getCharacter().getCornerLeftUpY() - getCharacter().getSpeed()) && getMatchfield().isFree(getCharacter().getCornerRightUpX(), getCharacter().getCornerRightUpY() - getCharacter().getSpeed())) {
@@ -130,37 +124,22 @@ public class BombermanController extends CharacterController {
                         }
                     }
                 }
-
             }
         }
-
-
-
-        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0) {
-            if(getCharacter().getBombCounter() < getCharacter().getNumberOfBombs()) {
-                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY()),getField(),getObstacles(),getpApplet() );
+        //Bei Leerzeichen wird eine Bombe gesetzt und erstellt
+        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 0
+                || getpApplet().key  == 'b' && getCharacter().getPlayernumber() == 1) {
+            if (getCharacter().getBombCounter() < getCharacter().getNumberOfBombs()) {
+                getCharacter().setBomb(getCharacter().getBombCounter(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpX(), getField()[getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY())].getCornerLeftUpY(), getCharacter().getBombRadius(), getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY()), getField(), getObstacles(), getpApplet());
                 getCharacter().addBombCounter();
                 getCharacter().setBombSet(true);
                 getpApplet().keyCode = 1;
-                getpApplet().println("SetBomb");
-                getpApplet().println(getCharacter().getBombCounter());
-
+                PApplet.println("SetBomb");
+                PApplet.println(getCharacter().getBombCounter());
             }
-
-//            getCharacter().setBombSet(true);
-//            bombPlaced = new BombController(getCharacter().getPositionX(), getCharacter().getPositionY(), getCharacter().getBombRadius(), getpApplet());
         }
-
-
-
-        if (getpApplet().keyCode == 32 && getCharacter().getPlayernumber() == 1) {
-//            new BombController(bomb,bombView,getpApplet());
-        }
-
+        //Position wird wieder geupdatet
         updatePosition();
-
-//        getpApplet().println(getMatchfield().getFieldNumber(getCharacter().getMidX(), getCharacter().getMidY()));
-//        getpApplet().println("PositionX: " + getCharacter().getPositionX() + " PositionY: " + getCharacter().getPositionY());
     }
 }
 

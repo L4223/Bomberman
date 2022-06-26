@@ -11,6 +11,7 @@ public class ObstacleController extends FieldController {
         super(matchfield, view, field, pApplet);
     }
 
+    //Die View für die Anzeige wird erstellt und wird über die Klasse FieldView gezeichnet
     public void setView() {
         getView().draw(getField(), getpApplet());
     }
