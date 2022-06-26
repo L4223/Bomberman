@@ -6,6 +6,7 @@ import matchfield.Field;
 import processing.core.PImage;
 
 public class Bomberman extends Character {
+    //erstellt Spieler und übernimmt die Eigenchaften der Superklasse
     public Bomberman(int playernumber, Matchfield matchfield,  PApplet pApplet) {
         super(playernumber, matchfield, pApplet);
         //main.Position links oben
@@ -19,7 +20,4 @@ public class Bomberman extends Character {
             setImage(pApplet.loadImage("images/bombermanGegner.png"));
         }
     }
-
-
-
 }

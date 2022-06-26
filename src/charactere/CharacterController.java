@@ -7,13 +7,12 @@ import processing.core.PApplet;
 
 public abstract class CharacterController {
 
-    private PApplet pApplet;
     private Character character;
     private CharacterView view;
-
     private Matchfield matchfield;
-
     private Field[] field;
+    private Obstacle [] obstacles;
+    private PApplet pApplet;
 
     public CharacterController (Character character, CharacterView view, Matchfield matchfield, Field[] field, Obstacle[] obstacles, PApplet pApplet) {
         setCharacter(character);
@@ -22,58 +21,9 @@ public abstract class CharacterController {
         setField(field);
         setObstacles(obstacles);
         setpApplet(pApplet);
-
     }
 
-    private Obstacle [] obstacles;
 
-    public void setObstacles(Obstacle[] obstacles) {
-        this.obstacles = obstacles;
-    }
-
-    public Obstacle[] getObstacles() {
-        return obstacles;
-    }
-
-    private void setpApplet(PApplet pApplet) {
-        this.pApplet = pApplet;
-    }
-
-    public PApplet getpApplet() {
-        return pApplet;
-    }
-
-    private void setCharacter(Character bomberman) {
-        this.character = bomberman;
-    }
-
-    public Character getCharacter() {
-        return character;
-    }
-
-    private void setView(CharacterView view) {
-        this.view = view;
-    }
-
-    public Matchfield getMatchfield() {
-        return matchfield;
-    }
-
-    public void setMatchfield(Matchfield matchfield) {
-        this.matchfield = matchfield;
-    }
-
-    public Field[] getField() {
-        return field;
-    }
-
-    public void setField(Field[] field) {
-        this.field = field;
-    }
-
-    public CharacterView getView() {
-        return view;
-    }
 
     //läuft in die gegebene Richtung
     public void left(int speed) {
@@ -93,11 +43,6 @@ public abstract class CharacterController {
         updatePosition();
     }
 
-
-
-
-
-
     //Die Positionen der verschiedenen Ecken werden aktualisiert
     public void updatePosition() {
         getCharacter().updatePosition();
@@ -111,9 +56,9 @@ public abstract class CharacterController {
     //abstrakte Funktion die in den Unterklassen verwendet wird
     public abstract void movement ();
 
+    //Schaut ob es erlaubt es weiter in die gegebene Richtung zu laufen oder ob ein Hinderniss im Weg steht
     public boolean movementDown() {
         boolean move = true;
-        forSchleife:
         for (int i = 0; i < getField().length; i++) {
             if (!(getField()[i].isEmpty())) {
                 if (getField()[i].getCornerLeftUpX() <= getCharacter().getCornerLeftDownX()
@@ -121,10 +66,7 @@ public abstract class CharacterController {
                         && getField()[i].getCornerLeftUpY() == getCharacter().getCornerRightDownY()
                         && getField()[i].getCornerRightUpY() == getCharacter().getCornerLeftDownY()) {
                     move = false;
-                    break forSchleife;
-
-                } else {
-                    move = true;
+                    break;
                 }
             }
         }
@@ -133,7 +75,6 @@ public abstract class CharacterController {
 
     public boolean movementUp() {
         boolean move = true;
-        forSchleife:
         for (int i = 0; i < getField().length; i++) {
             if (!(getField()[i].isEmpty())) {
                 if (getField()[i].getCornerLeftDownX() <= getCharacter().getCornerLeftUpX()
@@ -141,10 +82,7 @@ public abstract class CharacterController {
                         && getField()[i].getCornerLeftDownY() == getCharacter().getCornerRightUpY()
                         && getField()[i].getCornerRightDownY() == getCharacter().getCornerLeftUpY()) {
                     move = false;
-                    break forSchleife;
-
-                } else {
-                    move = true;
+                    break;
                 }
             }
         }
@@ -153,7 +91,6 @@ public abstract class CharacterController {
 
     public boolean movementRight() {
         boolean move = true;
-        forSchleife:
         for (int i = 0; i < getField().length; i++) {
             if (!(getField()[i].isEmpty())) {
                 if (getField()[i].getCornerLeftUpY() <= getCharacter().getCornerRightUpY()
@@ -161,10 +98,7 @@ public abstract class CharacterController {
                         && getField()[i].getCornerLeftUpX() == getCharacter().getCornerRightUpX()
                         && getField()[i].getCornerLeftDownX() == getCharacter().getCornerRightDownX()) {
                     move = false;
-                    break forSchleife;
-
-                } else {
-                    move = true;
+                    break;
                 }
             }
         }
@@ -173,7 +107,6 @@ public abstract class CharacterController {
 
     public boolean movementLeft() {
         boolean move = true;
-        forSchleife:
         for (int i = 0; i < getField().length; i++) {
             if (!(getField()[i].isEmpty())) {
                 if (
@@ -182,14 +115,48 @@ public abstract class CharacterController {
                                 && getField()[i].getCornerRightUpX() == getCharacter().getCornerLeftUpX()
                                 && getField()[i].getCornerRightDownX() == getCharacter().getCornerLeftDownX()) {
                     move = false;
-                    break forSchleife;
-
-                } else {
-                    move = true;
+                    break;
                 }
             }
         }
         return move;
     }
 
+    //Getter und Setter der Variablen
+    private void setCharacter(Character bomberman) {
+        this.character = bomberman;
+    }
+    public Character getCharacter() {
+        return character;
+    }
+    private void setView(CharacterView view) {
+        this.view = view;
+    }
+    public CharacterView getView() {
+        return view;
+    }
+    public void setMatchfield(Matchfield matchfield) {
+        this.matchfield = matchfield;
+    }
+    public Matchfield getMatchfield() {
+        return matchfield;
+    }
+    public void setField(Field[] field) {
+        this.field = field;
+    }
+    public Field[] getField() {
+        return field;
+    }
+    public void setObstacles(Obstacle[] obstacles) {
+        this.obstacles = obstacles;
+    }
+    public Obstacle[] getObstacles() {
+        return obstacles;
+    }
+    private void setpApplet(PApplet pApplet) {
+        this.pApplet = pApplet;
+    }
+    public PApplet getpApplet() {
+        return pApplet;
+    }
 }

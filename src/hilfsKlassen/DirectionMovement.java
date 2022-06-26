@@ -2,21 +2,23 @@ package hilfsKlassen;
 
 import processing.core.PApplet;
 
+import java.util.Objects;
+
 public class DirectionMovement {
-    String right;
-    String left;
-    String up;
-    String down;
-    String direction;
-    String randomDirection;
-    PApplet pApplet;
+    private String right;
+    private String left;
+    private String up;
+    private String down;
+    private String direction;
+    private String randomDirection;
+    private PApplet pApplet;
 
     //Hilfsklasse für Richtungen
     public DirectionMovement(PApplet pApplet) {
-        setRight("right");
-        setLeft("left");
-        setUp("up");
-        setDown("down");
+        setRight();
+        setLeft();
+        setUp();
+        setDown();
         setpApplet(pApplet);
     }
 
@@ -45,49 +47,38 @@ public class DirectionMovement {
         if (randomNumber == 1) randomDirection = getUp();
         if (randomNumber == 2) randomDirection = getLeft();
         if (randomNumber == 3) randomDirection = getRight();
-        if (randomDirection == except) getRandomDirection(except);
+        if (Objects.equals(randomDirection, except)) getRandomDirection(except);
         return randomDirection;
     }
-
-    private void setRight(String right) {
-        this.right = right;
+    //Setter und Getter der Richtungen
+    private void setRight() {
+        this.right = "right";
     }
-
-    private void setLeft(String left) {
-        this.left = left;
+    private void setLeft() {
+        this.left = "left";
     }
-
-    private void setUp(String up) {
-        this.up = up;
+    private void setUp() {
+        this.up = "up";
     }
-
-    private void setDown(String down) {
-        this.down = down;
+    private void setDown() {
+        this.down = "down";
     }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-
-
     public String getRight() {
         return right;
     }
-
     public String getLeft() {
         return left;
     }
-
     public String getUp() {
         return up;
     }
-
     public String getDown() {
         return down;
+    }
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+    public String getDirection() {
+        return direction;
     }
 }
