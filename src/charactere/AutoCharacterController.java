@@ -1,5 +1,6 @@
 package charactere;
 
+import acessoires.Obstacle;
 import hilfsKlassen.DirectionMovement;
 import matchfield.Field;
 import matchfield.Matchfield;
@@ -10,8 +11,8 @@ public class AutoCharacterController extends CharacterController {
     private AutoCharacter autoCharacter;
     private DirectionMovement directions = new DirectionMovement(getpApplet());
 
-    public AutoCharacterController(AutoCharacter autoCharacter, CharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
-        super(autoCharacter, view, matchfield, field, pApplet);
+    public AutoCharacterController(AutoCharacter autoCharacter, CharacterView view, Matchfield matchfield, Field[] field, Obstacle[] obstacles, PApplet pApplet) {
+        super(autoCharacter, view, matchfield, field, obstacles, pApplet);
         setAutoCharacter(autoCharacter);
         //Erstellt eine Klasse DirectionMovement mit dem Inhalt von rechts, links, unten, oben
         setDirections(new DirectionMovement(pApplet));

@@ -13,14 +13,6 @@ public class Field extends Matchfield{
         setImageHeight(height);
         setFieldNumber(fieldNumber);
         updatePosition();
-//        setCornerLeftUpX();
-//        setCornerLeftUpY();
-//        setCornerLeftDownX();
-//        setCornerLeftDownY();
-//        setCornerRightUpX();
-//        setCornerRightUpY();
-//        setCornerRightDownX();
-//        setCornerRightDownY();
         setEmpty(empty);
     }
 
@@ -35,28 +27,6 @@ public class Field extends Matchfield{
         return this.fieldNumber;
     }
 
-    //    public int getFieldNumber(int positionX, int positionY) {
-//        int result = 0;
-//        int i = 0;
-//        forSchleife:
-//        for (int x = getFieldWidth(); x < getWidth() - getFieldWidth(); x += getFieldWidth()) {
-//            for (int y = getFieldHeight(); y < getHeight() - getFieldHeight(); y += getFieldHeight()) {
-//                if (x % (getFieldWidth() * 2) == 0 && y % (getFieldHeight() * 2) == 0) {
-//                    if (positionX > x
-//                            && positionX < x + getFieldWidth()
-//                            && positionY > y
-//                            && positionY < y + getFieldHeight()) {
-//                        result =  i;
-//                        break forSchleife;
-//                    } else {
-//                        result = i;
-//                    }
-//                    i++;
-//                }
-//            }
-//        }
-//        return result;
-//    }
 
     private final PImage brick = getpApplet().loadImage("images/Brick.png");
     private final PImage floor = getpApplet().loadImage("images/floor.png");
@@ -107,7 +77,6 @@ public class Field extends Matchfield{
 
     public void setEmpty(boolean empty) {
         this.empty = empty;
-        if (empty = true) setImage(getFloor());
     }
 
 

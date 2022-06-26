@@ -52,10 +52,10 @@ public class NewGame {
         setFieldView();
         setFieldController();
 
-        setItemView();
+
         setItemController();
 
-        setObstacleView();
+
         setObstacleController();
 
         setMatchfieldView();
@@ -150,11 +150,12 @@ public class NewGame {
         for (int x = 0; x < getMatchfield().getWidth(); x += getMatchfield().getFieldWidth()) {
             for (int y = 0; y < getMatchfield().getHeight(); y += getMatchfield().getFieldHeight()) {
                 field[i] = new Field(i, x, y, getMatchfield().getFieldWidth(), getMatchfield().getFieldHeight(), true, getpApplet());
+                field[i].setImage(field[i].getFloor());
                 for (int k = 0; k < matchfield.getItemsFields().length; k++) {
                     if(matchfield.getItemsFields()[k] == i) {
                         items[k] = new Item(field[i]);
-                        items[k].setImage(field[i].getItem());
                         items[k].setEmpty(false);
+                        items[k].setImage(field[i].getItem());
                     }
                 }
                 for (int j = 0; j < matchfield.getStartObstacle().length; j++) {
@@ -190,15 +191,7 @@ public class NewGame {
         this.fieldController = new FieldController(getMatchfield(), getFieldView(), getField(), getpApplet());
     }
 
-    private ObstacleView obstacleView;
 
-    public ObstacleView getObstacleView() {
-        return obstacleView;
-    }
-
-    public void setObstacleView() {
-        this.obstacleView = new ObstacleView();
-    }
 
     private ObstacleController obstacleController;
 
@@ -207,23 +200,15 @@ public class NewGame {
     }
 
     public void setObstacleController() {
-        this.obstacleController = new ObstacleController(getMatchfield(), getObstacleView(), getObstacles(), getpApplet());
+        this.obstacleController = new ObstacleController(getMatchfield(), getFieldView(), getObstacles(), getpApplet());
     }
 
-    private ItemView itemView;
 
-    public ItemView getItemView() {
-        return itemView;
-    }
-
-    public void setItemView() {
-        this.itemView = new ItemView();
-    }
 
     private ItemController itemController;
 
     public void setItemController() {
-        this.itemController = new ItemController(getMatchfield(), getItemView(), getItems(), getpApplet());
+        this.itemController = new ItemController(getMatchfield(), getFieldView(), getItems(), getpApplet());
     }
 
     public void setItems(Item[] items) {
@@ -299,11 +284,11 @@ public class NewGame {
             try {
                 for (int i = 0; i < getNumberOfPlayers(); i++) {
                     bombermans[i] = new Bomberman(i, getMatchfield(), getpApplet());
-                    bombermanControllers[i] = new BombermanController(getBomberman(i), getCharacterView(), getMatchfield(), getField(), getpApplet());
+                    bombermanControllers[i] = new BombermanController(getBomberman(i), getCharacterView(), getMatchfield(), getField(), getObstacles(), getpApplet());
                 }
                 for (int i = 0; i < getNumberOfOpponents(); i++) {
                     autoCharacters[i] = new AutoCharacter(i,getMatchfield(),getpApplet());
-                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getCharacterView(), getMatchfield(), getField(), getpApplet());
+                    autoCharacterControllers[i] = new AutoCharacterController(getAutoCharacter(i), getCharacterView(), getMatchfield(), getField(), getObstacles(), getpApplet());
                 }
             } catch (Exception exception) {
                 pApplet.println("Fehler! Zwischen 1 - 4 Spieler zugelassen");

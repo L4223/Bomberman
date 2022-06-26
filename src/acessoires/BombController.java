@@ -75,6 +75,7 @@ public class BombController {
         fieldsHit[0] = fieldNumber;
         int k = 1;
         Field[] field = getBomb().getField();
+        Obstacle[] obstacles = getBomb().getObstacles();
         if (field[fieldNumber + verticalDown].isBorder()) verticalDown = 0;
         if (field[fieldNumber + verticalUp].isBorder()) verticalUp = 0;
         if (field[fieldNumber + horizontalRight].isBorder()) horizontalRight = 0;
@@ -86,6 +87,26 @@ public class BombController {
                     int caseUp = fieldNumber + j * verticalUp;
                     int caseRight = fieldNumber + j * horizontalRight;
                     int caseLeft = fieldNumber + j * horizontalLeft;
+
+                    for (int i = 0; i < obstacles.length; i++) {
+                        if (!obstacles[i].isBorder()) {
+                            if (!obstacles[i].isEmpty()) {
+                                if (obstacles[i].getFieldNumber() == caseDown) {
+                                    obstacles[i].setImage(getpApplet().loadImage("images/nothing.png"));
+                                }
+                                if (obstacles[i].getFieldNumber() == caseUp) {
+                                    obstacles[i].setImage(getpApplet().loadImage("images/nothing.png"));
+                                }
+                                if (obstacles[i].getFieldNumber() == caseRight) {
+                                    obstacles[i].setImage(getpApplet().loadImage("images/nothing.png"));
+                                }
+                                if (obstacles[i].getFieldNumber() == caseLeft) {
+                                    obstacles[i].setImage(getpApplet().loadImage("images/nothing.png"));
+                                }
+                            }
+                        }
+                    }
+
                     for (int i = 0; i < field.length; i++) {
                         if (!field[i].isBorder()) {
                     if (!field[i].isEmpty()) {
@@ -126,6 +147,7 @@ public class BombController {
                             }
 
                 }
+
 
 
             }

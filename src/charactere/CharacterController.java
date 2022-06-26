@@ -1,5 +1,6 @@
 package charactere;
 
+import acessoires.Obstacle;
 import matchfield.Field;
 import matchfield.Matchfield;
 import processing.core.PApplet;
@@ -14,15 +15,25 @@ public abstract class CharacterController {
 
     private Field[] field;
 
-    public CharacterController (Character character, CharacterView view, Matchfield matchfield, Field[] field, PApplet pApplet) {
+    public CharacterController (Character character, CharacterView view, Matchfield matchfield, Field[] field, Obstacle[] obstacles, PApplet pApplet) {
         setCharacter(character);
         setView(view);
         setMatchfield(matchfield);
         setField(field);
+        setObstacles(obstacles);
         setpApplet(pApplet);
 
     }
 
+    private Obstacle [] obstacles;
+
+    public void setObstacles(Obstacle[] obstacles) {
+        this.obstacles = obstacles;
+    }
+
+    public Obstacle[] getObstacles() {
+        return obstacles;
+    }
 
     private void setpApplet(PApplet pApplet) {
         this.pApplet = pApplet;

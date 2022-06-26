@@ -1,6 +1,7 @@
 package charactere;
 
 import acessoires.Bomb;
+import acessoires.Obstacle;
 import processing.core.PApplet;
 import matchfield.*;
 import main.Position;
@@ -102,12 +103,13 @@ public class Character extends Position {
         return bombs[bombNumber];
     }
 
-    public void setBomb(int numberOfBomb, int positionX, int positionY, int bombRadius, int fieldNumber, Field [] field, PApplet pApplet) {
+    public void setBomb(int numberOfBomb, int positionX, int positionY, int bombRadius, int fieldNumber, Field [] field, Obstacle [] obstacles, PApplet pApplet) {
         bombs[numberOfBomb].setPositionXY(positionX, positionY);
         bombs[numberOfBomb].updatePosition();
         bombs[numberOfBomb].setBombRadius(bombRadius);
         bombs[numberOfBomb].setFieldNumber(fieldNumber);
         bombs[numberOfBomb].setField(field);
+        bombs[numberOfBomb].setObstacles(obstacles);
         bombs[numberOfBomb].setPlaced();
         bombs[numberOfBomb].setpApplet(pApplet);
         bombs[numberOfBomb].setCharacter(this);
