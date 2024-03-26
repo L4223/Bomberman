@@ -23,8 +23,6 @@ Spieleranzahl muss in der Main geändert werden Zeile 25. Bitte nicht mehr als 2
 Character-Eigenschaften wie Speed, Leben, Anzahl der Bomben oder Radius der Bomben
 muss in der Klasse Character Zeile 38 - 41 geändert werden.
 
-Unser GitHub: https://github.com/jason01-95/Bomberman
-
 Viel Freude beim Anschauen und bewerten.
 
 Grüße:
